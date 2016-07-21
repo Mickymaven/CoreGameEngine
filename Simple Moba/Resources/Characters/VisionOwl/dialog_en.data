@@ -1,0 +1,36 @@
+dialog 0
+HEY FUNNY SEEING YOU AROUND HERE. GO AWAY IM LOOKING FOR MY TOOLS.
+I see.
+Eep.
+dialog 1
+I THINK THAT THE HONEY BADGERS RAIDED MY TOOLBAG AND TOOK THEM. SOMEWHERE.. I DONT KNOW. ARGGHHH
+You look like you could use some help there.
+You have something I want. Give it to me.
+Sorry to bother you.
+dialog 2
+I DONT WANNA HAVE TO DEFEND MY SELF BUT I WILL!
+Bring it!
+Whoa! Hey there JKJKJKJK.
+Yeah Ill just be leaving now.
+dialog 3
+Yo Im a very competent owl. But hey, I guess more pairs of eyes always helps right. Can you help me find the rest of the tools from my toolbag?
+Yes I will help.
+Hang on what did you say before that?
+Oh hey look at the time, I got some homework to do. Peace.
+dialog 4
+Hey you dont have my things. Do you want to continue with this quest?
+Yes, I will get your tools.
+No, I'll quit.
+dialog 5
+You found all my items. Hey I got something for you.
+NICE!
+dialog 6 "Offer reward"
+Yo here is your thing. Wanna see it now?
+Gimme gimme gimme
+Um hold on, Ill Come back for it.
+dialog 7 "Talk to you in trade screen"
+"Here it is! Isnt it a beauty! Go on and take it!
+"This is a test of how options look in game shops.. (this 'exits dialog')
+dialog 8 Dialog outro
+"Enjoy your nom bar."
+Thanks, bye!

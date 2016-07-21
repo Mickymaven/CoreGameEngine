@@ -1,0 +1,319 @@
+53
+gameElementHUD
+1
+Resources/UI/Player/hud4x3.png
+Resources/UI/Player/hud5x4.png
+Resources/UI/Player/hud16x9.png
+Resources/UI/Player/hud16x10.png
+gameElementPlayerAvatar
+0
+"settings dependent"
+-
+-
+-
+gameElementItemIcon
+0
+"settings dependent"
+-
+-
+-
+gameElementBuffIcon
+0
+"settings dependent"
+-
+-
+-
+gameElementItemTooltipBackground
+0
+Resources/misc/ux_tool_tip_ability.png
+-
+-
+-
+gameElementAbilityTooltipBackground
+0
+Resources/misc/ux_tool_tip_ability.png
+-
+-
+-
+gameElementBuffTooltipBackground
+0
+Resources/misc/ux_tool_tip_ability.png
+-
+-
+-
+gameElementTradeInventoryLabel
+0
+"no image"
+-
+-
+-
+gameElementTradeMenuBackground
+0
+Resources/UI/Menu/Shop/background.png
+-
+-
+-
+gameElementTradeMenuTitle
+0
+"no image"
+-
+-
+-
+gameElementConfirmTrade
+0
+Resources/Shop/Images/shop_confirm-trade.png
+-
+-
+-
+gameElementHealthBar
+0
+"no image"
+-
+-
+-
+gameElementAbility1,
+0
+"no image"
+-
+-
+-
+gameElementAbility2,
+0
+"no image"
+-
+-
+-
+gameElementAbility3,
+0
+"no image"
+-
+-
+-
+gameElementAbility4,
+0
+"no image"
+-
+-
+-
+gameElementAbilityCustom1,
+0
+"no image"
+-
+-
+-
+gameElementAbilityCustom2,
+0
+"no image"
+-
+-
+-
+gameElementAbilityRecall,
+0
+"no image"
+-
+-
+-
+gameElementAbilitySleep,
+0
+"no image"
+-
+-
+-
+gameElementCharacterStatLabelMoveSpeed,
+0
+"no image"
+-
+-
+-
+gameElementCharacterStatLabelRange,
+0
+"no image"
+-
+-
+-
+gameElementCharacterStatLabelAttackSpeed,
+0
+"no image"
+-
+-
+-
+gameElementCharacterStatLabelPhysical,
+0
+"no image"
+-
+-
+-
+gameElementCharacterStatLabelCatVoodoo,
+0
+"no image"
+-
+-
+-
+gameElementCharacterStatLabelArmor,
+0
+"no image"
+-
+-
+-
+gameElementCharacterStatLabelCatVoodooResist,
+0
+"no image"
+-
+-
+-
+gameElementCharacterStatLabelHPRegen,
+0
+"no image"
+-
+-
+-
+gameElementCharacterStatLabelHealth,
+0
+"no image"
+-
+-
+-
+gameElementCharacterStatLabelMaxHealth,
+0
+"no image"
+-
+-
+-
+gameElementGameInfoPanel,
+0
+"no image"
+-
+-
+-
+gameElementInfoAvatar0,
+0
+"no image"
+-
+-
+-
+gameElementInfoAvatar1,
+0
+"no image"
+-
+-
+-
+gameElementInfoAvatar2,
+0
+"no image"
+-
+-
+-
+gameElementInfoAvatar3,
+0
+"no image"
+-
+-
+-
+gameElementInfoAvatar4,
+0
+"no image"
+-
+-
+-
+gameElementInfoAvatar5,
+0
+"no image"
+-
+-
+-
+gameElementInfoAvatar6,
+0
+"no image"
+-
+-
+-
+gameElementInfoAvatar7,
+0
+"no image"
+-
+-
+-
+gameElementInfoAvatar8,
+0
+"no image"
+-
+-
+-
+gameElementInfoAvatar9,
+0
+"no image"
+-
+-
+-
+gameElementInv0,
+0
+"no image"
+-
+-
+-
+gameElementInv1,
+0
+"no image"
+-
+-
+-
+gameElementInv2,
+0
+"no image"
+-
+-
+-
+gameElementInv3,
+0
+"no image"
+-
+-
+-
+gameElementInv4,
+0
+"no image"
+-
+-
+-
+gameElementInv5,
+0
+"no image"
+-
+-
+-
+gameElementInv6,
+0
+"no image"
+-
+-
+-
+gameElementInv7,
+0
+"no image"
+-
+-
+-
+gameElementInv8,
+0
+"no image"
+-
+-
+-
+gameElementInv9,
+0
+"no image"
+-
+-
+-
+gameElementStatBackground,
+0
+Resources/UI/Menu/Stats/stats_background.png
+-
+-
+-
+gameElementStatVerticalStats
+0
+Resources/UI/Menu/Stats/vertical-stats.png
+-
+-
+-

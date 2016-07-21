@@ -1,0 +1,390 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Application\App.cpp" />
+    <ClCompile Include="src\Application\Main.cpp" />
+    <ClCompile Include="src\Application\MenuController.cpp" />
+    <ClCompile Include="src\Application\MenuScene.cpp" />
+    <ClCompile Include="src\Application\MenuSceneIntro.cpp" />
+    <ClCompile Include="src\Application\MenuSceneNormalGameLobby.cpp" />
+    <ClCompile Include="src\EnvironmentView\BoidstormView.cpp" />
+    <ClCompile Include="src\EnvironmentView\BoidView.cpp" />
+    <ClCompile Include="src\GameControl\GameController.cpp" />
+    <ClCompile Include="src\GameControl\MobaController.cpp" />
+    <ClCompile Include="src\GameControl\OpenWorld.cpp" />
+    <ClCompile Include="src\GameControl\PlayerWorldSelectionController.cpp" />
+    <ClCompile Include="src\GameControl\StandardMatch5v5.cpp" />
+    <ClCompile Include="src\GameplayViewIO\AbilityViewFactory.cpp" />
+    <ClCompile Include="src\GameplayViewIO\ActorViewFactory.cpp" />
+    <ClCompile Include="src\GameplayViewIO\BuffViewFactory.cpp" />
+    <ClCompile Include="src\GameplayViewIO\CharacterViewFactory.cpp" />
+    <ClCompile Include="src\GameplayViewIO\GameMapViewFactory.cpp" />
+    <ClCompile Include="src\GameplayViewIO\ItemViewFactory.cpp" />
+    <ClCompile Include="src\GameplayViewIO\NPCViewFactory.cpp" />
+    <ClCompile Include="src\GameplayView\Abilities\AntiFireballView.cpp" />
+    <ClCompile Include="src\GameplayView\Abilities\CosmicSpaghettiView.cpp" />
+    <ClCompile Include="src\GameplayView\Abilities\ElixirBurstView.cpp" />
+    <ClCompile Include="src\GameplayView\Abilities\EternalLightView.cpp" />
+    <ClCompile Include="src\GameplayView\Abilities\HauntedCreatureView.cpp" />
+    <ClCompile Include="src\GameplayView\Abilities\HiddenPowerView.cpp" />
+    <ClCompile Include="src\GameplayView\Abilities\HuntOfTheHauntedView.cpp" />
+    <ClCompile Include="src\GameplayView\Abilities\MotoBoostView.cpp" />
+    <ClCompile Include="src\GameplayView\Abilities\ValiantLeapView.cpp" />
+    <ClCompile Include="src\GameplayView\BuffView.cpp" />
+    <ClCompile Include="src\GameplayView\CharacterControllerView.cpp" />
+    <ClCompile Include="src\GameplayView\GameMapView.cpp" />
+    <ClCompile Include="src\GameplayView\Quests\QuestView.cpp" />
+    <ClCompile Include="src\GameplayView\ItemEntityView.cpp" />
+    <ClCompile Include="src\GameplayView\ItemView.cpp" />
+    <ClCompile Include="src\GameplayView\PlayerCharacterView.cpp" />
+    <ClCompile Include="src\GameplayView\Abilities\SpookySpaceMeringueView.cpp" />
+    <ClCompile Include="src\GameplayView\Abilities\TheSlurpeningView.cpp" />
+    <ClCompile Include="src\GameplayView\AbilityView.cpp" />
+    <ClCompile Include="src\GameplayView\CharacterView.cpp" />
+    <ClCompile Include="src\GameplayView\ActorView.cpp" />
+    <ClCompile Include="src\GameplayView\Abilities\BasicAttackView.cpp" />
+    <ClCompile Include="src\GameplayView\NPCView.cpp" />
+    <ClCompile Include="src\GameplayView\ShopInventoryView.cpp" />
+    <ClCompile Include="src\GameplayView\TradeInventoryView.cpp" />
+    <ClCompile Include="src\GameplayView\VitalEntityView.cpp" />
+    <ClCompile Include="src\GamestateViewIO\AspectProfileIO.cpp" />
+    <ClCompile Include="src\GamestateViewIO\GameAssetFactory.cpp" />
+    <ClCompile Include="src\GameplayViewIO\PlayerCharacterViewFactory.cpp" />
+    <ClCompile Include="src\GamestateViewIO\ThemeProfileIO.cpp" />
+    <ClCompile Include="src\GamestateView\AspectProfile.cpp" />
+    <ClCompile Include="src\GamestateView\BasicGameViewState.cpp" />
+    <ClCompile Include="src\GameplayView\Abilities\BasicProjectileView.cpp" />
+    <ClCompile Include="src\GamestateView\MobaViewState.cpp" />
+    <ClCompile Include="src\GamestateView\OpenWorldView.cpp" />
+    <ClCompile Include="src\GamestateView\ThemeResourceProfile.cpp" />
+    <ClCompile Include="src\GamestateView\ViewProfile.cpp" />
+    <ClCompile Include="src\Graphics\GraphicsAlgorithms.cpp" />
+    <ClCompile Include="src\InputControl\PlayerInputController.cpp" />
+    <ClCompile Include="src\InputIO\KeybindData.cpp" />
+    <ClCompile Include="src\Input\Control\CameraInputSet.cpp" />
+    <ClCompile Include="src\Input\Control\CharacterInputSet.cpp" />
+    <ClCompile Include="src\Input\Control\ChatTextAreaInputSet.cpp" />
+    <ClCompile Include="src\Input\Control\DevInputSet.cpp" />
+    <ClCompile Include="src\Input\Control\EditorInputSet.cpp" />
+    <ClCompile Include="src\Input\Control\InterfaceInputSet.cpp" />
+    <ClCompile Include="src\Input\Control\KeyDialogInputSet.cpp" />
+    <ClCompile Include="src\Input\Control\MainMenuInputSet.cpp" />
+    <ClCompile Include="src\Input\Control\ShopMenuInputSet.cpp" />
+    <ClCompile Include="src\Input\Model\CameraInputModel.cpp" />
+    <ClCompile Include="src\Input\Model\CharacterInputModel.cpp" />
+    <ClCompile Include="src\Input\Model\ChatTextAreaInputModel.cpp" />
+    <ClCompile Include="src\Input\Model\DevInputModel.cpp" />
+    <ClCompile Include="src\Input\Model\EditorInputModel.cpp" />
+    <ClCompile Include="src\Input\Model\InterfaceInputModel.cpp" />
+    <ClCompile Include="src\Input\Model\KeyDialogInputModel.cpp" />
+    <ClCompile Include="src\Input\Model\MainMenuInputModel.cpp" />
+    <ClCompile Include="src\Input\Model\ShopMenuInputModel.cpp" />
+    <ClCompile Include="src\Tools\BasicGameEditor.cpp" />
+    <ClCompile Include="src\Tools\NodeEditor.cpp" />
+    <ClCompile Include="src\Tools\PathOptimiser.cpp" />
+    <ClCompile Include="src\Tools\PathRendering.cpp" />
+    <ClCompile Include="src\UI\CooldownLabel.cpp" />
+    <ClCompile Include="src\UI\DialogOptionLabel.cpp" />
+    <ClCompile Include="src\UI\GameCursor.cpp" />
+    <ClCompile Include="src\UI\GameMainMenu.cpp" />
+    <ClCompile Include="src\UI\GameMap2Teams.cpp" />
+    <ClCompile Include="src\UI\GameMessage.cpp" />
+    <ClCompile Include="src\UI\GameShopMenu.cpp" />
+    <ClCompile Include="src\UI\HealthBar.cpp" />
+    <ClCompile Include="src\UI\HealthBarFrame.cpp" />
+    <ClCompile Include="src\UI\InfoPanel.cpp" />
+    <ClCompile Include="src\UI\KeyLabel.cpp" />
+    <ClCompile Include="src\UI\Main_Menu\DisplayContent.cpp" />
+    <ClCompile Include="src\UI\Main_Menu\KeybindContent.cpp" />
+    <ClCompile Include="src\UI\Main_Menu\OptionsContent.cpp" />
+    <ClCompile Include="src\UI\Main_Menu\SoundContent.cpp" />
+    <ClCompile Include="src\UI\SettingsLabel.cpp" />
+    <ClCompile Include="src\UI\Shop_Menu\ShopDialogTabLayoutMenu.cpp" />
+    <ClCompile Include="src\UI\StatBase.cpp" />
+    <ClCompile Include="src\UI\StatPanel.cpp" />
+    <ClCompile Include="src\UI\TabLayoutMenu.cpp" />
+    <ClCompile Include="src\UI\Tooltips\TooltipController.cpp" />
+    <ClCompile Include="src\UI\Tooltips\TooltipInfo.cpp" />
+    <ClCompile Include="src\UI\Tooltips\TooltipInfoAbility.cpp" />
+    <ClCompile Include="src\UI\Tooltips\TooltipInfoBuff.cpp" />
+    <ClCompile Include="src\UI\Tooltips\TooltipInfoItem.cpp" />
+    <ClCompile Include="src\UI\UICharacterPanel.cpp" />
+    <ClCompile Include="src\UI\UIChat.cpp" />
+    <ClCompile Include="src\UI\UIGameInfoPanel.cpp" />
+    <ClCompile Include="src\UI\UIInvPanel.cpp" />
+    <ClCompile Include="src\UI\UIMobaHud.cpp" />
+    <ClCompile Include="src\UI\UIMobaMap.cpp" />
+    <ClCompile Include="src\UI\UIPanelBase.cpp" />
+    <ClCompile Include="src\UI_Base\UIBasicDialogScreen.cpp" />
+    <ClCompile Include="src\UI_Base\UIBuff.cpp" />
+    <ClCompile Include="src\UI_Base\UIBuffGroup.cpp" />
+    <ClCompile Include="src\UI_Base\UIDialogScreen.cpp" />
+    <ClCompile Include="src\UI_Base\UIGameMap.cpp" />
+    <ClCompile Include="src\UI_Base\UIKeyDialog.cpp" />
+    <ClCompile Include="src\UI_Base\UILayoutAbility.cpp" />
+    <ClCompile Include="src\UI_Base\UILayoutAvatar.cpp" />
+    <ClCompile Include="src\UI_Base\UILayoutBase.cpp" />
+    <ClCompile Include="src\UI_Base\UILayoutGroup.cpp" />
+    <ClCompile Include="src\UI_Base\UILayoutInventory.cpp" />
+    <ClCompile Include="src\UI_Base\UILayoutItem.cpp" />
+    <ClCompile Include="src\UI_Base\UILayoutItemClone.cpp" />
+    <ClCompile Include="src\UI_Base\UILayoutStats.cpp" />
+    <ClCompile Include="src\UI_Base\UIStatLabelGroup.cpp" />
+    <ClCompile Include="src\UI_Control\CursorController.cpp" />
+    <ClCompile Include="src\UI_Control\DialogScreenController.cpp" />
+    <ClCompile Include="src\UI_Control\IndicatorController.cpp" />
+    <ClCompile Include="src\UI_Control\InfoPanelController.cpp" />
+    <ClCompile Include="src\UI_Control\MobaMessageEventManager.cpp" />
+    <ClCompile Include="src\ViewControl\CameraFactory.cpp" />
+    <ClCompile Include="src\ViewControl\CameraDirector.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Application\App.h" />
+    <ClInclude Include="src\Application\MenuControllerTarget.h" />
+    <ClInclude Include="src\Application\Main.h" />
+    <ClInclude Include="src\Application\MenuController.h" />
+    <ClInclude Include="src\Application\MenuScene.h" />
+    <ClInclude Include="src\Application\MenuSceneIntro.h" />
+    <ClInclude Include="src\Application\MenuSceneNormalGameLobby.h" />
+    <ClInclude Include="src\Application\MenuSceneSelection.h" />
+    <ClInclude Include="src\Application\MsgParams.h" />
+    <ClInclude Include="src\EnvironmentView\BoidstormView.h" />
+    <ClInclude Include="src\EnvironmentView\BoidView.h" />
+    <ClInclude Include="src\GameControl\GameController.h" />
+    <ClInclude Include="src\GameControl\MobaController.h" />
+    <ClInclude Include="src\GameControl\OpenWorld.h" />
+    <ClInclude Include="src\GameControl\PlayerWorldSelectionController.h" />
+    <ClInclude Include="src\GameControl\SImpleMobaStructure.h" />
+    <ClInclude Include="src\GameControl\StandardMatch5v5.h" />
+    <ClInclude Include="src\GameplayViewIO\AbilityViewFactory.h" />
+    <ClInclude Include="src\GameplayViewIO\ActorViewFactory.h" />
+    <ClInclude Include="src\GameplayViewIO\BuffViewFactory.h" />
+    <ClInclude Include="src\GameplayViewIO\CharacterViewFactory.h" />
+    <ClInclude Include="src\GameplayViewIO\GameMapViewFactory.h" />
+    <ClInclude Include="src\GameplayViewIO\ItemViewFactory.h" />
+    <ClInclude Include="src\GameplayViewIO\NPCViewFactory.h" />
+    <ClInclude Include="src\GameplayView\Abilities\AbilityViewHeaders.h" />
+    <ClInclude Include="src\GameplayView\Abilities\AntiFireballView.h" />
+    <ClInclude Include="src\GameplayView\Abilities\CosmicSpaghettiView.h" />
+    <ClInclude Include="src\GameplayView\Abilities\ElixirBurstView.h" />
+    <ClInclude Include="src\GameplayView\Abilities\HauntedCreatureView.h" />
+    <ClInclude Include="src\GameplayView\Abilities\HiddenPowerView.h" />
+    <ClInclude Include="src\GameplayView\Abilities\HuntOfTheHauntedView.h" />
+    <ClInclude Include="src\GameplayView\Abilities\MotoBoostView.h" />
+    <ClInclude Include="src\GameplayView\Abilities\ValiantLeapView.h" />
+    <ClInclude Include="src\GameplayView\BuffView.h" />
+    <ClInclude Include="src\GameplayView\Abilities\EternalLightView.h" />
+    <ClInclude Include="src\GameplayView\CharacterControllerView.h" />
+    <ClInclude Include="src\GameplayView\GameMapView.h" />
+    <ClInclude Include="src\GameplayView\Quests\QuestView.h" />
+    <ClInclude Include="src\GameplayView\ItemEntityView.h" />
+    <ClInclude Include="src\GameplayView\ItemView.h" />
+    <ClInclude Include="src\GameplayView\PlayerCharacterView.h" />
+    <ClInclude Include="src\GameplayView\Abilities\SpookySpaceMeringueView.h" />
+    <ClInclude Include="src\GameplayView\Abilities\TheSlurpeningView.h" />
+    <ClInclude Include="src\GameplayView\AbilityView.h" />
+    <ClInclude Include="src\GameplayView\CharacterView.h" />
+    <ClInclude Include="src\GameplayView\ActorView.h" />
+    <ClInclude Include="src\GameplayView\Abilities\BasicAttackView.h" />
+    <ClInclude Include="src\GameplayView\NPCView.h" />
+    <ClInclude Include="src\GameplayView\ShopInventoryView.h" />
+    <ClInclude Include="src\GameplayView\TradeInventoryView.h" />
+    <ClInclude Include="src\GameplayView\VitalEntityView.h" />
+    <ClInclude Include="src\GamestateViewIO\AspectProfileIO.h" />
+    <ClInclude Include="src\GamestateViewIO\GameAssetFactory.h" />
+    <ClInclude Include="src\GameplayViewIO\PlayerCharacterViewFactory.h" />
+    <ClInclude Include="src\GamestateViewIO\ProfileIOBase.h" />
+    <ClInclude Include="src\GamestateViewIO\ThemeProfileIO.h" />
+    <ClInclude Include="src\GamestateView\AspectProfile.h" />
+    <ClInclude Include="src\GamestateView\BasicGameViewState.h" />
+    <ClInclude Include="src\GameplayView\Abilities\BasicProjectileView.h" />
+    <ClInclude Include="src\GamestateView\MobaGameElementsEnum.h" />
+    <ClInclude Include="src\GamestateView\MobaViewState.h" />
+    <ClInclude Include="src\GamestateView\OpenWorldView.h" />
+    <ClInclude Include="src\GamestateView\ProfileBase.h" />
+    <ClInclude Include="src\GamestateView\ThemeResourceProfile.h" />
+    <ClInclude Include="src\GamestateView\ThemeResources.h" />
+    <ClInclude Include="src\GamestateView\ViewProfile.h" />
+    <ClInclude Include="src\Graphics\GraphicsAlgorithms.h" />
+    <ClInclude Include="src\InputControl\PlayerInputController.h" />
+    <ClInclude Include="src\InputIO\KeybindData.h" />
+    <ClInclude Include="src\Input\Control\CameraInputSet.h" />
+    <ClInclude Include="src\Input\Control\CharacterInputSet.h" />
+    <ClInclude Include="src\Input\Control\ChatTextAreaInputSet.h" />
+    <ClInclude Include="src\Input\Control\DevInputSet.h" />
+    <ClInclude Include="src\Input\Control\EditorInputSet.h" />
+    <ClInclude Include="src\Input\Control\InterfaceInputSet.h" />
+    <ClInclude Include="src\Input\Control\KeyDialogInputSet.h" />
+    <ClInclude Include="src\Input\Control\MainMenuInputSet.h" />
+    <ClInclude Include="src\Input\Control\ShopMenuInputSet.h" />
+    <ClInclude Include="src\Input\Model\CameraInputModel.h" />
+    <ClInclude Include="src\Input\Model\CharacterInputModel.h" />
+    <ClInclude Include="src\Input\Model\ChatTextAreaInputModel.h" />
+    <ClInclude Include="src\Input\Model\DevInputModel.h" />
+    <ClInclude Include="src\Input\Model\EditorInputModel.h" />
+    <ClInclude Include="src\Input\Model\InterfaceInputModel.h" />
+    <ClInclude Include="src\Input\Model\KeyDialogInputModel.h" />
+    <ClInclude Include="src\Input\Model\MainMenuInputModel.h" />
+    <ClInclude Include="src\Input\Model\ShopMenuInputModel.h" />
+    <ClInclude Include="src\Tools\BasicGameEditor.h" />
+    <ClInclude Include="src\Tools\NodeEditor.h" />
+    <ClInclude Include="src\Tools\PathOptimiser.h" />
+    <ClInclude Include="src\Tools\PathRendering.h" />
+    <ClInclude Include="src\UI\CooldownLabel.h" />
+    <ClInclude Include="src\UI\DialogOptionLabel.h" />
+    <ClInclude Include="src\UI\GameCursor.h" />
+    <ClInclude Include="src\UI\GameMainMenu.h" />
+    <ClInclude Include="src\UI\GameMap2Teams.h" />
+    <ClInclude Include="src\UI\GameMessage.h" />
+    <ClInclude Include="src\UI\GameShopMenu.h" />
+    <ClInclude Include="src\UI\HealthBar.h" />
+    <ClInclude Include="src\UI\HealthBarFrame.h" />
+    <ClInclude Include="src\UI\InfoPanel.h" />
+    <ClInclude Include="src\UI\KeyLabel.h" />
+    <ClInclude Include="src\UI\Main_Menu\DisplayContent.h" />
+    <ClInclude Include="src\UI\Main_Menu\KeybindContent.h" />
+    <ClInclude Include="src\UI\Main_Menu\OptionsContent.h" />
+    <ClInclude Include="src\UI\Main_Menu\SoundContent.h" />
+    <ClInclude Include="src\UI\UICharacterPanel.h" />
+    <ClInclude Include="src\UI\UIChat.h" />
+    <ClInclude Include="src\UI\UIGameInfoPanel.h" />
+    <ClInclude Include="src\UI\UIInvPanel.h" />
+    <ClInclude Include="src\UI\UIPanelBase.h" />
+    <ClInclude Include="src\UI_Base\UILayoutAvatar.h" />
+    <ClInclude Include="src\UI_Base\UILayoutBase.h" />
+    <ClInclude Include="src\UI_Base\UIStatLabelGroup.h" />
+    <ClInclude Include="src\UI_Control\MobaMessageEventManager.h" />
+    <ClInclude Include="src\UI\SettingsLabel.h" />
+    <ClInclude Include="src\UI\Shop_Menu\ShopDialogTabLayoutMenu.h" />
+    <ClInclude Include="src\UI\StatBase.h" />
+    <ClInclude Include="src\UI\StatPanel.h" />
+    <ClInclude Include="src\UI\TabLayoutMenu.h" />
+    <ClInclude Include="src\UI\Tooltips\TooltipController.h" />
+    <ClInclude Include="src\UI\Tooltips\TooltipEffect.h" />
+    <ClInclude Include="src\UI\Tooltips\TooltipInfo.h" />
+    <ClInclude Include="src\UI\Tooltips\TooltipInfoAbility.h" />
+    <ClInclude Include="src\UI\Tooltips\TooltipInfoBuff.h" />
+    <ClInclude Include="src\UI\Tooltips\TooltipInfoItem.h" />
+    <ClInclude Include="src\UI\UIMobaHud.h" />
+    <ClInclude Include="src\UI\UIMobaMap.h" />
+    <ClInclude Include="src\UI_Base\UIBasicDialogScreen.h" />
+    <ClInclude Include="src\UI_Base\UIBuff.h" />
+    <ClInclude Include="src\UI_Base\UIBuffGroup.h" />
+    <ClInclude Include="src\UI_Base\UIDialogScreen.h" />
+    <ClInclude Include="src\UI_Base\UIDialogScreenView.h" />
+    <ClInclude Include="src\UI_Base\UIGameMap.h" />
+    <ClInclude Include="src\UI_Base\UIItemGroup.h" />
+    <ClInclude Include="src\UI_Base\UIKeyDialog.h" />
+    <ClInclude Include="src\UI_Base\UILayoutAbility.h" />
+    <ClInclude Include="src\UI_Base\UILayoutGroup.h" />
+    <ClInclude Include="src\UI_Base\UILayoutInventory.h" />
+    <ClInclude Include="src\UI_Base\UILayoutItem.h" />
+    <ClInclude Include="src\UI_Base\UILayoutItemClone.h" />
+    <ClInclude Include="src\UI_Base\UILayoutStats.h" />
+    <ClInclude Include="src\UI_Control\CursorController.h" />
+    <ClInclude Include="src\UI_Control\DialogScreenController.h" />
+    <ClInclude Include="src\UI_Control\IndicatorController.h" />
+    <ClInclude Include="src\UI_Control\InfoPanelController.h" />
+    <ClInclude Include="src\ViewControl\CameraFactory.h" />
+    <ClInclude Include="src\ViewControl\CameraDirector.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Resources\shaders\fogshader.fx" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C99DA02F-71A0-40F0-9E35-34ACEF3E2C80}</ProjectGuid>
+    <RootNamespace>SimpleMoba</RootNamespace>
+    <ProjectName>Simple Moba Client</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(ProjectDir)../Debug;</LibraryPath>
+    <ReferencePath>$(VC_ReferencesPath_x86);</ReferencePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(ProjectDir)../Release;</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;$(ProjectDir)../;</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <ShowIncludes>
+      </ShowIncludes>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>CoreGame.lib;EngineGameModel.lib;EngineGameModuleDirectX9.lib;EngineMoba.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <FxCompile>
+      <ShaderType>Effect</ShaderType>
+      <ShaderModel>2.0</ShaderModel>
+      <AdditionalOptions>/Gec</AdditionalOptions>
+    </FxCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MultiProcessorCompilation>
+      </MultiProcessorCompilation>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;$(ProjectDir)../;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>CoreGame.lib;EngineGameModel.lib;EngineGameModuleDirectX9.lib;EngineMoba.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
+    <FxCompile>
+      <ShaderModel>2.0</ShaderModel>
+      <ShaderType>Effect</ShaderType>
+      <AdditionalOptions>/Gec</AdditionalOptions>
+    </FxCompile>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

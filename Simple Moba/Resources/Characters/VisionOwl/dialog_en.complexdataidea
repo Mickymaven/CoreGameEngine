@@ -1,0 +1,35 @@
+4
+dialog 0----------------------------------------------------
+"HEY FUNNY SEEING YOU AROUND HERE. GO AWAY IM LOOKING FOR MY TOOLS. I THINK THAT THE HONEY BADGERS RAIDED MY TOOLBAG AND TOOK THEM. SOMEWHERE.. I DONT KNOW. ARGGHHH"
+3
+"You look like you could use some help there."
+1
+"You have something I want. Give it to me."
+2
+"Sorry to bother you."
+exit
+dialog 1----------------------------------------------------
+"I DONT WANNA HAVE TO DEFEND MY SELF BUT I WILL!"
+3
+"Bring it!"
+event combat
+"Whoa! Hey there JKJKJKJK."
+0
+"Yeah Ill just be leaving now."
+exit
+dialog 2----------------------------------------------------
+"Yo Im a very competent owl. But hey, I guess more pairs of eyes always helps right. Can you help me find the rest of the tools from my toolbag?"
+3
+"Yes I will help."
+event quest
+"Hang on what did you say before that?"
+0
+"Oh hey look at the time, I got some homework to do. Peace."
+exit
+dialog 3---------------------------------------------------
+"Yo here is your thing. Wanna see it now?"
+2
+"Gimme gimme gimme"
+action trade
+"Um hold on, Ill Come back for it.
+exit

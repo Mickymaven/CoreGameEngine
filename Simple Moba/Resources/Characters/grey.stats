@@ -1,0 +1,40 @@
+	// Name
+"Grey"
+	// Caption
+"The sliding one"
+	// base Health
+450.0
+	// health per level   (* 20 _+ 50 =1500)
+50.0
+	// base Health Regen (per second)
+1.0
+	// health Regen per level   (per second)
+0.1
+	// Base Cat Voodoo
+55.0
+	// Cat Voodoo Per Level (*20 + 50 =150)
+6.0
+	// Base Physical Damage
+35.0
+	// Physical Damage Per Level (*20 + 50 =150)
+4.0 
+	// Base Attack Speed
+0.9
+	//Attack Speed Per Level
+0.1
+	//Base Move Speed 5.0
+2.5
+	//Move Speed per level
+1.0
+	//Base Armor
+10.0
+	//Armor Per Level
+2.5
+	//Base Cat Voodoo Resist
+10.0
+	//Cat Voodoo Resist Per Level
+2.5
+	//Base Range (basic attacks)
+6.0
+	//Base Range Per Level
+0.1

@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{25CB84A8-1433-44E8-8508-0BB1421EADD4}</ProjectGuid>
+    <RootNamespace>CoreGame</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include; $(ProjectDir)../EngineMoba;</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include; $(ProjectDir)../EngineMoba;</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Environment\Boid.cpp" />
+    <ClCompile Include="src\Environment\Boidstorm.cpp" />
+    <ClCompile Include="src\GameConfiguration.cpp" />
+    <ClCompile Include="src\Gameplay\Abilities\ElixirBurst.cpp" />
+    <ClCompile Include="src\Gameplay\Abilities\EternalLight.cpp" />
+    <ClCompile Include="src\Gameplay\Abilities\HiddenPower.cpp" />
+    <ClCompile Include="src\Gameplay\Abilities\ValiantLeap.cpp" />
+    <ClCompile Include="src\Gameplay\Characters\CoreCharacter.cpp" />
+    <ClCompile Include="src\Gameplay\Characters\CoreCharacterController.cpp" />
+    <ClCompile Include="src\Gameplay\Characters\CoreNPCController.cpp" />
+    <ClCompile Include="src\Gameplay\Characters\CorePlayerCharacterController.cpp" />
+    <ClCompile Include="src\Gameplay\Characters\VisionOwl\VisionOwlStandard1InteractionController.cpp" />
+    <ClCompile Include="src\Gameplay\Maps\MapBarebones.cpp" />
+    <ClCompile Include="src\Gameplay\Maps\MapTabulaRasa.cpp" />
+    <ClCompile Include="src\Gameplay\ModeConfigIO\ModeConfigurationFactory.cpp" />
+    <ClCompile Include="src\Gameplay\ModeConfig\BarebonesConfigForOpenWorld.cpp" />
+    <ClCompile Include="src\Gameplay\ModeConfig\BarebonesConfigForStandard.cpp" />
+    <ClCompile Include="src\Gameplay\ModeConfig\BaseMapConfigForOpenWorld.cpp" />
+    <ClCompile Include="src\Gameplay\ModeConfig\TabulaRasaConfigForStandard.cpp" />
+    <ClCompile Include="src\Gameplay\Quests\OwlQuestStandard1Config.cpp" />
+    <ClCompile Include="src\Gameplay\Quests\OwlQuestStandard1.cpp" />
+    <ClCompile Include="src\Gameplay\ModeConfig\BaseMapConfigForStandard.cpp" />
+    <ClCompile Include="src\Gameplay\Abilities\AntiFireball.cpp" />
+    <ClCompile Include="src\Gameplay\Abilities\BasicAttack.cpp" />
+    <ClCompile Include="src\Gameplay\Abilities\BasicProjectile.cpp" />
+    <ClCompile Include="src\Gameplay\Abilities\BudgetMenuBeverage.cpp" />
+    <ClCompile Include="src\Gameplay\Abilities\CosmicSpaghetti.cpp" />
+    <ClCompile Include="src\Gameplay\Abilities\HauntedCreature.cpp" />
+    <ClCompile Include="src\Gameplay\Abilities\HuntOfTheHaunted.cpp" />
+    <ClCompile Include="src\Gameplay\Abilities\MotoBoost.cpp" />
+    <ClCompile Include="src\Gameplay\Abilities\NomBarHeal.cpp" />
+    <ClCompile Include="src\Gameplay\Abilities\Recall.cpp" />
+    <ClCompile Include="src\Gameplay\Abilities\RideBike.cpp" />
+    <ClCompile Include="src\Gameplay\Abilities\SpookySpaceMeringue.cpp" />
+    <ClCompile Include="src\Gameplay\Abilities\TheSlurpening.cpp" />
+    <ClCompile Include="src\Gameplay\Abilities\ZZzzz.cpp" />
+    <ClCompile Include="src\Gameplay\Characters\AngryCat\AngryCat.cpp" />
+    <ClCompile Include="src\Gameplay\Characters\AngryCat\AngryCatInteractionController.cpp" />
+    <ClCompile Include="src\Gameplay\Characters\CharacterData.cpp" />
+    <ClCompile Include="src\Gameplay\Characters\VisionOwl\VisionOwl.cpp" />
+    <ClCompile Include="src\Gameplay\Characters\VisionOwl\VisionOwlDialogBehavior.cpp" />
+    <ClCompile Include="src\Gameplay\Characters\VisionOwl\VisionOwlInteractionController.cpp" />
+    <ClCompile Include="src\Gameplay\Items\ItemData.cpp" />
+    <ClCompile Include="src\GamestateIO\CoreActorFactory.cpp" />
+    <ClCompile Include="src\GamestateIO\CoreActorStatsFactory.cpp" />
+    <ClCompile Include="src\GamestateIO\CoreCharacterFactory.cpp" />
+    <ClCompile Include="src\GamestateIO\CoreNPCControllerFactory.cpp" />
+    <ClCompile Include="src\GamestateIO\CorePlayerCharacterControllerFactory.cpp" />
+    <ClCompile Include="src\GamestateIO\DialogBehaviorIO.cpp" />
+    <ClCompile Include="src\Gamestate\CoreGameState.cpp" />
+    <ClCompile Include="src\Gamestate\CustomMatchState.cpp" />
+    <ClCompile Include="src\Gamestate\OpenWorldState.cpp" />
+    <ClCompile Include="src\Gamestate\StandardMatch5v5State.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Gameplay\Abilities\ElixirBurst.h" />
+    <ClInclude Include="src\Gameplay\Abilities\EternalLight.h" />
+    <ClInclude Include="src\Gameplay\Abilities\HiddenPower.h" />
+    <ClInclude Include="src\Gameplay\Abilities\ValiantLeap.h" />
+    <ClInclude Include="src\Gameplay\Characters\AbilitySlotType.h" />
+    <ClInclude Include="src\Gameplay\Characters\CoreCharacter.h" />
+    <ClInclude Include="src\Gameplay\Characters\CoreCharacterController.h" />
+    <ClInclude Include="src\Gameplay\Characters\CoreNPCController.h" />
+    <ClInclude Include="src\Gameplay\Characters\CorePlayerCharacterController.h" />
+    <ClInclude Include="src\Gameplay\Characters\VisionOwl\VisionOwlStandard1InteractionController.h" />
+    <ClInclude Include="src\Gameplay\Quests\InvName.h" />
+    <ClInclude Include="src\Gameplay\Maps\MapBarebones.h" />
+    <ClInclude Include="src\Gameplay\Maps\MapTabulaRasa.h" />
+    <ClInclude Include="src\Gameplay\ModeConfigIO\ModeConfigurationFactory.h" />
+    <ClInclude Include="src\Gameplay\ModeConfig\BarebonesConfigForOpenWorld.h" />
+    <ClInclude Include="src\Gameplay\ModeConfig\BaseMapConfigForOpenWorld.h" />
+    <ClInclude Include="src\Gameplay\ModeConfig\TabulaRasaConfigForStandard.h" />
+    <ClInclude Include="src\Gameplay\Quests\OwlQuestStandard1Config.h" />
+    <ClInclude Include="src\Gameplay\Quests\OwlQuestStandard1.h" />
+    <ClInclude Include="src\Gameplay\MapsIO\MapFactory.h" />
+    <ClInclude Include="src\Gameplay\ModeConfig\BarebonesConfigForStandard.h" />
+    <ClInclude Include="src\Gameplay\ModeConfig\BaseMapConfigForStandard.h" />
+    <ClInclude Include="src\Gameplay\DamageEvent.h" />
+    <ClInclude Include="src\GamestateIO\CoreActorFactory.h" />
+    <ClInclude Include="src\GamestateIO\CoreActorStatsFactory.h" />
+    <ClInclude Include="src\GamestateIO\CoreCharacterFactory.h" />
+    <ClInclude Include="src\GamestateIO\CoreNPCControllerFactory.h" />
+    <ClInclude Include="src\GamestateIO\CorePlayerCharacterControllerFactory.h" />
+    <ClInclude Include="src\Gamestate\AssetMeshNameEnum.h" />
+    <ClInclude Include="src\Environment\Boid.h" />
+    <ClInclude Include="src\Environment\Boidstorm.h" />
+    <ClInclude Include="src\GameConfiguration.h" />
+    <ClInclude Include="src\Gameplay\Abilities\AbilityIncludes.h" />
+    <ClInclude Include="src\Gameplay\Abilities\AbilityName.h" />
+    <ClInclude Include="src\Gameplay\Abilities\BasicAttack.h" />
+    <ClInclude Include="src\Gameplay\Abilities\BasicProjectile.h" />
+    <ClInclude Include="src\Gameplay\Abilities\BudgetMenuBeverage.h" />
+    <ClInclude Include="src\Gameplay\Abilities\CosmicSpaghetti.h" />
+    <ClInclude Include="src\Gameplay\Abilities\HauntedCreature.h" />
+    <ClInclude Include="src\Gameplay\Abilities\AntiFireball.h" />
+    <ClInclude Include="src\Gameplay\Abilities\HuntOfTheHaunted.h" />
+    <ClInclude Include="src\Gameplay\Abilities\MotoBoost.h" />
+    <ClInclude Include="src\Gameplay\Abilities\NomBarHeal.h" />
+    <ClInclude Include="src\Gameplay\Abilities\Recall.h" />
+    <ClInclude Include="src\Gameplay\Abilities\RideBike.h" />
+    <ClInclude Include="src\Gameplay\Abilities\SpookySpaceMeringue.h" />
+    <ClInclude Include="src\Gameplay\Abilities\TheSlurpening.h" />
+    <ClInclude Include="src\Gameplay\Abilities\ZZzzz.h" />
+    <ClInclude Include="src\Gameplay\Buffs\BuffName.h" />
+    <ClInclude Include="src\Gameplay\Characters\AngryCat\AngryCat.h" />
+    <ClInclude Include="src\Gameplay\Characters\AngryCat\AngryCatInteractionController.h" />
+    <ClInclude Include="src\Gameplay\Characters\CharacterClassName.h" />
+    <ClInclude Include="src\Gameplay\Characters\CharacterData.h" />
+    <ClInclude Include="src\Gameplay\Characters\VisionOwl\VisionOwl.h" />
+    <ClInclude Include="src\Gameplay\Characters\VisionOwl\VisionOwlDialogBehavior.h" />
+    <ClInclude Include="src\Gameplay\Characters\VisionOwl\VisionOwlInteractionController.h" />
+    <ClInclude Include="src\Gameplay\Items\ItemData.h" />
+    <ClInclude Include="src\Gameplay\Items\ItemName.h" />
+    <ClInclude Include="src\Gameplay\TeamName.h" />
+    <ClInclude Include="src\GamestateIO\DialogBehaviorIO.h" />
+    <ClInclude Include="src\Gamestate\CoreGameState.h" />
+    <ClInclude Include="src\Gamestate\CustomMatchState.h" />
+    <ClInclude Include="src\Gamestate\GameMapId.h" />
+    <ClInclude Include="src\Gamestate\GameMode.h" />
+    <ClInclude Include="src\Gamestate\OpenWorldState.h" />
+    <ClInclude Include="src\Gamestate\StandardMatch5v5State.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B6F42460-A4A8-495E-879C-D6D632564291}</ProjectGuid>
+    <RootNamespace>EngineMoba</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Ability\Ability.cpp" />
+    <ClCompile Include="src\Ability\DirectionalAbility.cpp" />
+    <ClCompile Include="src\Ability\InstantAbility.cpp" />
+    <ClCompile Include="src\Ability\PointAbility.cpp" />
+    <ClCompile Include="src\Ability\SingleTargetAbility.cpp" />
+    <ClCompile Include="src\Actors\Actor.cpp" />
+    <ClCompile Include="src\Actors\ActorStats.cpp" />
+    <ClCompile Include="src\Actors\BuffRecipient.cpp" />
+    <ClCompile Include="src\Actors\Character.cpp" />
+    <ClCompile Include="src\Actors\CharacterActions.cpp" />
+    <ClCompile Include="src\Actors\CharacterController.cpp" />
+    <ClCompile Include="src\Actors\NPCController.cpp" />
+    <ClCompile Include="src\GameControl\BuffController.cpp" />
+    <ClCompile Include="src\GameControl\HealingController.cpp" />
+    <ClCompile Include="src\GameControl\QuestItemController.cpp" />
+    <ClCompile Include="src\GameControl\VitalEventController.cpp" />
+    <ClCompile Include="src\GameControl\VitalObjectController.cpp" />
+    <ClCompile Include="src\GamestateIO\AbilityFactory.cpp" />
+    <ClCompile Include="src\GamestateIO\ActorFactory.cpp" />
+    <ClCompile Include="src\GamestateIO\ActorStatsFactory.cpp" />
+    <ClCompile Include="src\GamestateIO\CharacterFactory.cpp" />
+    <ClCompile Include="src\GamestateIO\GameMapFactory.cpp" />
+    <ClCompile Include="src\GamestateIO\ItemFactory.cpp" />
+    <ClCompile Include="src\GamestateIO\NPCControllerFactory.cpp" />
+    <ClCompile Include="src\GamestateIO\PlayerCharacterControllerFactory.cpp" />
+    <ClCompile Include="src\Player\ChatMessage.cpp" />
+    <ClCompile Include="src\Player\ChatModel.cpp" />
+    <ClCompile Include="src\VitalEffect\Healing.cpp" />
+    <ClCompile Include="src\VitalEffect\HealthEffect.cpp" />
+    <ClCompile Include="src\ModeConfig\BaseMapConfigForMode.cpp" />
+    <ClCompile Include="src\Quests\Quest.cpp" />
+    <ClCompile Include="src\Actors\PlayerCharacterController.cpp" />
+    <ClCompile Include="src\Actors\ShopInventory.cpp" />
+    <ClCompile Include="src\Actors\ShopZone.cpp" />
+    <ClCompile Include="src\Actors\StatChangeObject.cpp" />
+    <ClCompile Include="src\Actors\TradeInventory.cpp" />
+    <ClCompile Include="src\Actors\VitalEntity.cpp" />
+    <ClCompile Include="src\Actors\VitalEntityController.cpp" />
+    <ClCompile Include="src\Actor_Control\AggressionState.cpp" />
+    <ClCompile Include="src\Actor_Control\AttackMoveController.cpp" />
+    <ClCompile Include="src\Actor_Control\BattleStateController.cpp" />
+    <ClCompile Include="src\Actor_Control\DialogBehavior.cpp" />
+    <ClCompile Include="src\Actor_Control\DialogStandbyBehavior.cpp" />
+    <ClCompile Include="src\Actor_Control\Interaction.cpp" />
+    <ClCompile Include="src\Actor_Control\InteractionController.cpp" />
+    <ClCompile Include="src\Actor_Control\InteractionZone.cpp" />
+    <ClCompile Include="src\Actor_Control\PathController.cpp" />
+    <ClCompile Include="src\Actor_Control\WalkState.cpp" />
+    <ClCompile Include="src\VitalEffect\Buff.cpp" />
+    <ClCompile Include="src\VitalEffect\Damage.cpp" />
+    <ClCompile Include="src\GameControl\DamageController.cpp" />
+    <ClCompile Include="src\GameControl\DeathEvent.cpp" />
+    <ClCompile Include="src\Gamestate\MobaActorStateObject.cpp" />
+    <ClCompile Include="src\Gamestate\MobaControllerSharedData.cpp" />
+    <ClCompile Include="src\Gamestate\MobaState.cpp" />
+    <ClCompile Include="src\Item\Item.cpp" />
+    <ClCompile Include="src\Actors\ItemEntity.cpp" />
+    <ClCompile Include="src\Maps\GameMap.cpp" />
+    <ClCompile Include="src\Pathfinding\Pathfinder.cpp" />
+    <ClCompile Include="src\Quests\QuestItems.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Ability\Ability.h" />
+    <ClInclude Include="src\Ability\DirectionalAbility.h" />
+    <ClInclude Include="src\Ability\InstantAbility.h" />
+    <ClInclude Include="src\Ability\PointAbility.h" />
+    <ClInclude Include="src\Ability\SingleTargetAbility.h" />
+    <ClInclude Include="src\Actors\Actor.h" />
+    <ClInclude Include="src\Actors\ActorStats.h" />
+    <ClInclude Include="src\Actors\BuffRecipient.h" />
+    <ClInclude Include="src\Actors\Character.h" />
+    <ClInclude Include="src\Actors\CharacterActions.h" />
+    <ClInclude Include="src\Actors\CharacterController.h" />
+    <ClInclude Include="src\Actors\NPCController.h" />
+    <ClInclude Include="src\Actors\PlayerActionEnum.h" />
+    <ClInclude Include="src\Actors\PlayerCharacterController.h" />
+    <ClInclude Include="src\Actors\ShopInventory.h" />
+    <ClInclude Include="src\Actors\ShopZone.h" />
+    <ClInclude Include="src\Actors\StatChangeObject.h" />
+    <ClInclude Include="src\Actors\StatName.h" />
+    <ClInclude Include="src\Actors\TradeInventory.h" />
+    <ClInclude Include="src\Actors\VitalEntity.h" />
+    <ClInclude Include="src\Actors\VitalEntityController.h" />
+    <ClInclude Include="src\Actor_Control\AggressionState.h" />
+    <ClInclude Include="src\Actor_Control\AttackMoveController.h" />
+    <ClInclude Include="src\Actor_Control\BattleStateController.h" />
+    <ClInclude Include="src\Actor_Control\DialogBehavior.h" />
+    <ClInclude Include="src\Actor_Control\DialogOption.h" />
+    <ClInclude Include="src\Actor_Control\DialogStandbyBehavior.h" />
+    <ClInclude Include="src\Actor_Control\DialogViewScreenOptions.h" />
+    <ClInclude Include="src\Actor_Control\Interaction.h" />
+    <ClInclude Include="src\Actor_Control\InteractionController.h" />
+    <ClInclude Include="src\Actor_Control\InteractionZone.h" />
+    <ClInclude Include="src\Actor_Control\PathController.h" />
+    <ClInclude Include="src\Actor_Control\WalkState.h" />
+    <ClInclude Include="src\GameControl\BuffController.h" />
+    <ClInclude Include="src\GameControl\HealingController.h" />
+    <ClInclude Include="src\GameControl\VitalObjectController.h" />
+    <ClInclude Include="src\GamestateIO\AbilityFactory.h" />
+    <ClInclude Include="src\GamestateIO\ActorFactory.h" />
+    <ClInclude Include="src\GamestateIO\ActorStatsFactory.h" />
+    <ClInclude Include="src\GamestateIO\CharacterControllerFactory.h" />
+    <ClInclude Include="src\GamestateIO\CharacterFactory.h" />
+    <ClInclude Include="src\GamestateIO\GameMapFactory.h" />
+    <ClInclude Include="src\GamestateIO\GameObjectFactory.h" />
+    <ClInclude Include="src\GamestateIO\ItemFactory.h" />
+    <ClInclude Include="src\GamestateIO\NPCControllerFactory.h" />
+    <ClInclude Include="src\GamestateIO\PlayerCharacterControllerFactory.h" />
+    <ClInclude Include="src\Player\ChatMessage.h" />
+    <ClInclude Include="src\Player\ChatModel.h" />
+    <ClInclude Include="src\VitalEffect\Buff.h" />
+    <ClInclude Include="src\VitalEffect\Damage.h" />
+    <ClInclude Include="src\GameControl\DamageController.h" />
+    <ClInclude Include="src\GameControl\DeathEvent.h" />
+    <ClInclude Include="src\GameControl\QuestItemController.h" />
+    <ClInclude Include="src\VitalEffect\Healing.h" />
+    <ClInclude Include="src\VitalEffect\HealthEffect.h" />
+    <ClInclude Include="src\Quests\Quest.h" />
+    <ClInclude Include="src\Gamestate\mobaactorstateobject.h" />
+    <ClInclude Include="src\Gamestate\MobaControllerSharedData.h" />
+    <ClInclude Include="src\Gamestate\MobaState.h" />
+    <ClInclude Include="src\Item\Item.h" />
+    <ClInclude Include="src\Actors\ItemEntity.h" />
+    <ClInclude Include="src\ModeConfig\BaseMapConfigForMode.h" />
+    <ClInclude Include="src\Maps\GameMap.h" />
+    <ClInclude Include="src\Pathfinding\Pathfinder.h" />
+    <ClInclude Include="src\Quests\QuestItems.h" />
+    <ClInclude Include="src\GameControl\VitalEventController.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
