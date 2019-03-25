@@ -82,6 +82,7 @@ protected:
 	vector <vector <PlayerCharacterController *> *> m_actorControllerTeams;
 
 	PlayerCharacterController * m_ownedPlayerCharacter;
+	unsigned long m_playerID;//one player id per application run? maybe move to MAIN / somewhere in app
 
 	bool m_controlAnyPlayerCharacter;
 	PlayerCharacterController * m_controlledPlayerCharacter;
@@ -131,6 +132,8 @@ public:
 	virtual void InitInventories(vector<int> * invsToInit);
 	virtual void InitGameShopsForMode();
 	//Accessors
+
+	unsigned long GetPlayerID();
 
 	vector<int> * GetSpriteConfig();
 	vector<int> * GetAssetConfig();

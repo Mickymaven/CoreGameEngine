@@ -78,6 +78,7 @@ public:
 	char * GetText();
 
 	void SetInputController(GameInputController * gameInputController);
+	void SetColor(D3DCOLOR * color);
 
 };
 

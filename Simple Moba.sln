@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Simple Moba Client", "Simple Moba\Simple Moba.vcxproj", "{C99DA02F-71A0-40F0-9E35-34ACEF3E2C80}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleMobaServer", "SimpleMobaServer\SimpleMobaServer.vcxproj", "{CD51CB7D-15F6-4A63-B80E-7191430D4DB0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineGameNet", "EngineGameNet\EngineGameNet.vcxproj", "{A9096F1A-F7EA-4D78-94F9-B76FAEE6CABC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineGameModuleOpenGL46", "EngineGameModuleOpenGL46\EngineGameModuleOpenGL46.vcxproj", "{DCDA8671-F1F6-4962-9E20-BDCAEEB518A0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -215,6 +217,26 @@ Global
 		{A9096F1A-F7EA-4D78-94F9-B76FAEE6CABC}.Release|x64.Build.0 = Release|x64
 		{A9096F1A-F7EA-4D78-94F9-B76FAEE6CABC}.Release|x86.ActiveCfg = Release|Win32
 		{A9096F1A-F7EA-4D78-94F9-B76FAEE6CABC}.Release|x86.Build.0 = Release|Win32
+		{DCDA8671-F1F6-4962-9E20-BDCAEEB518A0}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{DCDA8671-F1F6-4962-9E20-BDCAEEB518A0}.Debug|ARM.ActiveCfg = Debug|Win32
+		{DCDA8671-F1F6-4962-9E20-BDCAEEB518A0}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{DCDA8671-F1F6-4962-9E20-BDCAEEB518A0}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{DCDA8671-F1F6-4962-9E20-BDCAEEB518A0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DCDA8671-F1F6-4962-9E20-BDCAEEB518A0}.Debug|Win32.Build.0 = Debug|Win32
+		{DCDA8671-F1F6-4962-9E20-BDCAEEB518A0}.Debug|x64.ActiveCfg = Debug|x64
+		{DCDA8671-F1F6-4962-9E20-BDCAEEB518A0}.Debug|x64.Build.0 = Debug|x64
+		{DCDA8671-F1F6-4962-9E20-BDCAEEB518A0}.Debug|x86.ActiveCfg = Debug|Win32
+		{DCDA8671-F1F6-4962-9E20-BDCAEEB518A0}.Debug|x86.Build.0 = Debug|Win32
+		{DCDA8671-F1F6-4962-9E20-BDCAEEB518A0}.Release|Any CPU.ActiveCfg = Release|Win32
+		{DCDA8671-F1F6-4962-9E20-BDCAEEB518A0}.Release|ARM.ActiveCfg = Release|Win32
+		{DCDA8671-F1F6-4962-9E20-BDCAEEB518A0}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{DCDA8671-F1F6-4962-9E20-BDCAEEB518A0}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{DCDA8671-F1F6-4962-9E20-BDCAEEB518A0}.Release|Win32.ActiveCfg = Release|Win32
+		{DCDA8671-F1F6-4962-9E20-BDCAEEB518A0}.Release|Win32.Build.0 = Release|Win32
+		{DCDA8671-F1F6-4962-9E20-BDCAEEB518A0}.Release|x64.ActiveCfg = Release|x64
+		{DCDA8671-F1F6-4962-9E20-BDCAEEB518A0}.Release|x64.Build.0 = Release|x64
+		{DCDA8671-F1F6-4962-9E20-BDCAEEB518A0}.Release|x86.ActiveCfg = Release|Win32
+		{DCDA8671-F1F6-4962-9E20-BDCAEEB518A0}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -52,7 +52,7 @@ void UITextInput::Render()
 
 bool UITextInput::Char(char key)
 {
-	if (m_end < 64)
+	if (m_end < 63)
 	{
 		m_text[m_end] = key;
 		m_text[m_end+1] = '\0';
@@ -101,8 +101,15 @@ void UITextInput::Active(float deltaTime)
 			{
 				if (m_gameInputController->GetKeyPressDownLast(i) == false)
 				{
+
+					bool shift=false;
+					if (m_gameInputController->GetKeyPress(0x2A, false, false)
+						|| m_gameInputController->GetKeyPress(0x36, false, false)) shift = true;
+					
+
+
 					//iKey = i;
-					if (UITextInput::Char(CharForKey(i)))
+					if (UITextInput::Char(CharForKey(i, false, shift)))
 						m_gameInputController->ExpendKey(i);
 
 				}
@@ -145,6 +152,16 @@ TextInputState UITextInput::GetState() { return m_state; }
 
 void UITextInput::ActionUseDeactivate()
 {
+	RECT rcRect = { 0,0,0,0 };
+
+	m_font->DrawText(NULL, m_text, strlen(m_text), &rcRect, DT_CALCRECT, *m_color);
+
+	int l = rcRect.left;
+	int r = rcRect.right;
+	int w = r - l;
+
+
+
 
 	std::memset(m_text, NULL, 64);
 
@@ -169,3 +186,5 @@ char * UITextInput::GetText() { return m_text; }
 
 
 void UITextInput::SetInputController(GameInputController * gameInputController) { m_gameInputController = gameInputController; }
+
+void UITextInput::SetColor(D3DCOLOR * color) { m_color = color; }

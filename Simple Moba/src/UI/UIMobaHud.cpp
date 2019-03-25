@@ -41,7 +41,7 @@ bool UIMobaHud::Init(
 	if (! m_characterPanel.Init(viewProfile, theme, gameStateIn, tooltipController, inputModels, initCharControl)) return false;
 	if (! m_gameInfoPanel.Init(viewProfile, theme, gameStateIn, tooltipController, initCharControl, inputModels, itemViews)) return false;
 	if (! m_invPanel.Init(viewProfile, theme, gameStateIn, tooltipController, inputModels, itemViews, initCharControl)) return false;
-	if (!m_chat.Init(viewProfile, theme, gameStateIn->GetChatModel())) return false;
+	if (!m_chat.Init(viewProfile, theme, gameStateIn)) return false;
 
 	//491; 0.3881422f ~= 0.5f-0.111857f
 	//912;

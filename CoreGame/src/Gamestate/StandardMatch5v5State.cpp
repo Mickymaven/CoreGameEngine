@@ -28,6 +28,8 @@ bool StandardMatch5v5State::InitSelectedPhase(int initPhase)
 	if (initPhase == initLoading){ /////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////
 		//bulk of game loading here
+
+		m_playerID = m_gameConfiguration->GetPlayerIDs()->at(0);//TODO client test only line
 		
 		if (createModeCodeOK != m_modeConfigurationFactory->CreateModeConfiguration(
 			(BaseMapConfigForMode**)&m_ModeMapConfig,
@@ -448,8 +450,7 @@ bool StandardMatch5v5State::InitSelectedPhase(int initPhase)
 			if (team == purpleTeamName) purpleCount++;
 			else if (team == yellowTeamName) yellowCount++;
 
-			//conttrolled character hardcode as id #0
-			if (pvPlayerIDs->at(i) == 0) //g_playerID
+			if (pvPlayerIDs->at(i) == 1) //g_playerID
 			{
 				SetControlledCharacter(charController);
 				m_ownedPlayerCharacter = charController;

@@ -84,10 +84,12 @@ bool UICharacterPanel::Init(
 		if (!viewProfile->InitRelativeLabel(elementIDs[i], &m_bindLabels[i], &themeResources->m_smallText, 20.0f, 13, 1.0f, 1.0f)) return false;
 		m_bindLabels[i].SetText(
 			GetInputDefineString(
-				inputModels->at(7)->m_keybinds[elementText[i]]
+				inputModels->at(8)->m_keybinds[elementText[i]]
 				).c_str()
 			
 			);
+
+		//todo inputModels->at(8) index of intended member of inputModels could change 
 	}
 
 

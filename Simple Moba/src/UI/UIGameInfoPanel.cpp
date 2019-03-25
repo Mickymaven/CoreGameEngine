@@ -129,10 +129,13 @@ bool UIGameInfoPanel::Init(ViewProfile * viewProfile, ThemeResources * themeReso
 		if (!viewProfile->InitRelativeLabel(elementIDs[i], &m_bindLabels[i], &themeResources->m_smallText, 20.0f, 13.0f, 1.0f, 1.0f)) return false;
 		m_bindLabels[i].SetText(
 			GetInputDefineString(
-				inputModels->at(5)->m_keybinds[CameraActionsId[i]]
+				inputModels->at(6)->m_keybinds[CameraActionsId[i]]
 				).c_str()
 
 			);
+
+
+		//todo inputModels->at(6)-> is current one for camera input set can change
 	}
 
 }

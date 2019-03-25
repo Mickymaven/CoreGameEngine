@@ -69,10 +69,12 @@ bool UIInvPanel::Init(
 		if (!viewProfile->InitRelativeLabel(elementIDs[i], &m_bindLabels[i], &themeResources->m_smallText, 20.0f, 14.0f, 0.7f, 0.7f)) return false;
 		m_bindLabels[i].SetText(
 			GetInputDefineString(
-				inputModels->at(7)->m_keybinds[elementText[i]]
+				inputModels->at(8)->m_keybinds[elementText[i]]
 				).c_str()
 
 			);
+
+		//tofo inputModels->at(8) index of intended member of inputModels could change 
 	}
 
 	return true;

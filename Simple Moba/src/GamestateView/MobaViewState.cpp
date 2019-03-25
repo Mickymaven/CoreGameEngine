@@ -165,7 +165,7 @@ bool MobaViewState::InitSelectedPhase(int initPhase)
 		//controlled init view
 		for (unsigned int i = 0; i < gameState->GetPlayerCharacters()->size(); i++)
 		{
-			if (m_gameConfiguration->GetPlayerIDs()->at(i) == 0) //g_playerID
+			if (m_gameConfiguration->GetPlayerIDs()->at(i) == 1) //g_playerID
 			{
 				m_controlledPlayerView = m_playerCharacterViews.at(i);
 			}
@@ -663,6 +663,17 @@ bool MobaViewState::InitTheme(int theme)
 
 		m_theme.m_nameText.m_color = D3DCOLOR_XRGB(255, 255, 255);
 		m_theme.m_nameText.m_format = DT_CENTER;
+
+
+
+		//medium plain white
+		if (FAILED(
+		D3DXCreateFont(g_D3D_Device, 18, 0, FW_BOLD, 1, false, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, ANTIALIASED_QUALITY,
+		DEFAULT_PITCH | FF_DONTCARE, "", &m_theme.m_mediumPlainText.m_font))) return false; // DEFAULT_QUALITY //FW_BOLD
+
+
+		m_theme.m_mediumPlainText.m_color = D3DCOLOR_XRGB(255, 255, 255);
+		m_theme.m_mediumPlainText.m_format = DT_RIGHT;
 
 
 

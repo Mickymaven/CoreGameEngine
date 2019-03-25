@@ -36,7 +36,9 @@ void MobaState::InitGameShopsForMode()
 
 }
 
+
 //Access
+unsigned long MobaState::GetPlayerID() { return m_playerID; }
 vector<int> * MobaState::GetSpriteConfig() { return &m_gameSpriteConfig; }
 vector<int> * MobaState::GetAssetConfig() { return &m_gameAssetConfig; }
 ItemFactory * MobaState::GetItemFactory() { return &m_itemFactory; }

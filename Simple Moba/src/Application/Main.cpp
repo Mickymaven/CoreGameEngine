@@ -14,8 +14,11 @@
 #include "Main.h"//first
 #include "App.h"//2nd
 #include "../../../EngineGameModuleDirectX9/src/Application/Globals.h"//3rd
-
 #include "../../../EngineGameModuleDirectX9/src/ControlHeader.h"
+
+#include "../../../EngineGameModuleOpenGL46/src/Application/Globals.h"//3rd
+#include "../../../EngineGameModuleOpenGL46/src/ControlHeader.h"
+
 #include "../GameControl/GameController.h"
 
 #include "MenuController.h"
@@ -176,7 +179,9 @@ INT Main::Run()
 	if (PeekMessage(&g_msg, NULL, NULL, NULL, PM_REMOVE))
 	{
 		if (g_msg.message == WM_QUIT)
+		{
 			done = true;
+		}
 		TranslateMessage(&g_msg);
 		DispatchMessage(&g_msg);
 	}
@@ -428,6 +433,14 @@ bool Main::InitDirectX()
 
 
 	return true;
+}
+
+bool Main::InitOpenGL()
+{
+
+
+
+	return false;
 }
 
 bool Main::InitDeviceController()

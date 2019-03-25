@@ -13,6 +13,7 @@ public:
 	bool InitWindowClass();
 	bool InitWindow();
 	bool InitDirectX();
+	bool InitOpenGL();
 	bool InitDeviceController();
 	bool InitInputController();
 	bool InitMenuController();

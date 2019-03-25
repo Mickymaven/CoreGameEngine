@@ -1,0 +1,2 @@
+nodes.resize(0);
+m_graph.resize(0);

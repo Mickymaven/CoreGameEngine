@@ -13,6 +13,8 @@ public:
 	FontGroup m_messageText;
 	FontGroup m_nameText;
 
+	FontGroup m_mediumPlainText;
+
 	FontGroup m_abilityCooldownText;
 	FontGroup m_abilityCooldownBelowText;
 

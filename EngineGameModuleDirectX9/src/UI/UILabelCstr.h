@@ -37,6 +37,8 @@ public:
 	void SetText(int i);
 	virtual void SetText(float f);
 
+	void SetColor(D3DCOLOR * color);
+
 	void SetFloatFormat(int whole, int remainder);
 
 };

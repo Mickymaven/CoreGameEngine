@@ -17,13 +17,18 @@ bool ChatTextAreaInputModel::Init(string path)
 	m_keybinds[chatTextAreaActionLeft] = DIK_LEFT;
 	m_keybinds[chatTextAreaActionRight] = DIK_RIGHT;
 	m_keybinds[chatTextAreaActionBackspace] = DIK_BACKSPACE;
+	m_keybinds[chatTextAreaActionChatScrollUp] = DIK_PGUP;
+	m_keybinds[chatTextAreaActionChatScrollDown] = DIK_PGDN;
+	m_keybinds[chatTextAreaActionCycleScope] = DIK_TAB;
 
 	m_spamFlags.resize(chatTextAreaActionCount, 0);
 
 
 	vector<int> inactiveTextArea
 	{
-		chatTextAreaActionOpen
+		chatTextAreaActionOpen,
+		chatTextAreaActionChatScrollUp,
+		chatTextAreaActionChatScrollDown
 	};
 
 	vector<int> activeTextArea
@@ -33,7 +38,10 @@ bool ChatTextAreaInputModel::Init(string path)
 		chatTextAreaActionSend,
 		chatTextAreaActionLeft,
 		chatTextAreaActionRight,
-		chatTextAreaActionBackspace
+		chatTextAreaActionBackspace,
+		chatTextAreaActionChatScrollUp,
+		chatTextAreaActionChatScrollDown,
+		chatTextAreaActionCycleScope
 	};
 
 

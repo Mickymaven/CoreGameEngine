@@ -60,8 +60,9 @@ void ChatTextAreaInputSet::AttemptAction(int action, float deltaTime)
 	case chatTextAreaActionLeft: m_uiChat->ActionLeft(); break;
 	case chatTextAreaActionRight: m_uiChat->ActionRight(); break;
 	case chatTextAreaActionBackspace:m_uiChat->ActionBackspace(); break;
-
-
+	case chatTextAreaActionChatScrollUp:m_uiChat->ActionScrollUp(); break;
+	case chatTextAreaActionChatScrollDown:m_uiChat->ActionScrollDown(); break;
+	case chatTextAreaActionCycleScope: m_uiChat->ActionCycleScope(); break;
 	}
 }
 

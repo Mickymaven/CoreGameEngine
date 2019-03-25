@@ -12,6 +12,9 @@ enum ChatTextAreaAction
 	chatTextAreaActionLeft,
 	chatTextAreaActionRight,
 	chatTextAreaActionBackspace,
+	chatTextAreaActionChatScrollUp,
+	chatTextAreaActionChatScrollDown,
+	chatTextAreaActionCycleScope,
 	chatTextAreaActionCount
 };
 

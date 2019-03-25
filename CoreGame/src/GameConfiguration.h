@@ -25,7 +25,7 @@ private:
 	vector<string> m_names;
 	vector<CharacterClassName> m_characterName;
 	vector<TeamName> teamNames;
-	vector<unsigned long> playerID;
+	vector<unsigned long> m_playerIDs;
 	vector<vector<AbilityName>> customAbilities;
 
 public:
@@ -34,6 +34,8 @@ public:
 	~GameConfiguration();
 
 	void AddPlayer(string playerName, CharacterClassName characterClass, TeamName teamName, unsigned long id, AbilityName ability1, AbilityName ability2);
+	bool GetNameByPlayerID(string ** playerNameOut, unsigned long * id);
+
 
 	//accessors
 	//string GetMapName() { return m_mapName; }
@@ -43,7 +45,7 @@ public:
 	vector<string> * GetNames() { return &m_names; }
 	vector<CharacterClassName> * GetPlayerCharacterNames() { return &m_characterName; }
 	vector<TeamName> * GetTeamNames() { return &teamNames; }
-	vector<unsigned long> * GetPlayerIDs() { return &playerID; }
+	vector<unsigned long> * GetPlayerIDs() { return &m_playerIDs; }
 	vector< vector<AbilityName>> * GetCustomAbilities() { return &customAbilities; };
 };
 

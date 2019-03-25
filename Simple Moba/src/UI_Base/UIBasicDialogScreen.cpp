@@ -21,7 +21,7 @@ bool UIBasicDialogScreen::Init(
 	m_r = { 0, 0, 0, 0 };
 
 	//background 
-	m_background = UIElement(1280.0f, 400.0f, "Resources/Themes/Forest/Dialog/background.png");
+	m_background = UIElement(g_clientSizeRect->right, 400.0f, "Resources/Themes/Forest/Dialog/background.png");
 	if (!m_background.Init()) return false;
 	
 	m_background.SetPosition(0.0f, 0.0f, 350.0f);

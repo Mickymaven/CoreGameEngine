@@ -1,8 +1,7 @@
 ###############################################################################
 # Set default behavior to automatically normalize line endings.
 ###############################################################################
-#* text=auto
-#commented out by micky to fix Visual Studio pending edit ttick gui bug
+* text=auto
 
 ###############################################################################
 # Set default behavior for command prompt diff.

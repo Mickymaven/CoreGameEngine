@@ -188,7 +188,7 @@ using std::string;
 
 
 extern string GetInputDefineString(int keybind);
-extern char CharForKey(int keybind);
+extern char CharForKey(int keybind, bool caps, bool shift);
 
 extern string g_keysEN[242];
 

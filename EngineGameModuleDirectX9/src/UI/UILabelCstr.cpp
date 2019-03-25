@@ -57,6 +57,13 @@ void UILabelCstr::SetText(float f)
 	sprintf_s(m_cstr, m_formatf, f);
 }
 
+void UILabelCstr::SetColor(D3DCOLOR * color)
+{
+	m_color = color;
+
+
+}
+
 void UILabelCstr::SetFloatFormat(int whole, int remainder)
 {
 	sprintf_s(m_formatf, "%%");

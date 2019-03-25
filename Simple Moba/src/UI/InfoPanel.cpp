@@ -18,6 +18,7 @@ bool InfoPanel::Init(Character * character, vector<ItemView> * itemViews, Toolti
 	m_state = infoPanelStateClosed;
 
 	if (!m_background.Init(880.0f, 50.0f, "Resources/UI/Player/info-panel_background.png")) return false;
+	//m_background.SetPosition(185.0f, 0.0f, 50.0f);
 	m_background.SetPosition(185.0f, 0.0f, 50.0f);
 
 	if (!StatBase::Init(tooltipController)) return false;

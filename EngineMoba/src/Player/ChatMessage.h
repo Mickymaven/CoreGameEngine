@@ -17,7 +17,7 @@ struct ChatMessage
 
 	char m_text[m_messageMax];
 
-	int m_playerID; //player who wrote msg
+	unsigned long m_playerID; //player who wrote msg
 	int m_teamID; // team of player who wrote msg
 	ChatMessageTarget m_messageTarget;
 	int m_playerReciepientID;
