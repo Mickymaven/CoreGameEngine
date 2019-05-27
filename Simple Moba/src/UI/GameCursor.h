@@ -6,6 +6,9 @@ using std::vector;
 
 #include "../../../EngineGameModuleDirectX9/src/UI/UIElement.h"
 
+#include "../../../EngineGamePlatform/src/Application/Globals.h"//todo BAD!
+
+
 enum GameCursorTypes
 {
 	gameCursorTypeNone,

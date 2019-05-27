@@ -9,7 +9,7 @@
 
 #include "../GameplayView/PlayerCharacterView.h"
 
-#include "../../../EngineGameModuleDirectX9/src/Application/Globals.h"
+#include "../../../EngineGameModuleDirectX9/src/Application/GlobalsDX9.h"//todo bad?
 
 #include "CameraFactory.h"
 
@@ -107,7 +107,8 @@ public:
 	void ActionCentreCamera(Actor *  actorWithFocus);
 	void ActionToggleFreeCamera(Actor *  actorWithFocus);
 
-	void ApplyLockedCameraMovement(LMVector2 * m_panDisplacment);
+	void ApplyLockedCameraMovement(LMVector2 * panDisplacment);
+	void ApplyLockedCameraMovement();
 
 	UsingGameCamera GetSelectedCameraState() { return m_cameraSelectionState; }
 

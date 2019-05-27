@@ -4,7 +4,8 @@
 #include <string>
 using std::string;
 
-#include "../../../EngineGameModuleDirectX9/src/Application/Globals.h"//todo baaaaaaaaad
+#include "../../../EngineGamePlatform/src/Application/Globals.h"
+#include "../../../EngineGameModuleDirectX9/src/Application/GlobalsDX9.h"//todo bad?
 #include "../../../EngineGameModel/src/Utility/LMTimer.h"
 
 class GameMessage

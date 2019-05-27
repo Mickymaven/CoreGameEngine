@@ -107,7 +107,7 @@ MenuControllerTarget MenuController::Run()
 	{
 		if (PeekMessage(&g_msg, NULL, NULL, NULL, PM_REMOVE))
 		{
-			if (g_msg.message == WM_QUIT) isDone = true;
+			//if (g_msg.message == WM_QUIT) isDone = true;
 			TranslateMessage(&g_msg);
 			DispatchMessage(&g_msg);
 		}

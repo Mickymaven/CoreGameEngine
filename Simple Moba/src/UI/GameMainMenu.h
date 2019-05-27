@@ -2,6 +2,7 @@
 #define GAMEMAINMENU_H
 
 #include "../Application/MsgParams.h"
+#include "../../../EngineGamePlatform/src/Application/Globals.h"
 
 #include "../../../EngineGameModuleDirectX9/src/UI/UIElement.h"
 #include "../../../EngineGameModuleDirectX9/src/UI/UIButton.h"

@@ -4,8 +4,8 @@
 #include <vector>
 using std::vector;
 
-#include <d3dx9.h>
-#include "../../../EngineGameModuleDirectX9/src/Application/Globals.h"
+#include "../../../EngineGamePlatform/src/Application/Globals.h"
+#include "../../../EngineGameModuleDirectX9/src/Application/GlobalsDX9.h"
 
 #include "../../../EngineGameModuleDirectX9/src/Graphics/LMMesh.h"
 #include "../../../EngineGameModuleDirectX9/src/View/LMCamera.h"
@@ -27,9 +27,6 @@ inline void GetRayFromLMCamera(LMCamera * camera, int x, int y, D3DXVECTOR3 & po
 	float nearDist = camera->GetNearPlane();
 	float fov = camera->GetFOV();
 	float aspect = camera->GetAspectRatio();
-
-	//dx = tanf(fov * 0.5f) * ((x / (g_clientSizeRect->right *0.5f) - 1.0f) / aspect);
-	//dy = tanf(fov * 0.5f) * (1.0f - y / (g_clientSizeRect->bottom*0.5f));
 
 	dx = tanf(fov * 0.5f) * ((x / (g_clientSizeRect->right *0.5f) - 1.0f) * aspect);
 	dy = tanf(fov * 0.5f) * (1.0f - y / (g_clientSizeRect->bottom*0.5f));

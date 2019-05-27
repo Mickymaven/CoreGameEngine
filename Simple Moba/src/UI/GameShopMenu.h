@@ -5,7 +5,7 @@
 #include "../../../EngineGameModuleDirectX9/src/UI/UIButton.h"
 #include "../../../EngineGameModuleDirectX9/src/UI/UIContentArea.h"
 #include "../../../EngineGameModuleDirectX9/src/UI/UIElement.h"
-#include "../../../EngineGameModuleDirectX9/src/Application/Globals.h"
+#include "../../../EngineGameModuleDirectX9/src/Application/GlobalsDX9.h"//todo bad?
 #include "../GameplayView/PlayerCharacterView.h"
 #include "../GameplayView/TradeInventoryView.h"
 #include "../GamestateViewIO/GameAssetFactory.h"

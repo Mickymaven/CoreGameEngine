@@ -1504,7 +1504,7 @@ void Pathfinder::Search(vector<LMVector3 *> * pathOut, LMVector3 * startNode, LM
 	float SumOfG = position->DisplacementMag(*startNode);
 
 	//1. Add Starting node to the open list
-	m_openList.push_back(VectorForNode(startNode));
+	 m_openList.push_back(VectorForNode(startNode));
 	//m_closedList.push_back(VectorForNode(startNode));
 
 	vector<LMVector3*> * currentNode = VectorForNode(startNode);

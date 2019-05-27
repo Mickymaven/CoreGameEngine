@@ -9,7 +9,9 @@ using std::string;
 
 //include only for debug stuff maybe
 
-#include "../../../../EngineGameModuleDirectX9/src/Application/Globals.h"
+#include "../../../../EngineGameModuleDirectX9/src/Application/GlobalsDX9.h"//todo bad?
+#include "../../../../EngineGamePlatform/src/Application/Globals.h"
+
 #include "../../../../EngineGameModel/src/Maths/LMVector3.h"
 #include "../../../../EngineGameModuleDirectX9/src/UI/UIElement.h"
 #include "TooltipEffect.h"

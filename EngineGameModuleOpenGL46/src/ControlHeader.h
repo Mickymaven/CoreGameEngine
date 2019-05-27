@@ -7,8 +7,8 @@
 //extern DirectX9DeviceController g_deviceControl;
 //extern DirectInput8Controller g_inputControl;
 
-#include "Device/DeviceController.h"
-#include "Input/InputController.h"
+//#include "Device/DeviceController.h"
+//#include "Input/InputController.h"
 
 
 

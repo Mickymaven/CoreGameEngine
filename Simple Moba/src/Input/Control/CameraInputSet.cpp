@@ -132,7 +132,7 @@ void CameraInputSet::AttemptAction(int action, float deltaTime)
 			SetCursorPos(r.left + 0.5f * (float)g_clientSizeRect->right,r.top + 0.5f * (float)g_clientSizeRect->bottom);
 		}
 		break;
-	}
+	}	
 }
 
 void CameraInputSet::SetCameraDirector(CameraDirector * cameraDirector)

@@ -16,7 +16,7 @@
 
 #include "../Graphics/GraphicsAlgorithms.h"
 
-#include "../../../EngineGameModuleDirectX9/src/Application/Globals.h"
+#include "../../../EngineGameModuleDirectX9/src/Application/GlobalsDX9.h"//todo bad?
 
 class HealthBar
 {

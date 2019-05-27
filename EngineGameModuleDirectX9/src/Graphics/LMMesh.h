@@ -1,10 +1,11 @@
-#if !defined(LMMesh_H)
-#define LMMesh_H
-
-#include<d3dx9.h>
+#if !defined(LMMESH_H)
+#define LMMESH_H
 
 #include <string>
 using std::string;
+
+#include <d3d9.h>
+#include <d3dx9.h>
 
 #include "../../../EngineGameModel/src/Maths/LMVector3.h"
 #include "../UI/LMGeometry.h"

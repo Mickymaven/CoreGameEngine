@@ -2,7 +2,7 @@
 #define CAMERAFACTORY_H
 
 #include "../../../EngineGameModuleDirectX9/src/View/LMCamera.h"
-#include "../../../EngineGameModuleDirectX9/src/Application/Globals.h"
+#include "../../../EngineGameModuleDirectX9/src/Application/GlobalsDX9.h"//todo badd?
 
 class CameraFactory
 {

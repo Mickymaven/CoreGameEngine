@@ -4,7 +4,7 @@
 
 #include<d3d9.h>
 
-#include "../Application/Globals.h"
+#include "../Application/GlobalsDX9.h"
 
 enum CustomRenderSettings
 {

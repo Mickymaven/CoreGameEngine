@@ -6,6 +6,9 @@ using namespace std::placeholders;
 #include <vector>
 using std::vector;
 
+#include "../../../EngineGamePlatform/src/Application/Globals.h"//todo bad?
+
+
 #include "../../../EngineMoba/src/Actors/PlayerCharacterController.h"
 #include "../../../EngineGameModuleDirectX9/src/UI/UIArea.h"
 

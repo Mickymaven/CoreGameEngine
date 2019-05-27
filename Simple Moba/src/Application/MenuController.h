@@ -6,7 +6,7 @@
 #include "MenuScene.h"
 #include "MenuSceneIntro.h"
 #include "MenuSceneNormalGameLobby.h"
-#include "../../../EngineGameModuleDirectX9/src/Application/Globals.h"
+#include "../../../EngineGameModuleDirectX9/src/Application/GlobalsDX9.h"
 #include "MenuControllerTarget.h"
 #include "MenuSceneSelection.h"
 

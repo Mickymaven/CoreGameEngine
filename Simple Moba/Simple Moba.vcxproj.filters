@@ -137,6 +137,8 @@
     <ClCompile Include="src\Input\Model\ChatTextAreaInputModel.cpp" />
     <ClCompile Include="src\Input\Control\ChatTextAreaInputSet.cpp" />
     <ClCompile Include="src\UI\UIChat.cpp" />
+    <ClCompile Include="src\GameControl\OpenGL46TestController.cpp" />
+    <ClCompile Include="src\GameControl\TimestepController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application\Main.h" />
@@ -287,6 +289,8 @@
     <ClInclude Include="src\UI\UIChat.h" />
     <ClInclude Include="src\Input\Model\ChatTextAreaInputModel.h" />
     <ClInclude Include="src\Input\Control\ChatTextAreaInputSet.h" />
+    <ClInclude Include="src\GameControl\OpenGL46TestController.h" />
+    <ClInclude Include="src\GameControl\TimestepController.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\fogshader.fx" />

@@ -11,6 +11,7 @@ public:
 	HRESULT Create(HINSTANCE hInstance);
 	INT Run();
 	bool InitWindowClass();
+	bool InitOpenGLExtensions();
 	bool InitWindow();
 	bool InitDirectX();
 	bool InitOpenGL();

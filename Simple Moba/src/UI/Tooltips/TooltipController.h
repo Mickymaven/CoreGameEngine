@@ -6,6 +6,8 @@
 #include "TooltipInfo.h"
 #include "TooltipInfoItem.h"
 
+
+
 enum TooltipState
 {
 	tooltipStateActive,

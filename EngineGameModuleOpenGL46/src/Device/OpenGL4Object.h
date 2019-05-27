@@ -3,6 +3,7 @@
 
 #pragma comment(lib, "opengl32.lib")
 #include <windows.h>
+#include <math.h>
 #include<gl/GL.h>
 
 //copy paste rastertek
@@ -84,18 +85,75 @@ typedef void (APIENTRY * PFNGLUNIFORM4FVPROC) (GLint location, GLsizei count, co
 
 
 class OpenGL4Object {
-
-public:
-	OpenGL4Object();
-	virtual ~OpenGL4Object();
-	bool InitialiseOpenGL4Object();
-
 private:
 	HDC m_deviceContext;
 	HGLRC m_renderingContext;
 	PFNWGLCHOOSEPIXELFORMATARBPROC wglChoosePixelFormatARB;
 	PFNWGLCREATECONTEXTATTRIBSARBPROC wglCreateContextAttribsARB;
 	PFNWGLSWAPINTERVALEXTPROC wglSwapIntervalEXT;
+
+
+	float m_worldMatrix[16];
+	float m_projectionMatrix[16];
+	char m_videoCardDescription[128];
+
+public:
+	PFNGLATTACHSHADERPROC glAttachShader;
+	PFNGLBINDBUFFERPROC glBindBuffer;
+	PFNGLBINDVERTEXARRAYPROC glBindVertexArray;
+	PFNGLBUFFERDATAPROC glBufferData;
+	PFNGLCOMPILESHADERPROC glCompileShader;
+	PFNGLCREATEPROGRAMPROC glCreateProgram;
+	PFNGLCREATESHADERPROC glCreateShader;
+	PFNGLDELETEBUFFERSPROC glDeleteBuffers;
+	PFNGLDELETEPROGRAMPROC glDeleteProgram;
+	PFNGLDELETESHADERPROC glDeleteShader;
+	PFNGLDELETEVERTEXARRAYSPROC glDeleteVertexArrays;
+	PFNGLDETACHSHADERPROC glDetachShader;
+	PFNGLENABLEVERTEXATTRIBARRAYPROC glEnableVertexAttribArray;
+	PFNGLGENBUFFERSPROC glGenBuffers;
+	PFNGLGENVERTEXARRAYSPROC glGenVertexArrays;
+	PFNGLGETATTRIBLOCATIONPROC glGetAttribLocation;
+	PFNGLGETPROGRAMINFOLOGPROC glGetProgramInfoLog;
+	PFNGLGETPROGRAMIVPROC glGetProgramiv;
+	PFNGLGETSHADERINFOLOGPROC glGetShaderInfoLog;
+	PFNGLGETSHADERIVPROC glGetShaderiv;
+	PFNGLLINKPROGRAMPROC glLinkProgram;
+	PFNGLSHADERSOURCEPROC glShaderSource;
+	PFNGLUSEPROGRAMPROC glUseProgram;
+	PFNGLVERTEXATTRIBPOINTERPROC glVertexAttribPointer;
+	PFNGLBINDATTRIBLOCATIONPROC glBindAttribLocation;
+	PFNGLGETUNIFORMLOCATIONPROC glGetUniformLocation;
+	PFNGLUNIFORMMATRIX4FVPROC glUniformMatrix4fv;
+	PFNGLACTIVETEXTUREPROC glActiveTexture;
+	PFNGLUNIFORM1IPROC glUniform1i;
+	PFNGLGENERATEMIPMAPPROC glGenerateMipmap;
+	PFNGLDISABLEVERTEXATTRIBARRAYPROC glDisableVertexAttribArray;
+	PFNGLUNIFORM3FVPROC glUniform3fv;
+	PFNGLUNIFORM4FVPROC glUniform4fv;
+
+public:
+	OpenGL4Object();
+	~OpenGL4Object();
+	bool InitialiseOpenGL4Object(HWND hwnd, int screenWidth, int screenHeight, float screenDepth, float screenNear, bool isVsyncEnabled);
+	bool OpenGL4Object::InitializeExtensions(HWND hwnd);
+	void Shutdown(HWND hwnd);
+
+	void BeginScene(float, float, float, float);
+	void EndScene();
+
+	bool LoadExtensionList();
+
+	void GetWorldMatrix(float*);
+	void GetProjectionMatrix(float*);
+	void GetVideoCardInfo(char*);
+
+
+	void BuildIdentityMatrix(float*);
+	void BuildPerspectiveFovLHMatrix(float*, float, float, float, float);
+	void MatrixRotationY(float*, float);
+	void MatrixTranslation(float*, float, float, float);
+	void MatrixMultiply(float*, float*, float*);
 
 };
 

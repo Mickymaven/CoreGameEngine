@@ -1,6 +1,9 @@
 #if !defined(INFOPANELCONTROLLER_H)
 #define INFOPANELCONTROLLER_H
 
+#include "../../../EngineGamePlatform/src/Application/Globals.h"//todo bad?
+
+
 #include "../../../EngineMoba/src/Actors/PlayerCharacterController.h"
 #include "../../../CoreGame/src/Gamestate/StandardMatch5v5State.h"
 #include "../../../CoreGame/src/GameConfiguration.h"

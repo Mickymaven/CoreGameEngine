@@ -1,6 +1,9 @@
 #if !defined(UICHAT_H)
 #define UICHAT_H
 
+#include "../../../EngineGamePlatform/src/Application/Globals.h" //todo bad?
+
+
 #include "../../../EngineGameModuleDirectX9/src/UI/UIArea.h"
 #include "../../../EngineGameModuleDirectX9/src/UI/UIElement.h"
 #include "../../../EngineGameModuleDirectX9/src/UI/UILabelCstr.h"

@@ -7,7 +7,7 @@ using std::vector;
 using std::string;
 
 #include "../../../../EngineGameModuleDirectX9/src/UI/UIElement.h"
-#include "../../../../EngineGameModuleDirectX9/src/Application/Globals.h"
+#include "../../../../EngineGameModuleDirectX9/src/Application/GlobalsDX9.h"
 #include "TooltipInfo.h"
 
 class TooltipInfoBuff : public TooltipInfo

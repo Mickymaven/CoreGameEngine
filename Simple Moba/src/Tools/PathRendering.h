@@ -4,9 +4,7 @@
 #include <vector>
 using std::vector;
 
-#include "../../../EngineGameModuleDirectX9/src/Application/Globals.h"
-
-#include "d3dx9.h"
+#include "../../../EngineGameModuleDirectX9/src/Application/GlobalsDX9.h"//todo bad?
 
 #include "../../../EngineGameModuleDirectX9/src/Graphics/LMMesh.h"
 #include "../../../EngineGameModel/src/Maths/LMVector3.h"

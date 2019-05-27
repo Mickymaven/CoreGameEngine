@@ -4,7 +4,7 @@
 #include <vector>
 using std::vector;
 
-#include "../Application/Globals.h"
+#include "../Application/GlobalsDX9.h"
 #include "InputModel.h"
 
 #include "GameInputController.h"

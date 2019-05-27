@@ -27,7 +27,7 @@ using namespace std;
 #include "../../../EngineGameModuleDirectX9/src/Base/SpriteView.h"
 #include "../../../EngineGameModuleDirectX9/src/Graphics/LMMesh.h"
 
-#include "../../../EngineGameModuleDirectX9/src/Application/Globals.h" //todo bad!
+#include "../../../EngineGameModuleDirectX9/src/Application/GlobalsDX9.h" //todo bad?
 #include "../GamestateView/BasicGameViewState.h"
 #include "../Graphics/GraphicsAlgorithms.h"
 

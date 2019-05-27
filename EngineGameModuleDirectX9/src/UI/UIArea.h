@@ -8,7 +8,9 @@ using std::vector;
 #include "../../../EngineGameModel/src/Maths/LMVector3.h"
 #include "../../../EngineMoba/src/VitalEffect/Buff.h"
 
-#include "../Application/Globals.h"
+//#include "../Application/GlobalsDX9.h"
+#include "../../../EngineGamePlatform/src/Application/Globals.h"
+
 #include "UIButton.h"
 #include "UIElement.h"
 #include "UICheckBox.h"

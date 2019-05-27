@@ -9,7 +9,7 @@ using std::string;
 #include "../../../../EngineGameModel/src/Maths/LMVector3.h"
 #include "../../../../EngineMoba/src/Actors/Actor.h"
 #include "../../../../EngineGameModuleDirectX9/src/UI/UIElement.h"
-#include "../../../../EngineGameModuleDirectX9/src/Application/Globals.h"
+#include "../../../../EngineGameModuleDirectX9/src/Application/GlobalsDX9.h"
 #include "TooltipInfo.h"
 
 class TooltipInfoAbility : public TooltipInfo

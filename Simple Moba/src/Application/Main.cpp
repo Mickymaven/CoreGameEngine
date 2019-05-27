@@ -11,25 +11,52 @@
 #include <d3d9.h>
 #include <d3dx9.h>
 
-#include "Main.h"//first
+
+
+#include "Main.h"//1st
 #include "App.h"//2nd
-#include "../../../EngineGameModuleDirectX9/src/Application/Globals.h"//3rd
+
+
+#include "../../../EngineGamePlatform/src/Application/Globals.h"//3rd
+
+
+#include "../../../EngineGameModuleDirectX9/src/Application/GlobalsDX9.h"//4th
+
 #include "../../../EngineGameModuleDirectX9/src/ControlHeader.h"
 
-#include "../../../EngineGameModuleOpenGL46/src/Application/Globals.h"//3rd
+#include "../../../EngineGameModuleOpenGL46/src/Application/GlobalsOGL46.h"//4th
 #include "../../../EngineGameModuleOpenGL46/src/ControlHeader.h"
 
 #include "../GameControl/GameController.h"
+#include "../GameControl/OpenGL46TestController.h"
+
 
 #include "MenuController.h"
 MenuController g_menuController;
 
+class OpenGL4Object;
+
+#include "../../../EngineGameModuleOpenGL46/src/Device/OpenGL4Object.h"
+
+
+Main::Main()
+{
+}
+
+Main::~Main()
+{
+}
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
 	isStartFullscreen = false;
-	g_initWidth = 1440;
-	g_initHeight = 900;
+	g_initWidth = 2560;
+	g_initHeight = 1440;
+
+
+	g_clientSizeRect->left = 0;
+	g_clientSizeRect->top = 0;
+
 	g_clientSizeRect->right = g_initWidth;
 	g_clientSizeRect->bottom = g_initHeight;
 
@@ -159,11 +186,18 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 HRESULT Main::Create(HINSTANCE hInstance)
 {
+	
+
 	//HRESULT x;
 
 	if (!InitWindowClass())		return false;
+
+
+	if (graphics_target == G_TARG_OPENGL) { if (!InitOpenGLExtensions()) return false; }
+
 	if (!InitWindow())			return false;
-	if (!InitDirectX())			return false;
+	if (graphics_target == G_TARG_DIRECTX) { if (!InitDirectX()) return false; }
+	else if (graphics_target == G_TARG_OPENGL) { if (!InitOpenGL()) return false; else return S_OK; }
 	if (!InitDeviceController()) return false;
 	if (!InitInputController())	return false;
 	if (!InitMenuController())	return false;
@@ -190,11 +224,29 @@ INT Main::Run()
 
 	//SetWindowPos(g_hwnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
 
+
+	if (graphics_target == G_TARG_OPENGL)
+
+	{
+		OpenGL46TestController control = OpenGL46TestController();
+
+		while (!done)
+		{
+			if (!control.Run())//todo int used as bool here(enum for codes maybe)
+			{
+				done = true;
+				OutputDebugString("game controller returned false\n");
+			}
+
+		}
+	return (INT)g_msg.wParam;
+	}
+
 	while (!done)
 	{
 		if (g_menuController.Run() == menuTargetGame)
 		{
-			GameController gameController;// = GameController();//rinse and repeat scope
+			GameController gameController; //default constructor on stack, destruct within this scope.
 			GameConfiguration * pGameConfig = g_menuController.GetGameConfig();
 
 			if (pGameConfig != NULL)
@@ -237,12 +289,61 @@ bool Main::InitWindowClass()
 	return true;
 }
 
-Main::Main()
-{
-}
 
-Main::~Main()
+
+bool Main::InitOpenGLExtensions()
 {
+	bool result;
+	HWND h;
+	h = CreateWindowEx(NULL,                       // The extended style.
+		"MyClass",										// Window class.
+		"Simple Moba on twitch.tv/mickymaven",			// Window name.
+		WS_OVERLAPPED | WS_MINIMIZEBOX | WS_VISIBLE |   // Window style.
+		WS_SYSMENU | WS_CLIPCHILDREN |
+		WS_CLIPSIBLINGS,
+		g_windowPositionX, g_windowPositionY,
+		g_clientSizeRect->right - g_clientSizeRect->left,   // Window size X.
+		g_clientSizeRect->bottom - g_clientSizeRect->top,   // Window size Y.
+		NULL,											// Handle to parent window.
+		NULL,											// Menu.
+		g_hInstance,									// Handle to app instance.
+		NULL);
+
+	if (h == NULL)
+	{
+		return false;
+	}
+
+	// Don't show the window.
+	ShowWindow(h, SW_HIDE);
+
+	// Initialize a temporary OpenGL window and load the OpenGL extensions.
+	result = g_OpenGL4Object.InitializeExtensions(h);
+	if (!result)
+	{
+		MessageBox(h, "Could not initialize the OpenGL extensions.", "Error", MB_OK);
+		return false;
+	}
+
+	// Release the temporary window now that the extensions have been initialized.
+	DestroyWindow(h);
+	h = NULL;
+
+	bool messages=true;
+	while (messages)
+	{
+		if (PeekMessage(&g_msg, NULL, NULL, NULL, PM_REMOVE))
+		{
+			TranslateMessage(&g_msg);
+			DispatchMessage(&g_msg);
+
+			messages = true;
+		}
+		else messages = false;
+	}
+
+	return true;
+
 }
 
 bool Main::InitWindow()
@@ -290,12 +391,12 @@ bool Main::InitWindow()
 	if (!g_hwnd) return false;
 
 	ShowWindow(g_hwnd, SW_SHOW);    // Show the window.
+	SetForegroundWindow(g_hwnd);
 	UpdateWindow(g_hwnd);           // Update its display.
 
 									//GetWindowRect(g_hwnd, &)
 									//GetClientRect(g_hwnd, &)
-
-
+	SetFocus(g_hwnd);
 
 
 	char m_buffer[500];
@@ -308,16 +409,11 @@ bool Main::InitWindow()
 	sprintf_s(m_buffer, "---------------\n GetClientRect : w%i , h%i (back onto clientSizeRect) \n--------\n", g_clientSizeRect->right, g_clientSizeRect->bottom);
 	OutputDebugString(m_buffer);
 
-
-
 	return true;
 }
 
 bool Main::InitDirectX()
 {
-
-
-
 	g_D3D_Object = Direct3DCreate9(D3D_SDK_VERSION);//d3d9.h
 
 	if (g_D3D_Object == NULL)
@@ -438,9 +534,23 @@ bool Main::InitDirectX()
 bool Main::InitOpenGL()
 {
 
+	bool result = g_OpenGL4Object.InitialiseOpenGL4Object(
+		g_hwnd,
+		g_clientSizeRect->right - g_clientSizeRect->left, //width
+		g_clientSizeRect->bottom - g_clientSizeRect->top, //height
+		g_SCREEN_DEPTH,//view depth
+		g_SCREEN_NEAR,//view min
+		g_VSYNC_ENABLED //vsync
+	);
 
 
-	return false;
+	if (!result)
+	{
+		MessageBox(g_hwnd, "Could not initialize OpenGL, check if video card supports OpenGL 4.0.", "Error", MB_OK);
+		return false;
+	}
+
+	return true;
 }
 
 bool Main::InitDeviceController()
@@ -449,7 +559,7 @@ bool Main::InitDeviceController()
 }
 
 bool Main::InitInputController()
-{
+{ 
 	//g_inputControl = DirectInput8Controller();
 
 	if (!g_inputControl.Init(g_hwnd, g_hInstance, false)) return false;

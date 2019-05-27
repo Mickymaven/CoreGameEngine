@@ -8,7 +8,10 @@ using namespace std;
 #include "../../../CoreGame/src/GameConfiguration.h"
 
 #include "MenuScene.h"
-#include "../../../EngineGameModuleDirectX9/src/Application/Globals.h"
+
+#include "../../../EngineGamePlatform/src/Application/Globals.h"
+
+#include "../../../EngineGameModuleDirectX9/src/Application/GlobalsDX9.h"
 
 class MenuSceneIntro: public MenuScene
 {

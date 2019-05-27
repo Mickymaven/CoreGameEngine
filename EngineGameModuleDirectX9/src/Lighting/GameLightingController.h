@@ -3,7 +3,7 @@
 
 #include <d3dx9.h>
 
-#include "../Application/Globals.h"
+#include "../Application/GlobalsDX9.h"
 
 enum GameLightingState
 {

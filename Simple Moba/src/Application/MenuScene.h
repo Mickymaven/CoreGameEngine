@@ -6,6 +6,9 @@ using namespace std;
 
 #include <d3dx9.h>
 
+#include "../../../EngineGamePlatform/src/Application/Globals.h"
+
+
 #include "../../../EngineGameModuleDirectX9/src/View/LMCamera.h"
 #include "../../../EngineGameModuleDirectX9/src/UI/UIElement.h"
 

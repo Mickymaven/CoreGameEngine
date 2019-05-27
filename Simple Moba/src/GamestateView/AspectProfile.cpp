@@ -3,7 +3,7 @@
 
 AspectProfile::AspectProfile()
 {
-	m_currentResolution = resolution1440x900;
+	m_currentResolution = resolution2560x1440;
 	//aspect moved below
 
 	//4x3

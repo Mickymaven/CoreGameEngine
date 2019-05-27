@@ -18,13 +18,13 @@
     <ClInclude Include="src\ControlHeader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Application\Globals.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Device\OpenGL4DeviceController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Device\OpenGL4Object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Application\GlobalsOGL46.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -35,10 +35,10 @@
     <ClCompile Include="src\Device\OpenGL4DeviceController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Application\Globals.cpp">
+    <ClCompile Include="src\Device\OpenGL4Object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Device\OpenGL4Object.cpp">
+    <ClCompile Include="src\Application\GlobalsOGL46.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

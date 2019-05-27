@@ -1,7 +1,7 @@
 #if !defined(OPENGL4DEVICECONTROLLER_H)
 #define OPENGL4DEVICECONTROLLER_H
 
-#include "../Application/Globals.h"
+#include "../Application/GlobalsOGL46.h"
 
 
 enum CustomRenderSettings

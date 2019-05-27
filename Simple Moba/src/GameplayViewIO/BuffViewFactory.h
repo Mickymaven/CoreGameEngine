@@ -9,6 +9,9 @@ using std::vector;
 #include "../GamestateView/ViewProfile.h"
 #include "../GameplayView/BuffView.h"
 
+#include "../../../EngineGamePlatform/src/Application/Globals.h"
+
+
 class BuffViewFactory
 {
 private:

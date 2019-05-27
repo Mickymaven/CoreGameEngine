@@ -16,6 +16,8 @@ using std::string;
 
 #include "../../../EngineGameModuleDirectX9/src/ControlHeader.h"
 
+#include "../../../EngineGamePlatform/src/Application/Globals.h"
+
 class MenuSceneNormalGameLobby: public MenuScene
 {
 	

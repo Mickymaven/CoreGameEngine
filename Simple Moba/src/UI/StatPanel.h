@@ -4,6 +4,9 @@
 #include <functional>
 using namespace std::placeholders;
 
+#include "../../../EngineGamePlatform/src/Application/Globals.h"//todo ?
+
+
 #include "../../../EngineMoba/src/Actors/PlayerCharacterController.h"
 
 #include "../../../EngineGameModuleDirectX9/src/UI/UIArea.h"

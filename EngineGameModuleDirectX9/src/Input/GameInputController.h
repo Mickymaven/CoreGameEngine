@@ -8,6 +8,8 @@ using std::vector;
 #include "../UI/UIArea.h"
 #include "../ControlHeader.h"
 
+#include "../../../EngineGamePlatform/src/Application/Globals.h"
+
 class GameInputController
 {
 private:

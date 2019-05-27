@@ -212,15 +212,15 @@ void CameraDirector::ActionToggleFreeCamera(Actor *  actorWithFocus)
 }
 
 
-void CameraDirector::ApplyLockedCameraMovement(LMVector2 * m_panDisplacment)
+void CameraDirector::ApplyLockedCameraMovement(LMVector2 * panDisplacment)
 {
 	if (m_cameraSelectionState == usingLockCamera)
 	{
 		m_unlockLookAt =
 			D3DXVECTOR3(
-			m_unlockLookAt.x + m_panDisplacment->x,
+			m_unlockLookAt.x + panDisplacment->x,
 			0.0f,
-			m_unlockLookAt.z + (m_panDisplacment->y*-1.0f)
+			m_unlockLookAt.z + (panDisplacment->y*-1.0f)
 			);
 
 		m_lockedCamera.SetLookAt(&m_unlockLookAt);
@@ -230,6 +230,11 @@ void CameraDirector::ApplyLockedCameraMovement(LMVector2 * m_panDisplacment)
 		SetGameView();
 		SetGameProjection();
 	}
+}
+
+void CameraDirector::ApplyLockedCameraMovement()
+{
+	ApplyLockedCameraMovement(&m_panDisplacment);
 }
 
 LMCamera * CameraDirector::GetUsingCamera(UsingGameCamera camera)

@@ -4,9 +4,8 @@
 #include <string>
 using std::string;
 
-#include <d3dx9.h>
 
-#include "../Application/Globals.h"//dont sstatic in device anymore
+#include "../Application/GlobalsDX9.h"//dont sstatic in device anymore
 #include "../../../EngineGameModel/src/Maths/LMVector4.h"
 #include "LMGeometry.h"
 #include "UIBase.h"

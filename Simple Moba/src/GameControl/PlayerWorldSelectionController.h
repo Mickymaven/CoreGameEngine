@@ -15,7 +15,11 @@ using std::vector;
 //#include "../../../CoreGame/src/Gamestate/CoreGameState.h"
 #include "../../../CoreGame/src/Gamestate/StandardMatch5v5State.h"
 
-#include "../../../EngineGameModuleDirectX9/src/Application/Globals.h"
+#include "../../../EngineGameModuleDirectX9/src/Application/GlobalsDX9.h"
+
+
+
+#include "../../../EngineGamePlatform/src/Application/Globals.h"
 
 #include "../GamestateView/MobaViewState.h"
 #include "../Graphics/GraphicsAlgorithms.h"

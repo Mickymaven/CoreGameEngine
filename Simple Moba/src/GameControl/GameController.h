@@ -6,10 +6,15 @@ using std::vector;
 
 #include <windows.h>
 
-#include "../../../EngineGameModuleDirectX9/src/Application/Globals.h"
+#include "../../../EngineGamePlatform/src/Application/Globals.h"
+
+#include "../../../EngineGameModuleDirectX9/src/Application/GlobalsDX9.h"
 #include "../../../EngineGameModuleDirectX9/src/UI/UIElement.h"
 
 #include "../../../CoreGame/src/GameConfiguration.h"
+
+#include "TimestepController.h"
+
 #include "../Application/MsgParams.h"
 #include "../GamestateView/AspectProfile.h"
 
@@ -18,17 +23,12 @@ using std::vector;
 #include "OpenWorld.h"
 
 
-class GameController
+class GameController : public TimestepController
 {
 private:
 	//GAME LOOP HOUSEKEEPING
 
-	LARGE_INTEGER tFrequency;
-	LARGE_INTEGER tLastCount;
-	LARGE_INTEGER tCurrentCount;
-	float timeElapsed;
 
-	bool isDone;
 
 	UIElement * m_loadingBackground;
 	
@@ -38,8 +38,7 @@ private:
 	OpenWorld * openWorld;
 
 	//init values
-	LARGE_INTEGER m_initStart;
-	LARGE_INTEGER m_initCurrent;
+
 	char m_initBuffer[9000];
 	LPD3DXFONT loadFont;
 	RECT  fontPos;

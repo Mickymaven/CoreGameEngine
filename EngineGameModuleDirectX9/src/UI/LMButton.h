@@ -6,7 +6,7 @@ using namespace std;
 
 #include <d3dx9.h>
 
-#include "../Application/Globals.h"
+#include "../Application/GlobalsDX9.h"
 #include "../ControlHeader.h"
 
 class LMButton
