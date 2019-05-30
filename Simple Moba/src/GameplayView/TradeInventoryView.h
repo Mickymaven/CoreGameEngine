@@ -15,6 +15,7 @@ using namespace std::placeholders;
 class TradeInventoryView : public UIContentArea
 {
 protected:
+	string s;
 	TradeInventory * m_tradeInventory;
 	UITab * m_tab;
 

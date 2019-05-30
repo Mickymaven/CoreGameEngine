@@ -159,6 +159,7 @@
     <ClCompile Include="src\UI\UIContentArea.cpp" />
     <ClCompile Include="src\UI\UIDialogBox.cpp" />
     <ClCompile Include="src\UI\UIElement.cpp" />
+    <ClCompile Include="src\UI\UIHudBase.cpp" />
     <ClCompile Include="src\UI\UILabel.cpp" />
     <ClCompile Include="src\UI\UILabelCstr.cpp" />
     <ClCompile Include="src\UI\UIMenu.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="src\UI\UIContentArea.h" />
     <ClInclude Include="src\UI\UIDialogBox.h" />
     <ClInclude Include="src\UI\UIElement.h" />
+    <ClInclude Include="src\UI\UIHudBase.h" />
     <ClInclude Include="src\UI\UILabel.h" />
     <ClInclude Include="src\UI\UILabelCstr.h" />
     <ClInclude Include="src\UI\UIMenu.h" />

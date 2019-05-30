@@ -54,6 +54,7 @@ void MainMenuInputSet::AttemptAction(int action, float deltaTime)
 		if (m_mainMenu->ToggleState())
 		{
 			gameView->GetHud()->GetGameInfoPanel()->GetInfoPanel()->SetState(infoPanelStateClosed);
+
 		}
 		break;
 	case mainMenuActionToggleOpenStatPanelItems:
@@ -61,14 +62,21 @@ void MainMenuInputSet::AttemptAction(int action, float deltaTime)
 		if (gameView->GetStatPanel()->ToggleAction(statPanelOpenedItems))
 		{
 			gameView->GetHud()->GetGameInfoPanel()->GetInfoPanel()->SetState(infoPanelStateClosed);
+			gameView->GetHud()->SetStateRequest(uiHudOpen);
 		}
+		else gameView->GetHud()->SetStateRequest(uiHudClosed);
+
 		break;
 	case mainMenuActionToggleOpenStatPanelStats:
 
 		if (gameView->GetStatPanel()->ToggleAction(statPanelOpenedStats))
 		{
 			gameView->GetHud()->GetGameInfoPanel()->GetInfoPanel()->SetState(infoPanelStateClosed);
+			gameView->GetHud()->SetStateRequest(uiHudOpen);
+
 		}
+		else gameView->GetHud()->SetStateRequest(uiHudClosed);
+
 		break;
 
 	case mainMenuActionApply:

@@ -50,8 +50,8 @@ Main::~Main()
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
 	isStartFullscreen = false;
-	g_initWidth = 2560;
-	g_initHeight = 1440;
+	g_initWidth = 1600;
+	g_initHeight = 900;
 
 
 	g_clientSizeRect->left = 0;

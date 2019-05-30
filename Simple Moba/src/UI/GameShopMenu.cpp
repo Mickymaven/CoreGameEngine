@@ -83,7 +83,7 @@ bool GameShopMenu::Init(
 
 	m_confirmPreorder = UIButton(122.0f, 52.0f, "Resources/Shop/Images/shop_preorder.png");
 	m_cancelPreorder = UIButton(52.0f, 52.0f, "Resources/Shop/Images/shop_cancel-trade.png");
-	//m_confirmTrade = UIButton(122.0f, 52.0f, "Resources/Shop/Images/shop_confirm-trade.png");
+	m_confirmTrade = UIButton(122.0f, 52.0f, "Resources/Shop/Images/shop_confirm-trade.png");
 	m_cancelTrade = UIButton(52.0f, 52.0f, "Resources/Shop/Images/shop_cancel-trade.png");
 
 	m_confirmPreorder.SetCallbackSTDFunction(std::bind(&GameShopMenu::ActionPreOrder, this));
@@ -93,19 +93,19 @@ bool GameShopMenu::Init(
 
 	if (!m_confirmPreorder.Init()) return false;
 	if (!m_cancelPreorder.Init()) return false;
-	//if (!m_confirmTrade.Init()) return false;
+	if (!m_confirmTrade.Init()) return false;
 	if (!m_cancelTrade.Init()) return false;
 
-	m_confirmPreorder	.SetPosition(origin->x + size->x - 450.0f, 0.0f, origin->y + size->y - 57.0f);//booo
-	m_cancelPreorder	.SetPosition(origin->x + size->x - 300.f, 0.0f, origin->y + size->y - 57.0f);
-	//m_confirmTrade		.SetPosition(origin->x + size->x - 200.0, 0.0f, origin->y + size->y - 57.0f);
-	m_cancelTrade		.SetPosition(origin->x + size->x - 50.0f, 0.0f, origin->y + size->y - 57.0f);
+	m_confirmPreorder	.SetPosition(origin->x + size->x - 450.0f, 0.0f, origin->y + size->y - 60.0f);//booo
+	m_cancelPreorder	.SetPosition(origin->x + size->x - 300.f, 0.0f, origin->y + size->y - 60.0f);
+	m_confirmTrade		.SetPosition(origin->x + size->x - 210.0, 0.0f, origin->y + size->y - 60.0f);
+	m_cancelTrade		.SetPosition(origin->x + size->x - 87.0f, 0.0f, origin->y + size->y - 60.0f);
 
 
 	//Init GameShopViews for each game shop /////////////////////////////////////////
 	//might move this to MobaViewState
 	
-	tempCharacterController = playerCharacterController;
+	m_tempCharacterController = playerCharacterController;
 	
 	ShopInventoryView::m_selectedPlayerController = playerCharacterController;
 	//TradeInventoryView::m_selectedPlayerController = playerCharacterController;
@@ -175,7 +175,7 @@ bool GameShopMenu::Init(
 
 void GameShopMenu::Update(float deltaTime, PlayerCharacterController * playerCharacterController)
 {
-	tempCharacterController = playerCharacterController;
+	m_tempCharacterController = playerCharacterController;
 	//set menu tabs based on controlledPCC in range information
 
 	m_tabgroup.GetTabs()->resize(1);//assumption: 0 will always be team shop (always there)
@@ -296,13 +296,13 @@ bool  GameShopMenu::MouseOver(POINT * p)
 
 void GameShopMenu::SetShopForAutoInv()
 {
-	ShopInventoryView::m_selectedPlayerController = tempCharacterController;
+	ShopInventoryView::m_selectedPlayerController = m_tempCharacterController;
 
 	int shopId = -1;
 
-	for (unsigned int index = 0; index < tempCharacterController->GetInRangeShops()->size(); index++)
+	for (unsigned int index = 0; index < m_tempCharacterController->GetInRangeShops()->size(); index++)
 	{
-		shopId = tempCharacterController->GetInRangeShops()->at(index);
+		shopId = m_tempCharacterController->GetInRangeShops()->at(index);
 		m_page = m_gameShopViews.at(shopId);
 		return;
 	}
@@ -409,8 +409,8 @@ bool GameShopMenu::IsCurrentGameShopInRange()
 	for(unsigned int i = 0; i < zones->size(); i++)
 	{
 		if (zones->at(i)->IsUsable(
-			*tempCharacterController->GetCharacter()->GetActor()->GetPhysicsObject()->GetPosition(),
-			tempCharacterController->GetCharacter()->GetActor()->GetTeam()))
+			*m_tempCharacterController->GetCharacter()->GetActor()->GetPhysicsObject()->GetPosition(),
+			m_tempCharacterController->GetCharacter()->GetActor()->GetTeam()))
 		{
 			return true;
 		}
@@ -442,12 +442,12 @@ void GameShopMenu::SetGameShopView(TradeInventoryView * gameShopView)
 
 PlayerCharacterController * GameShopMenu::GetCtrl()
 {
-	return tempCharacterController;
+	return m_tempCharacterController;
 }
 
 void GameShopMenu::SetCtrl(PlayerCharacterController * playerCharacterController)
 {
-	tempCharacterController = playerCharacterController;
+	m_tempCharacterController = playerCharacterController;
 }
 
 

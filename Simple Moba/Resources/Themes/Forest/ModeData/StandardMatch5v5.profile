@@ -97,7 +97,7 @@ gameElementTradeMenuTitle
 0.1
 1.0
 250.0
-15.0
+123.0
 1920
 1200
 gameElementTradeConfirmTrade
@@ -628,7 +628,7 @@ gameElementTradeMenuTitle
 0.1
 1.0
 250.0
-15.0
+101.0
 1920
 1200
 gameElementTradeConfirmTrade
@@ -1159,7 +1159,7 @@ gameElementTradeMenuTitle
 0.1
 1.0
 250.0
-15.0
+101.0
 1920
 1200
 gameElementTradeConfirmTrade
@@ -1690,7 +1690,7 @@ gameElementTradeMenuTitle
 0.1
 1.0
 500.0
-50.0
+101.0
 1920
 1200
 gameElementTradeConfirmTrade

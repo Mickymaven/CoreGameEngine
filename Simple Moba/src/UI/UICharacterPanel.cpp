@@ -111,11 +111,9 @@ bool UICharacterPanel::Init(
 		//m_cooldownLabels[i].SetFloatFormat(3, 0);
 	}
 
-
 	//init avatar
 	if (!InitAvatarElement(&m_avatar, characterGrey)) return false;
-
-
+	if (!InitHPBar()) return false;
 
 	//init hpbar
 	//if (!viewProfile->InitElement(gameElementHUD, &m_playergui)) return false;
@@ -125,30 +123,8 @@ bool UICharacterPanel::Init(
 	//hppc = 0.284585f;
 	//hpwidth = hppc * g_clientSizeRect->right;
 
-	m_xorigin = m_viewProfile->m_aspectProfile->GetAlignX(gameElementHealthBar) 
-		+ m_viewProfile->m_aspectProfile->GetXForElement(gameElementHealthBar);
-													//g_clientSizeRect->right*(0.3881422f + 0.5f*hppc) - 0.5f*hpwidth;
-	m_y = m_viewProfile->m_aspectProfile->GetAlignY(gameElementHealthBar) +
-		+ m_viewProfile->m_aspectProfile->GetYForElement(gameElementHealthBar);
 
-	LPDIRECT3DTEXTURE9 tex;
-	if (D3DXCreateTextureFromFile(g_D3D_Device, "Resources/misc/HealthBar_texture.png", &tex) != D3D_OK)
-		return false;
-	m_hpbar = UIResizableElement(
-		m_viewProfile->m_aspectProfile->GetWidthForElement(gameElementHealthBar),
-		m_viewProfile->m_aspectProfile->GetHeightForElement(gameElementHealthBar),//0.0313f * g_clientSizeRect->bottom,
-		PhysicsObject(
-			LMVector3(0.0f, 0.0f, m_y),		//Position
-			LMVector3(0.0f, 0.0f, 0.0f),	//Rotation
-			LMVector3(1.0f, 1.0f, 1.0f),	//Scale
-			LMVector3(0.0f, 0.0f, 0.0f),	//Velocity
-			LMVector3(0.0f, 0.0f, 0.0f),	//Spin
-			LMVector3(0.0f, 0.0f, 0.0f),	//Resize
-			0.0f),
-		tex);
 
-	m_hpbar.InitMaterial();
-	if (!m_hpbar.InitVertexData()) return false;
 
 	//init stats labels
 	if (!m_stats.Init(viewProfile, themeResources, gameState, tooltipController, initCharControl)) return false;
@@ -170,24 +146,46 @@ bool UICharacterPanel::InitAvatarElement(UIElement * uiElement, CharacterClassNa
 	return true;
 }
 
+bool UICharacterPanel::InitHPBar()
+{
+	m_xorigin = m_viewProfile->m_aspectProfile->GetAlignX(gameElementHealthBar)
+		+ m_viewProfile->m_aspectProfile->GetXForElement(gameElementHealthBar);
+	//g_clientSizeRect->right*(0.3881422f + 0.5f*hppc) - 0.5f*hpwidth;
+	m_y = m_viewProfile->m_aspectProfile->GetAlignY(gameElementHealthBar) +
+		+m_viewProfile->m_aspectProfile->GetYForElement(gameElementHealthBar);
+
+	LPDIRECT3DTEXTURE9 tex;
+	if (D3DXCreateTextureFromFile(g_D3D_Device, "Resources/misc/HealthBar_texture.png", &tex) != D3D_OK)
+		return false;
+	m_hpbar = UIResizableElement(
+		m_viewProfile->m_aspectProfile->GetWidthForElement(gameElementHealthBar),
+		m_viewProfile->m_aspectProfile->GetHeightForElement(gameElementHealthBar),//0.0313f * g_clientSizeRect->bottom,
+		PhysicsObject(
+			LMVector3(0.0f, 0.0f, m_y),		//Position
+			LMVector3(0.0f, 0.0f, 0.0f),	//Rotation
+			LMVector3(1.0f, 1.0f, 1.0f),	//Scale
+			LMVector3(0.0f, 0.0f, 0.0f),	//Velocity
+			LMVector3(0.0f, 0.0f, 0.0f),	//Spin
+			LMVector3(0.0f, 0.0f, 0.0f),	//Resize
+			0.0f),
+		tex);
+
+
+	m_hpbar.InitMaterial();
+	if (!m_hpbar.InitVertexData()) return false;
+
+	return true;
+}
+
 void UICharacterPanel::Update(float deltaTime, PlayerCharacterController * playerCharacterController, PlayerCharacterView * playerCharacterView)
 {
 	SetAbilities(playerCharacterView);
 
 	m_stats.Update(deltaTime, playerCharacterController->GetCharacter()->GetActor()->GetStats());
 
-	//update hp bar
-	float scale = 0.0f;
-	if (playerCharacterController->GetCharacter()->GetActor()->GetStats()->m_maxHealth > 0)
-	{
-		scale = playerCharacterController->GetCharacter()->GetActor()->GetStats()->m_health
-			/ playerCharacterController->GetCharacter()->GetActor()->GetStats()->m_maxHealth;
-	}//maybe if you get 100 to 0'd bc you're a scrub your hp bar might show 100?
-	 //TODO health bar goes down with a velocity (even though most damage is damage over time).
-	 //this way less things can be damage over time and i get the smooth hp bar thing.
+	UpdateHP(deltaTime, playerCharacterController, playerCharacterView);
 
-	m_hpbar.GetPhysicsObject()->GetScale()->x = scale;
-	m_hpbar.GetPhysicsObject()->GetPosition()->x = m_xorigin - 0.5f*(1.0f - scale);
+
 
 
 	float cdValue = 0.0f;
@@ -219,6 +217,22 @@ void UICharacterPanel::Update(float deltaTime, PlayerCharacterController * playe
 		}
 		else m_cooldownLabels[i].UILabelCstr::SetText("");
 	}
+}
+
+void UICharacterPanel::UpdateHP(float deltaTime, PlayerCharacterController * playerCharacterController, PlayerCharacterView * playerCharacterView)
+{
+	//update hp bar
+	float scale = 0.0f;
+	if (playerCharacterController->GetCharacter()->GetActor()->GetStats()->m_maxHealth > 0)
+	{
+		scale = playerCharacterController->GetCharacter()->GetActor()->GetStats()->m_health
+			/ playerCharacterController->GetCharacter()->GetActor()->GetStats()->m_maxHealth;
+	}//maybe if you get 100 to 0'd bc you're a scrub your hp bar might show 100?
+	 //TODO health bar goes down with a velocity (even though most damage is damage over time).
+	 //this way less things can be damage over time and i get the smooth hp bar thing.
+
+	m_hpbar.GetPhysicsObject()->GetScale()->x = scale;
+	m_hpbar.GetPhysicsObject()->GetPosition()->x = m_xorigin - 0.5f*(1.0f - scale);
 }
 
 void UICharacterPanel::Render()

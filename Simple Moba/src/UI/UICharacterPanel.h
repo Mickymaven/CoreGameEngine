@@ -22,9 +22,7 @@ using std::vector;
 
 class UICharacterPanel : public UIPanelBase
 {
-private:
-
-
+protected:
 
 	vector<UILayoutAbility> m_characterAbilities;
 
@@ -61,8 +59,11 @@ public:
 		PlayerCharacterController * initCharControl);
 
 	bool InitAvatarElement(UIElement * uiElement, CharacterClassName characterClass);
+	bool InitHPBar();
 	
 	void Update(float deltaTime, PlayerCharacterController * playerCharacterController, PlayerCharacterView * playerCharacterView);
+	void UpdateHP(float deltaTime, PlayerCharacterController * playerCharacterController, PlayerCharacterView * playerCharacterView);
+
 	void Render();
 
 	void SetAbilityPositions(ViewProfile * viewProfile);

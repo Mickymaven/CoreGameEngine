@@ -340,3 +340,8 @@ bool StatPanel::MouseOver(POINT * p)
 
 	return false;
 }
+
+StatPanelState StatPanel::GetState()
+{
+	return m_state;
+}

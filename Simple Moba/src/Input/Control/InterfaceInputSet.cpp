@@ -24,7 +24,7 @@ void InterfaceInputSet::Update(float deltaTime)
 	}
 	else
 	{
-		gameView->GetHud()->GetInvPanel()->MouseOver(&g_mouseClientPosition);
+		//you are not dragging your item in the inv panel. The hud will provide mouse over oon that item below.
 		gameView->GetHud()->MouseOver(&g_mouseClientPosition);
 	}
 }
@@ -35,16 +35,18 @@ void InterfaceInputSet::AttemptAction(int action, float deltaTime)
 	{
 	case interfaceActionSelect:
 	{
-		//detect and handle our click and drag behavior
+		//every following Mouse Handling calls should not happen if the hud is closed
+		if (gameView->GetHud()->GetState() != uiHudClosed)
+		{
 
-		gameView->GetHud()->GetGameInfoPanel()->Select(&g_mouseClientPosition);
-		sm_gameInputController->ExpendForBounds(LEFT_BUTTON, gameView->GetHud()->GetGameInfoPanel());
+			gameView->GetHud()->GetGameInfoPanel()->Select(&g_mouseClientPosition);
+			sm_gameInputController->ExpendForBounds(LEFT_BUTTON, gameView->GetHud()->GetGameInfoPanel());
 
-		//
+			gameView->GetHud()->GetInvPanel()->Select(&g_mouseClientPosition);
+			sm_gameInputController->ExpendForBounds(LEFT_BUTTON, gameView->GetHud()->GetInvPanel());
 
-		gameView->GetHud()->GetInvPanel()->Select(&g_mouseClientPosition);
-		//expend
-
+			//expend
+		}
 
 		if (!sm_gameInputController->GetMousePressDownLast(LEFT_BUTTON))
 			//gameView->GetInterfaceInputModel()->m_keybinds[interfaceActionSelect]))
@@ -64,6 +66,10 @@ void InterfaceInputSet::AttemptAction(int action, float deltaTime)
 			actionCastRecall,
 			actionCastSleep,
 		};
+
+
+
+		if (gameView->GetHud()->GetState() == uiHudClosed) break;
 
 		if (abilityIndex > -1)
 		{
@@ -98,6 +104,10 @@ void InterfaceInputSet::AttemptAction(int action, float deltaTime)
 		break;
 	}
 	case interfaceActionAltSelect:
+
+		//every following Mouse Handling calls should not happen if the hud is closed
+		if (gameView->GetHud()->GetState() == uiHudClosed) break;
+
 		if (gameView->GetHud()->GetMap()->ActionAltSelect(&g_mouseClientPosition, gameView->GetIndicatorController()->GetWalkIndicator()))
 		{
 			gameView->GetIndicatorController()->SetWalkIndicatorTimer(0.0f);

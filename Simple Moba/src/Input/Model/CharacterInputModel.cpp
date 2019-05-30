@@ -44,6 +44,19 @@ bool CharacterInputModel::Init(string path)
 	m_keybinds[characterActionInventory0] = DIK_0;
 
 
+	m_spamFlags.resize(characterActionCount, false);
+
+	m_spamFlags[characterActionKeyMoveLeft] = true;
+	m_spamFlags[characterActionKeyMoveRight] = true;
+	m_spamFlags[characterActionKeyMoveUp] = true;
+	m_spamFlags[characterActionKeyMoveDown] = true;
+
+	m_spamFlags[characterActionSelectWithMouse] = true;
+	m_spamFlags[characterActionWalkOrBasicAttack] = true;
+
+	m_spamFlags[characterActionAttackMove] = true;
+	m_spamFlags[characterActionDriveByMove] = true;
+
 	m_name = new vector<string> {
 		"Move Left",
 		"Move Right",
@@ -76,55 +89,6 @@ bool CharacterInputModel::Init(string path)
 		"Inventory 8",
 		"Inventory 9",
 		"Inventory 10" };
-
-	m_keybinds.resize(characterActionCount);
-
-	m_keybinds[characterActionKeyMoveLeft] = DIK_LEFT;
-	m_keybinds[characterActionKeyMoveRight] = DIK_RIGHT;
-	m_keybinds[characterActionKeyMoveUp] = DIK_UP;
-	m_keybinds[characterActionKeyMoveDown] = DIK_DOWN;
-
-	m_keybinds[characterActionSelectWithMouse] = MO_LEFT_BUTTON;
-	m_keybinds[characterActionWalkOrBasicAttack] = MO_RIGHT_BUTTON;
-
-	m_keybinds[characterActionStop] = DIK_S;
-	m_keybinds[characterActionAttackMove] = DIK_A;
-	m_keybinds[characterActionDriveByMove] = DIK_D;
-
-	m_keybinds[characterActionCastRecall] = DIK_B;
-	m_keybinds[characterActionCastSleep] = DIK_Z;
-
-	m_keybinds[characterActionCastAbility1] = DIK_Q;
-	m_keybinds[characterActionCastAbility2] = DIK_W;
-	m_keybinds[characterActionCastAbility3] = DIK_E;
-	m_keybinds[characterActionCastAbility4] = DIK_R;
-	m_keybinds[characterActionCastAbility5] = DIK_T;
-	m_keybinds[characterActionCastAbility6] = DIK_F;
-
-	m_keybinds[characterActionInventory1] = DIK_1;
-	m_keybinds[characterActionInventory2] = DIK_2;
-	m_keybinds[characterActionInventory3] = DIK_3;
-	m_keybinds[characterActionInventory4] = DIK_4;
-	m_keybinds[characterActionInventory5] = DIK_5;
-	m_keybinds[characterActionInventory6] = DIK_6;
-	m_keybinds[characterActionInventory7] = DIK_7;
-	m_keybinds[characterActionInventory8] = DIK_8;
-	m_keybinds[characterActionInventory9] = DIK_9;
-	m_keybinds[characterActionInventory0] = DIK_0;
-
-
-	m_spamFlags.resize(characterActionCount, false);
-
-	m_spamFlags[characterActionKeyMoveLeft] = true;
-	m_spamFlags[characterActionKeyMoveRight] = true;
-	m_spamFlags[characterActionKeyMoveUp] = true;
-	m_spamFlags[characterActionKeyMoveDown] = true;
-
-	m_spamFlags[characterActionSelectWithMouse] = true;
-	m_spamFlags[characterActionWalkOrBasicAttack] = true;
-
-	m_spamFlags[characterActionAttackMove] = true;
-	m_spamFlags[characterActionDriveByMove] = true;
 
 
 	//State inits

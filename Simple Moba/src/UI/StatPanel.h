@@ -95,13 +95,14 @@ public:
 	void RenderItems(PlayerCharacterController * playerCharacterController);
 	void RenderStats(PlayerCharacterController * playerCharacterController);
 	
-	void HandleLeftClick();
 	bool ToggleAction(StatPanelState message);
 
 
 	void Select(POINT * p);
 	void AltSelect(POINT * p);
 	bool MouseOver(POINT * p);
+
+	StatPanelState GetState();
 
 
 };

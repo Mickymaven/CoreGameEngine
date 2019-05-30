@@ -18,7 +18,7 @@ class UIMobaMap : public UIGameMap
 private:
 protected:
 	GameConfiguration * gameConfiguration;
-	StandardMatch5v5State * gameState;
+	CoreGameState * gameState;
 
 	vector< vector <PlayerCharacterController *> *> m_playerTeams;
 	vector< vector <UIElement >> m_playerIcons;
@@ -29,7 +29,7 @@ protected:
 public:
 	UIMobaMap();
 	~UIMobaMap();
-	bool Init(StandardMatch5v5State * gameStateIn, GameConfiguration * gameConfigurationIn);
+	bool Init(CoreGameState * gameStateIn, GameConfiguration * gameConfigurationIn);
 
 	void Update(float deltaTime);
 	void Render();

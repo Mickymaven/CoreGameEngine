@@ -129,9 +129,12 @@
     <ClCompile Include="src\UI\Tooltips\TooltipInfoBuff.cpp" />
     <ClCompile Include="src\UI\Tooltips\TooltipInfoItem.cpp" />
     <ClCompile Include="src\UI\UICharacterPanel.cpp" />
+    <ClCompile Include="src\UI\UICharacterPanelFull.cpp" />
+    <ClCompile Include="src\UI\UICharacterPanelMini.cpp" />
     <ClCompile Include="src\UI\UIChat.cpp" />
     <ClCompile Include="src\UI\UIGameInfoPanel.cpp" />
     <ClCompile Include="src\UI\UIInvPanel.cpp" />
+    <ClCompile Include="src\UI\UIMiniHud.cpp" />
     <ClCompile Include="src\UI\UIMobaHud.cpp" />
     <ClCompile Include="src\UI\UIMobaMap.cpp" />
     <ClCompile Include="src\UI\UIPanelBase.cpp" />
@@ -268,9 +271,12 @@
     <ClInclude Include="src\UI\Main_Menu\OptionsContent.h" />
     <ClInclude Include="src\UI\Main_Menu\SoundContent.h" />
     <ClInclude Include="src\UI\UICharacterPanel.h" />
+    <ClInclude Include="src\UI\UICharacterPanelFull.h" />
+    <ClInclude Include="src\UI\UICharacterPanelMini.h" />
     <ClInclude Include="src\UI\UIChat.h" />
     <ClInclude Include="src\UI\UIGameInfoPanel.h" />
     <ClInclude Include="src\UI\UIInvPanel.h" />
+    <ClInclude Include="src\UI\UIMiniHud.h" />
     <ClInclude Include="src\UI\UIPanelBase.h" />
     <ClInclude Include="src\UI_Base\UILayoutAvatar.h" />
     <ClInclude Include="src\UI_Base\UILayoutBase.h" />

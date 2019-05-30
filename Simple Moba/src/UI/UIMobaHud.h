@@ -7,20 +7,26 @@ using namespace std::placeholders;
 #include <vector>
 using std::vector;
 
-#include "../../../EngineGameModuleDirectX9/src/UI/UIArea.h"
+#include "../../../EngineGameModuleDirectX9/src/UI/UIHudBase.h"
+
+
 #include "../../../EngineGameModuleDirectX9/src/UI/UIElement.h"
-#include "../../../EngineGameModuleDirectX9/src/UI/UIResizableElement.h"
+//#include "../../../EngineGameModuleDirectX9/src/UI/UIResizableElement.h"
 #include "../../../EngineGameModuleDirectX9/src/Input/InputModel.h"
 #include "../../../EngineMoba/src/Gamestate/MobaState.h"
 #include "../../../EngineMoba/src/Actors/PlayerCharacterController.h"
 #include "../../../EngineGameModel/src/Maths/LMVector2.h"
 #include "../../../EngineGameModel/src/Maths/LMVector3.h"
 #include "../../../EngineGameModel/src/Maths/LMVector4.h"
+
+#include "../../../CoreGame/src/Gamestate/CoreGameState.h"
+
 #include "../ViewControl/CameraDirector.h"
 #include "../UI_Base/UIBuff.h"
 #include "../UI_Base/UIBuffGroup.h"
 #include "../UI_Base/UILayoutAbility.h"
 #include "../UI_Base/UILayoutInventory.h"
+
 #include "../GameplayView/PlayerCharacterView.h"
 #include "../GameplayView/BuffView.h"
 #include "../GameplayView/ItemView.h"
@@ -31,21 +37,21 @@ using std::vector;
 
 #include "UIChat.h"
 #include "UIMobaMap.h"
-#include "UICharacterPanel.h"
+#include "UICharacterPanelFull.h"
 #include "UIGameInfoPanel.h"
 #include "UIInvPanel.h"
 
-class UIMobaHud: public UIArea
+
+class UIMobaHud: public UIHudBase
 {
 private:
-
-	StandardMatch5v5State * gameState;
+	CoreGameState * gameState;
 	
 	static TooltipController * m_tooltipController;
 
 	CameraDirector * m_cameraDirector;
 	
-	UICharacterPanel m_characterPanel;
+	UICharacterPanelFull m_characterPanel;
 	UIGameInfoPanel m_gameInfoPanel;
 	UIInvPanel m_invPanel;
 	UIMobaMap m_map;
@@ -115,7 +121,7 @@ public:
 	UIMobaHud();
 	~UIMobaHud();
 	bool Init(
-		StandardMatch5v5State * gameStateIn,
+		CoreGameState * gameStateIn,
 		ViewProfile * viewProfile,
 		ThemeResources * theme,
 		CameraDirector * cameraDirector,
@@ -150,11 +156,17 @@ public:
 	bool IsDragging();
 	bool InitAvatarElement(UIElement * uiElement, CharacterClassName characterClass);
 
+	void SetStateRequest(UIHudState state);
+
+
+	
 	UIChat * GetChat();
 	UIMobaMap * GetMap();
 	UIGameInfoPanel * GetGameInfoPanel();
 	UICharacterPanel * GetCharacterPanel();
 	UIInvPanel * GetInvPanel();
+
+
 
 };
 

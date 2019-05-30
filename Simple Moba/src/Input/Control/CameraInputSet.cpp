@@ -80,13 +80,13 @@ void CameraInputSet::AttemptAction(int action, float deltaTime)
 		case usingThirdPersonCamera://intentionally use this behavior for 3rd person as well.
 			if (sm_gameInputController->GetZDelta() > 0)
 			{
-				m_cameraDirector->Zoom(deltaTime, 'i', 12.0f);
+				m_cameraDirector->Zoom(deltaTime, 'i', 4.0f);
 			}
 			else
 			{
 				if (sm_gameInputController->GetZDelta() < 0)
 				{
-					m_cameraDirector->Zoom(deltaTime, 'o', 12.0f);
+					m_cameraDirector->Zoom(deltaTime, 'o', 4.0f);
 				}
 			}
 			break;

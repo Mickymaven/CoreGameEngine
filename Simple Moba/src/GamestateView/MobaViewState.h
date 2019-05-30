@@ -46,6 +46,7 @@ using namespace std::placeholders;
 #include "../UI/StatPanel.h"
 #include "../UI/Tooltips/TooltipController.h"
 #include "../UI/UIMobaHud.h"
+#include "../UI/UIMiniHud.h"
 
 
 
@@ -117,7 +118,9 @@ protected:
 	DialogBehaviorIO m_dialogBehaviorViewIO;
 
 	GameCursor m_cursor;
-	UIMobaHud m_mobaHud;//derived from UIArea
+	UIMobaHud m_mobaHud;
+	UIMiniHud m_miniHud;
+
 	UIMobaMap m_mobaMap;
 
 	StatPanel m_statPanel;
@@ -224,7 +227,6 @@ public:
 
 
 
-
 	//these are view class managers (should rename or refactor).
 	IndicatorController * GetIndicatorController();
 	InfoPanelController * GetInfoPanelController();
@@ -248,6 +250,7 @@ public:
 	GameCursor * GetGameCursor();
 
 	UIMobaHud * GetHud();
+	UIMiniHud * GetMiniHud();
 
 	StatPanel * GetStatPanel();
 	

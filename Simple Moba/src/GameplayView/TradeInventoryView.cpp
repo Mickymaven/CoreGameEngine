@@ -29,8 +29,12 @@ bool TradeInventoryView::Init(ViewProfile * viewProfile, ThemeResources * theme,
 
 	RECT rect = { 0, 0, 0, 0 };
 
+	//s = "HEY LISTEN!";
+
+	m_shopLabel = UILabel();
+
 	m_shopLabel.Init(rect, &theme->m_dialogLabel, tradeInventory->GetName());
-	m_shopLabel.SetBounds(bounds->left() + 120.0f, bounds->top() + 10.0f, bounds->left() + 620.0f, bounds->top() + 40.0f);
+	//m_shopLabel.SetBounds(bounds->left() + 120.0f, bounds->top() + 10.0f, bounds->right() + 620.0f, bounds->bottom() + 200.0f);
 
 	if (!viewProfile->InitLabel(gameElementTradeMenuTitle, &m_shopLabel, &theme->m_dialogLabel, nullptr));
 
@@ -39,6 +43,7 @@ bool TradeInventoryView::Init(ViewProfile * viewProfile, ThemeResources * theme,
 
 void TradeInventoryView::Render()
 {
+	//m_shopLabel.SetBounds(m_bounds.left() + 120.0f, m_bounds.top() + 10.0f, m_bounds.right() + 620.0f, m_bounds.bottom() + 200.0f);
 	m_shopLabel.Render();
 
 	if (m_selectedShopView != nullptr) m_selectedShopView->Render();

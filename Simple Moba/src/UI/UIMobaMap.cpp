@@ -10,7 +10,7 @@ UIMobaMap::~UIMobaMap()
 
 }
 
-bool UIMobaMap::Init(StandardMatch5v5State * gameStateIn, GameConfiguration * gameConfigurationIn)
+bool UIMobaMap::Init(CoreGameState * gameStateIn, GameConfiguration * gameConfigurationIn)
 {
 	gameConfiguration = gameConfigurationIn;
 	gameState = gameStateIn;
@@ -18,8 +18,8 @@ bool UIMobaMap::Init(StandardMatch5v5State * gameStateIn, GameConfiguration * ga
 	m_positionMax = LMVector2(400.0f, 400.0f);
 	
 	m_playerTeams.resize(2);
-	m_playerTeams.at(0) = gameState->GetTeamControllersAsVector(yellowTeamName);
-	m_playerTeams.at(1) = gameState->GetTeamControllersAsVector(purpleTeamName);
+	m_playerTeams.at(0) = ((StandardMatch5v5State*)gameState)->GetTeamControllersAsVector(yellowTeamName);
+	m_playerTeams.at(1) = ((StandardMatch5v5State*)gameState)->GetTeamControllersAsVector(purpleTeamName);
 
 	//m_icons.resize(0);
 

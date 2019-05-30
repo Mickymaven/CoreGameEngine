@@ -432,6 +432,16 @@ bool MobaViewState::InitSelectedPhase(int initPhase)
 			&m_gameAssetFactory, &m_tooltipController, gameState->GetControlledPCC())) return false;
 		
 		// Player main GUI
+		if (!m_miniHud.Init(
+			gameState,
+			&m_viewProfile,
+			&m_theme,
+			gameState->GetGameElapsedTime(),
+			&m_inputModelList,
+			gameState->GetControlledPCC())) return false;
+
+
+		//player tab menu GUI
 		if (!m_mobaHud.Init(
 			gameState,
 			&m_viewProfile,
@@ -445,6 +455,8 @@ bool MobaViewState::InitSelectedPhase(int initPhase)
 			m_itemViewFactory.GetLightweightItemViews(),
 			&m_tooltipController,
 			gameState->GetControlledPCC())) return false;
+
+		
 
 		// Info Panel Controller
 		//InitDebugPrint("UI: Info Panel");
@@ -818,6 +830,7 @@ BoidstormView * MobaViewState::GetBoidstormView() { return &m_boidstormView;  }
 
 GameCursor * MobaViewState::GetGameCursor() { return &m_cursor; }
 UIMobaHud * MobaViewState::GetHud() { return &m_mobaHud; }
+UIMiniHud * MobaViewState::GetMiniHud() { return &m_miniHud; }
 GameShopMenu * MobaViewState::GetGameShopMenu() { return &m_gameShopMenu; }
 GameMainMenu *  MobaViewState::GetMainMenu() { return &m_mainMenu; }
 UIKeyDialog * MobaViewState::GetKeyDialog() { return &m_keyDialog; }

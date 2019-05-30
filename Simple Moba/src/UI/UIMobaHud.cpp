@@ -2,7 +2,7 @@
 
 TooltipController * UIMobaHud::m_tooltipController = NULL;
 
-UIMobaHud::UIMobaHud() :UIArea()
+UIMobaHud::UIMobaHud() : UIHudBase()
 {
 	m_isLeftInv = true;
 	m_playerCharacter = NULL;
@@ -16,7 +16,7 @@ UIMobaHud::~UIMobaHud()
 }
 
 bool UIMobaHud::Init(
-	StandardMatch5v5State * gameStateIn,
+	CoreGameState * gameStateIn, //todo substitute for base class pointer ad every thing inited here is from Engine MOBA
 	ViewProfile * viewProfile,
 	ThemeResources * theme,
 	CameraDirector * cameraDirector,
@@ -34,9 +34,16 @@ bool UIMobaHud::Init(
 	m_viewProfile = viewProfile;
 	m_theme = theme;
 	m_cameraDirector = cameraDirector;
-	
+
+
+	m_state = uiHudClosed;
+
 	if (!viewProfile->InitElement(gameElementHUD, &m_playergui)) return false;
 	
+
+
+
+
 	if (! m_map.Init(gameStateIn, gameConfiguration)) return false;
 	if (! m_characterPanel.Init(viewProfile, theme, gameStateIn, tooltipController, inputModels, initCharControl)) return false;
 	if (! m_gameInfoPanel.Init(viewProfile, theme, gameStateIn, tooltipController, initCharControl, inputModels, itemViews)) return false;
@@ -205,21 +212,23 @@ void UIMobaHud::Update(float deltaTime, PlayerCharacterController * playerCharac
 
 void UIMobaHud::Render()
 {
-	
-	m_playergui.Render();
-	m_map.Render();
-	m_characterPanel.Render();
-	m_gameInfoPanel.Render();
-
-	m_invPanel.Render();
-
-	if (m_playerCharacter != NULL)
+	if (m_state != uiHudClosed)
 	{
+		m_playergui.Render();
+		m_map.Render();
+		m_characterPanel.Render();
+		m_gameInfoPanel.Render();
 
-		//render buffs
+		m_invPanel.Render();
 
-		m_buffs.Render();
-		m_debuffs.Render();
+		if (m_playerCharacter != NULL)
+		{
+
+			//render buffs
+
+			m_buffs.Render();
+			m_debuffs.Render();
+		}
 	}
 
 	m_chat.Render();
@@ -227,6 +236,8 @@ void UIMobaHud::Render()
 
 void UIMobaHud::RenderTextStuff()
 {
+	//hud is closed. dont render
+	
 	// # player interface text //////////////////////////////////////////////////
 
 
@@ -244,127 +255,131 @@ void UIMobaHud::RenderTextStuff()
 
 	float team2 = ((0.5935 - 0.17578125) * g_clientSizeRect->right);
 
-
-
-	for (int h = 0; h <= 1; h++)
+	if (m_state != uiHudClosed)
 	{
-		if (h == 0) switchTeamUX = gameState->GetPlayerCharactersByTeam(yellowTeamName);
-		else if (h == 1) switchTeamUX = gameState->GetPlayerCharactersByTeam(purpleTeamName);
 
-		for (int i = 0; i < 5; i++)
+
+		for (int h = 0; h <= 1; h++)
 		{
-			//player name at top
+			if (h == 0) switchTeamUX = gameState->GetPlayerCharactersByTeam(yellowTeamName);
+			else if (h == 1) switchTeamUX = gameState->GetPlayerCharactersByTeam(purpleTeamName);
 
-			m_fontPos = { 180, -1, 230, g_clientSizeRect->bottom };
-			m_fontPos.left = 0.17578125 * g_clientSizeRect->right;
-			m_fontPos.right = m_fontPos.left + 50;
+			for (int i = 0; i < 5; i++)
+			{
+				//player name at top
 
-			m_fontPos.left += (int)((xbump  * i) + (h * team2));
-			m_fontPos.right += (int)((xbump * i) + (h * team2));
+				m_fontPos = { 180, -1, 230, g_clientSizeRect->bottom };
+				m_fontPos.left = 0.17578125 * g_clientSizeRect->right;
+				m_fontPos.right = m_fontPos.left + 50;
 
-			sprintf_s(m_buffer9001, switchTeamUX->at(i)->GetCharacter()->GetActor()->GetUniqueName().c_str());
+				m_fontPos.left += (int)((xbump  * i) + (h * team2));
+				m_fontPos.right += (int)((xbump * i) + (h * team2));
 
-			m_fontPos.top += 1;
-			m_fontPos.left += 1;
-			m_fontPos.right += 1;
+				sprintf_s(m_buffer9001, switchTeamUX->at(i)->GetCharacter()->GetActor()->GetUniqueName().c_str());
+
+				m_fontPos.top += 1;
+				m_fontPos.left += 1;
+				m_fontPos.right += 1;
 
 
 			
-			m_theme->m_nameText.m_font->DrawText(NULL, m_buffer9001, -1, &m_fontPos, DT_CENTER, D3DCOLOR_XRGB(48, 47, 45));
-			m_fontPos.top -= 1;
-			m_fontPos.left -= 1;
-			m_fontPos.right -= 1;
-			m_theme->m_nameText.m_font->DrawText(NULL, m_buffer9001, -1, &m_fontPos, DT_CENTER, D3DCOLOR_XRGB(255, 255, 255));
+				m_theme->m_nameText.m_font->DrawText(NULL, m_buffer9001, -1, &m_fontPos, DT_CENTER, D3DCOLOR_XRGB(48, 47, 45));
+				m_fontPos.top -= 1;
+				m_fontPos.left -= 1;
+				m_fontPos.right -= 1;
+				m_theme->m_nameText.m_font->DrawText(NULL, m_buffer9001, -1, &m_fontPos, DT_CENTER, D3DCOLOR_XRGB(255, 255, 255));
 
-			m_fontPos = { 180, 35, 230, g_clientSizeRect->bottom };
-			m_fontPos.left = 0.17578125 * g_clientSizeRect->right;
-			m_fontPos.right = m_fontPos.left + 50;
+				m_fontPos = { 180, 35, 230, g_clientSizeRect->bottom };
+				m_fontPos.left = 0.17578125 * g_clientSizeRect->right;
+				m_fontPos.right = m_fontPos.left + 50;
 
-			m_fontPos.left += (int)((xbump  * i) + (h * team2));
-			m_fontPos.right += (int)((xbump * i) + (h * team2));
+				m_fontPos.left += (int)((xbump  * i) + (h * team2));
+				m_fontPos.right += (int)((xbump * i) + (h * team2));
 
 
-			tempCDvalue = 0.0f;
+				tempCDvalue = 0.0f;
 
-			if (switchTeamUX->at(i)->GetCharacter()->GetActor()->GetState() == actorDead)
-			{
-				tempCDvalue = switchTeamUX->at(i)->GetCharacter()->GetActor()->GetTimer()->GetRemainder();
+				if (switchTeamUX->at(i)->GetCharacter()->GetActor()->GetState() == actorDead)
+				{
+					tempCDvalue = switchTeamUX->at(i)->GetCharacter()->GetActor()->GetTimer()->GetRemainder();
+				}
+
+				if (tempCDvalue > 0.0f)
+				{
+					if (tempCDvalue < 1.0f) sprintf_s(m_buffer9001, "%0.1f", tempCDvalue);
+					else sprintf_s(m_buffer9001, "%.0f", tempCDvalue);
+
+					m_theme->m_largeText.m_font->DrawText(NULL, m_buffer9001, -1, &m_fontPos, DT_CENTER, D3DCOLOR_XRGB(48, 47, 45));
+				}
+
+				tempCDvalue = 0.0f;
+				if (switchTeamUX->at(i)->GetCharacter()->GetActor()->GetState() == actorRecall)
+				{
+					tempCDvalue = ((Recall*)switchTeamUX->at(i)->GetCharacter()->GetAbilities()->at(actionCastRecall))->GetRecallTimer()->GetRemainder();
+				}
+
+				if (tempCDvalue > 0.0f)
+				{
+					if (tempCDvalue < 1.0f) sprintf_s(m_buffer9001, "%0.1f", tempCDvalue);
+					else sprintf_s(m_buffer9001, "%.0f", tempCDvalue);
+
+					m_theme->m_nameText.m_font->DrawText(NULL, m_buffer9001, -1,&m_fontPos, DT_CENTER, D3DCOLOR_XRGB(0, 0, 0));
+				}
+
+
+				/*
+				//damage vec size
+				for (int j = 1; j <= 4; j++)
+				{
+				m_fontPos.top += 30;
+				sprintf_s(m_buffer9001, "%i", switchTeamUX->at(i)->GetSlotAbility(j)->GetDamageOnUpdate()->size());
+				m_theme->m_largeText.m_font->DrawText(NULL, m_buffer9001, -1, &m_fontPos, DT_CENTER, D3DCOLOR_XRGB(222, 255, 222));
+				}
+				*/
 			}
-
-			if (tempCDvalue > 0.0f)
-			{
-				if (tempCDvalue < 1.0f) sprintf_s(m_buffer9001, "%0.1f", tempCDvalue);
-				else sprintf_s(m_buffer9001, "%.0f", tempCDvalue);
-
-				m_theme->m_largeText.m_font->DrawText(NULL, m_buffer9001, -1, &m_fontPos, DT_CENTER, D3DCOLOR_XRGB(48, 47, 45));
-			}
-
-			tempCDvalue = 0.0f;
-			if (switchTeamUX->at(i)->GetCharacter()->GetActor()->GetState() == actorRecall)
-			{
-				tempCDvalue = ((Recall*)switchTeamUX->at(i)->GetCharacter()->GetAbilities()->at(actionCastRecall))->GetRecallTimer()->GetRemainder();
-			}
-
-			if (tempCDvalue > 0.0f)
-			{
-				if (tempCDvalue < 1.0f) sprintf_s(m_buffer9001, "%0.1f", tempCDvalue);
-				else sprintf_s(m_buffer9001, "%.0f", tempCDvalue);
-
-				m_theme->m_nameText.m_font->DrawText(NULL, m_buffer9001, -1,&m_fontPos, DT_CENTER, D3DCOLOR_XRGB(0, 0, 0));
-			}
-
-
-			/*
-			//damage vec size
-			for (int j = 1; j <= 4; j++)
-			{
-			m_fontPos.top += 30;
-			sprintf_s(m_buffer9001, "%i", switchTeamUX->at(i)->GetSlotAbility(j)->GetDamageOnUpdate()->size());
-			m_theme->m_largeText.m_font->DrawText(NULL, m_buffer9001, -1, &m_fontPos, DT_CENTER, D3DCOLOR_XRGB(222, 255, 222));
-			}
-			*/
 		}
-	}
 
-	int yEnd = g_clientSizeRect->bottom;
-	int xEnd = g_clientSizeRect->right;
+		int yEnd = g_clientSizeRect->bottom;
+		int xEnd = g_clientSizeRect->right;
 
-	//YellowTeamScore
-	sprintf_s(m_buffer9001, "%i", *gameState->GetTeamScore(yellowTeamName));
-	m_fontPos = { 0, 15, (g_clientSizeRect->right / 2 - 60), yEnd };
-	m_theme->m_largeText.m_font->DrawText(NULL, m_buffer9001, -1,&m_fontPos, DT_RIGHT, D3DCOLOR_XRGB(255, 255, 192));
+		//YellowTeamScore
+		sprintf_s(m_buffer9001, "%i", *gameState->GetTeamScore(yellowTeamName));
+		m_fontPos = { 0, 15, (g_clientSizeRect->right / 2 - 60), yEnd };
+		m_theme->m_largeText.m_font->DrawText(NULL, m_buffer9001, -1,&m_fontPos, DT_RIGHT, D3DCOLOR_XRGB(255, 255, 192));
 
-	//PurpleTeamScore
-	sprintf_s(m_buffer9001, "%i", *gameState->GetTeamScore(purpleTeamName));
-	m_fontPos = { (g_clientSizeRect->right / 2 + 60), 15, g_clientSizeRect->right, yEnd };
-	m_theme->m_largeText.m_font->DrawText(NULL, m_buffer9001, -1,&m_fontPos, DT_LEFT, D3DCOLOR_XRGB(255, 192, 255));
+		//PurpleTeamScore
+		sprintf_s(m_buffer9001, "%i", *gameState->GetTeamScore(purpleTeamName));
+		m_fontPos = { (g_clientSizeRect->right / 2 + 60), 15, g_clientSizeRect->right, yEnd };
+		m_theme->m_largeText.m_font->DrawText(NULL, m_buffer9001, -1,&m_fontPos, DT_LEFT, D3DCOLOR_XRGB(255, 192, 255));
 
-	//Kills
-	sprintf_s(m_buffer9001, "%i  /", gameState->GetControlledCharacter()->GetActor()->GetKDA().kills);
-	m_fontPos = { 0, (LONG)(0.01f*g_clientSizeRect->bottom), 50, g_clientSizeRect->bottom };
-	m_theme->m_mediumText.m_font->DrawText(NULL, m_buffer9001, -1,&m_fontPos, DT_RIGHT, D3DCOLOR_XRGB(255, 255, 255));
+		//Kills
+		sprintf_s(m_buffer9001, "%i  /", gameState->GetControlledCharacter()->GetActor()->GetKDA().kills);
+		m_fontPos = { 0, (LONG)(0.01f*g_clientSizeRect->bottom), 50, g_clientSizeRect->bottom };
+		m_theme->m_mediumText.m_font->DrawText(NULL, m_buffer9001, -1,&m_fontPos, DT_RIGHT, D3DCOLOR_XRGB(255, 255, 255));
 
-	//Deaths
-	sprintf_s(m_buffer9001, "%i  /", gameState->GetControlledCharacter()->GetActor()->GetKDA().deaths);
-	m_fontPos = { 0, (LONG)(0.01f*g_clientSizeRect->bottom), 88, g_clientSizeRect->bottom };
-	m_theme->m_mediumText.m_font->DrawText(NULL, m_buffer9001, -1,&m_fontPos, DT_RIGHT, D3DCOLOR_XRGB(255, 255, 255));
+		//Deaths
+		sprintf_s(m_buffer9001, "%i  /", gameState->GetControlledCharacter()->GetActor()->GetKDA().deaths);
+		m_fontPos = { 0, (LONG)(0.01f*g_clientSizeRect->bottom), 88, g_clientSizeRect->bottom };
+		m_theme->m_mediumText.m_font->DrawText(NULL, m_buffer9001, -1,&m_fontPos, DT_RIGHT, D3DCOLOR_XRGB(255, 255, 255));
 
-	//Assists
-	sprintf_s(m_buffer9001, "%i", gameState->GetControlledCharacter()->GetActor()->GetKDA().assists);
-	m_fontPos = { 0, (LONG)(0.01f*g_clientSizeRect->bottom), 112, g_clientSizeRect->bottom };
-	m_theme->m_mediumText.m_font->DrawText(NULL, m_buffer9001, -1,&m_fontPos, DT_RIGHT, D3DCOLOR_XRGB(255, 255, 255));
-
+		//Assists
+		sprintf_s(m_buffer9001, "%i", gameState->GetControlledCharacter()->GetActor()->GetKDA().assists);
+		m_fontPos = { 0, (LONG)(0.01f*g_clientSizeRect->bottom), 112, g_clientSizeRect->bottom };
+		m_theme->m_mediumText.m_font->DrawText(NULL, m_buffer9001, -1,&m_fontPos, DT_RIGHT, D3DCOLOR_XRGB(255, 255, 255));
 
 
 
-	//INV Value
-	sprintf_s(m_buffer9001, "Inventory value: %i", *gameState->GetControlledCharacter()->GetInventoryValue());
-	m_fontPos = { 10, (LONG)(0.855f * g_clientSizeRect->bottom), 150, g_clientSizeRect->bottom };//795
-	m_theme->m_mediumText.m_font->DrawText(NULL, m_buffer9001, -1, &m_fontPos, DT_RIGHT, D3DCOLOR_XRGB(163, 175, 160));
 
-	int sStart = 0.419f*g_clientSizeRect->right;
-	int sSpread = 39.68f;//0.031f * g_clientSizeRect->right;*1280
-	int yStart = g_clientSizeRect->bottom - 0.025f*g_clientSizeRect->bottom;
+		//INV Value
+		sprintf_s(m_buffer9001, "Inventory value: %i", *gameState->GetControlledCharacter()->GetInventoryValue());
+		m_fontPos = { 10, (LONG)(0.855f * g_clientSizeRect->bottom), 150, g_clientSizeRect->bottom };//795
+		m_theme->m_mediumText.m_font->DrawText(NULL, m_buffer9001, -1, &m_fontPos, DT_RIGHT, D3DCOLOR_XRGB(163, 175, 160));
+
+		int sStart = 0.419f*g_clientSizeRect->right;
+		int sSpread = 39.68f;//0.031f * g_clientSizeRect->right;*1280
+		int yStart = g_clientSizeRect->bottom - 0.025f*g_clientSizeRect->bottom;
+
+	 }//end not mobaHUDClosed check
 
 	//// GAME DEBUG STUFF /////
 	if (gameState->m_isDebugTextOn)
@@ -564,14 +579,20 @@ void UIMobaHud::ActionUnselect()
 
 void UIMobaHud::Select(POINT * p)
 {
-	m_map.Select(p);
-	//m_gameInfoPanel.Select(p);
-	m_invPanel.Select(p);
+	if (m_state != uiHudClosed)
+	{
+		m_map.Select(p);
+		//m_gameInfoPanel.Select(p);
+		m_invPanel.Select(p);
+	}
 }
 
 void UIMobaHud::AltSelect(POINT * p)
 {
-	//m_map.AltSelect(p); do this in InputSet > map needs bool return
+	if (m_state != uiHudClosed)
+	{
+		//m_map.AltSelect(p); do this in InputSet > map needs bool return
+	}
 }
 
 bool UIMobaHud::MouseOver(POINT * p)
@@ -582,15 +603,15 @@ bool UIMobaHud::MouseOver(POINT * p)
 		if (m_playerInventory.m_items.at(i).MouseOver(p)) return true;
 	}
 	*/
+	if (m_state != uiHudClosed)
+	{
+		//abilities
+		if (m_invPanel.MouseOver(p)) return true;
+		if (m_buffs.MouseOver(p)) return true;
+		if (m_debuffs.MouseOver(p)) return true;
+		if (m_characterPanel.MouseOver(p)) return true;
 
-
-	//abilities
-
-	if (m_buffs.MouseOver(p)) return true;
-	if (m_debuffs.MouseOver(p)) return true;
-	if (m_characterPanel.MouseOver(p)) return true;
-	if (m_invPanel.MouseOver(p)) return true;
-
+	}
 	return false;
 }
 
@@ -601,9 +622,12 @@ bool UIMobaHud::IsDragging()
 
 bool UIMobaHud::InitAvatarElement(UIElement * uiElement, CharacterClassName characterClass)
 {
-
-
 	return true;
+}
+
+void UIMobaHud::SetStateRequest(UIHudState state)
+{
+	if (state < uiHudStateCount && state >=0) m_state = state;
 }
 
 UIChat * UIMobaHud::GetChat() { return &m_chat; }

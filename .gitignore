@@ -4,8 +4,6 @@
 
 # my excludes
 
-EngineGameModuleOpenGL40/
-EngineGameModuleOpenGL46/
 EngineGameNet/
 EngineNetClient/
 SimpleMobaServer/

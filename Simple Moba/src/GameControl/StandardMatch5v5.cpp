@@ -34,6 +34,8 @@ bool StandardMatch5v5::Init(GameConfiguration & gameConfigurationIn)
 	//statesToInit[gameBuildPhaseModel]->Init(gameConfigurationIn);
 	//statesToInit[gameBuildPhaseView]->Init(gameConfigurationIn);
 
+	gameState->m_isDebugTextOn = true;
+
 	return true;
 }
 
@@ -278,7 +280,13 @@ void StandardMatch5v5::Update(float deltaTime)
 
 		//2.4 Game Hud updates ////////////////////////////////////////////////////////////////
 
-		gameView->GetHud()->Update(deltaTime, gameState->GetControlledPCC(), gameView->GetControlledPlayerView());
+
+		if (gameView->GetHud()->GetState() != uiHudClosed)
+			gameView->GetHud()->Update(deltaTime, gameState->GetControlledPCC(), gameView->GetControlledPlayerView());
+
+
+		else if (gameView->GetHud()->GetState() == uiHudClosed)
+			gameView->GetMiniHud()->Update(deltaTime, gameState->GetControlledPCC(), gameView->GetControlledPlayerView());
 
 
 	} //End of if (coreGameStateGameOn)
@@ -860,7 +868,13 @@ void StandardMatch5v5::RenderUI()
 		gameView->GetStatPanel()->Render();
 
 		//HUD
+		
+		
+		
 		gameView->GetHud()->Render();
+
+		if (gameView->GetHud()->GetState() == uiHudClosed) gameView->GetMiniHud()->Render();
+
 
 		// Game/Teams GUI
 		//gameView->GetInfoPanelController()->Render();

@@ -22,7 +22,7 @@ private:
 
 	GameAssetFactory * m_gameAssetFactory;//not really used, static init og gameshopview that we might be moving
 
-	PlayerCharacterController * tempCharacterController;
+	PlayerCharacterController * m_tempCharacterController;
 	TradeInventoryView * m_tempGameShopView;
 
 	//TradeInventoryView * m_tempGameShopView;
