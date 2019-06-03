@@ -34,6 +34,9 @@ void CursorController::Update(float deltaTime)
 
 GameCursorTypes CursorController::WhichCursorShouldIShow()
 {
+	return gameCursorTypeCursor;
+#
+
 	if (m_gameInputController->GetMousePress(MIDDLE_BUTTON, true, false))
 	{
 		if (cameraDirector->GetUsingCamera() == usingLockCamera) return gameCursorTypeCameraPan;

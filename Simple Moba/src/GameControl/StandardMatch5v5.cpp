@@ -821,6 +821,9 @@ void StandardMatch5v5::RenderUI()
 
 		for (unsigned int i = 0; i < currentVector->size(); i++)
 		{
+
+			if (gameState->GetPlayerCharacters()->at(i) == gameState->GetControlledCharacter()) continue;//dont render for controlled
+
 			switch (vectorCount)
 			{
 			case vitalEntityVectorNamePlayerCharacter:

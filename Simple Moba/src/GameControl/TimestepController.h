@@ -3,6 +3,8 @@
 
 #include <Windows.h>
 
+#include "../../../EngineGameModel/src/Gamestate/FrameTimerModel.h"
+
 class TimestepController
 {
 protected:
@@ -10,6 +12,8 @@ protected:
 	LARGE_INTEGER tLastCount;
 	LARGE_INTEGER tCurrentCount;
 	float timeElapsed;
+
+	FrameTimerModel m_frameTimer;
 
 	bool isDone;
 	bool firstQuit;
@@ -20,6 +24,10 @@ protected:
 public:
 	TimestepController();
 	~TimestepController();
+
+
+
+
 };
 
 

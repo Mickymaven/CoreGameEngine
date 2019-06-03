@@ -1450,6 +1450,7 @@ void Pathfinder::GeneratePath(vector<LMVector3 *> * pathOut, LMVector3 * positio
 	float best = 9999999.0f;
 	float dist = 0.0f;
 
+
 	for (unsigned int i = 0; i < m_graph.size(); i++)
 	{
 		if (m_graph.at(i).size() == 0) continue;
@@ -1461,6 +1462,10 @@ void Pathfinder::GeneratePath(vector<LMVector3 *> * pathOut, LMVector3 * positio
 			bestStartNode = m_graph.at(i).at(0);
 		}
 	}
+
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//1. Add starting node to openList ////////////////////////////////////////////////////////////////////////
 
 	//calc target node
 	LMVector3 * bestEndNode = NULL;

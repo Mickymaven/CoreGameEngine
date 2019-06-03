@@ -22,6 +22,9 @@ public:
 		PlayerCharacterController * initCharControl);
 
 
+	bool UICharacterPanelMini::InitHealthBar();
+
+
 
 	void Update(float deltaTime, PlayerCharacterController * playerCharacterController, PlayerCharacterView * playerCharacterView);
 	void Render();

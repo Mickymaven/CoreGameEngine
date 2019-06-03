@@ -136,6 +136,7 @@
     <ClCompile Include="src\Gamestate\BasicGameState.cpp" />
     <ClCompile Include="src\Gamestate\GameState.cpp" />
     <ClCompile Include="src\Gamestate\GameStateObject.cpp" />
+    <ClCompile Include="src\Gamestate\FrameTimerModel.cpp" />
     <ClCompile Include="src\Maths\LMVector2.cpp" />
     <ClCompile Include="src\Maths\LMVector3.cpp" />
     <ClCompile Include="src\Maths\LMVector4.cpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="src\Gamestate\BasicGameState.h" />
     <ClInclude Include="src\Gamestate\GameState.h" />
     <ClInclude Include="src\Gamestate\GameStateObject.h" />
+    <ClInclude Include="src\Gamestate\FrameTimerModel.h" />
     <ClInclude Include="src\Maths\LMVector2.h" />
     <ClInclude Include="src\Maths\LMVector3.h" />
     <ClInclude Include="src\Maths\LMVector4.h" />

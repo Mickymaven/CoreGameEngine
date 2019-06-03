@@ -496,6 +496,23 @@ void UIMobaHud::RenderTextStuff()
 		m_theme->m_mediumText.m_font->DrawText(NULL, m_buffer9001, -1, &m_fontPos, DT_RIGHT, D3DCOLOR_XRGB(255, 128, 255));
 
 
+
+
+		
+		float frameTime = gameState->GetFrameTimerModel()->GetFrameTimeAverage();
+		float fps = gameState->GetFrameTimerModel()->GetFPSAverage();
+
+		sprintf_s(m_buffer9001, "frame time: %0.7fms", frameTime);
+		m_fontPos = { 10, 820, g_clientSizeRect->right - 10, g_clientSizeRect->bottom };
+		m_theme->m_largeText.m_font->DrawText(NULL, m_buffer9001, -1, &m_fontPos, DT_RIGHT, D3DCOLOR_XRGB(255, 255, 255));
+
+
+
+		sprintf_s(m_buffer9001, "fps ( %000.0f)", fps);
+		m_fontPos = { 10, 840, g_clientSizeRect->right - 10, g_clientSizeRect->bottom };
+		m_theme->m_largeText.m_font->DrawText(NULL, m_buffer9001, -1, &m_fontPos, DT_RIGHT, D3DCOLOR_XRGB(255, 255, 255));
+
+
 	}
 }
 

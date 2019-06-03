@@ -90,8 +90,7 @@ void PathController::OnEnterNavigate()
 
 void PathController::Navigate(float deltaTime)
 {
-	if ((m_owner->GetPhysicsObject()->GetPosition())
-		->DisplacementMag(*m_nextNode) < 1.5f)
+	if ((m_owner->GetPhysicsObject()->GetPosition())->DisplacementMag(*m_nextNode) < 0.05f)
 	{
 		m_nextNodeIndex++;
 
@@ -169,7 +168,7 @@ bool PathController::WalkToPosition(bool ignoreRateLowering, LMVector3 * target,
 		//todo okay we might need delta/gametime param to set up a timer or some other way of not searching every update
 		//but rand atm
 
-		if (rand() > 0.20f || ignoreRateLowering)
+		if (rand() > 0.90f || ignoreRateLowering)
 		{
 			sm_pathfinder->GeneratePath(
 				&m_currentPath,

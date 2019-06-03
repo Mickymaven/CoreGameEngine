@@ -6,6 +6,9 @@ GameController::GameController()
 	standardMatch5v5 = nullptr;
 	openWorld = nullptr;
 
+
+
+
 }
 
 GameController::~GameController()
@@ -37,6 +40,8 @@ INT GameController::Run(GameConfiguration * config)
 	bool isLoadingDone = false;
 	
 	if (!mobaControllerToRun->Init(*config)) return (INT)g_msg.wParam;
+
+	mobaControllerToRun->GetMobaState()->SetFrameTimerModel(&m_frameTimer);
 
 	while (!isLoadingDone)
 	{
@@ -79,6 +84,8 @@ INT GameController::Run(GameConfiguration * config)
 			QueryPerformanceCounter(&tCurrentCount);
 
 			timeElapsed = (tCurrentCount.QuadPart - tLastCount.QuadPart) / (float)tFrequency.QuadPart;
+
+			m_frameTimer.Update(timeElapsed);
 
 			mobaControllerToRun->Update(timeElapsed);
 				
