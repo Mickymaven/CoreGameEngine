@@ -301,4 +301,12 @@
   <ItemGroup>
     <FxCompile Include="Resources\shaders\fogshader.fx" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shaders\texturePS.glsl" />
+    <None Include="Resources\Shaders\textureVS.glsl" />
+    <None Include="Resources\Shaders\colorPS.glsl" />
+    <None Include="Resources\Shaders\colorVS.glsl" />
+    <None Include="Resources\Shaders\lightVS.glsl" />
+    <None Include="Resources\Shaders\lightPS.glsl" />
+  </ItemGroup>
 </Project>

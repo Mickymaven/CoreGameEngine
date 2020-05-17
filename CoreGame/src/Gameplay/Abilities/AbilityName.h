@@ -22,6 +22,7 @@ enum AbilityName
 	abilityRopeDance, //1. shoot the projectile, 2. move your character (in directions)
 	abilityVoodooConnection, // npc walks to point, as many points as you can click.
 	abilityUltimateBurn, //click 3 waypoints (three point casting).
+	abilityHealTurret,
 	abilityCount
 };
 

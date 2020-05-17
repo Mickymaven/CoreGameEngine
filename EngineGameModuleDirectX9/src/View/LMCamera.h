@@ -5,6 +5,8 @@
 using std::string;
 
 #include <d3dx9math.h>
+//#include <d3d9.h>
+
 
 enum projectionType
 {

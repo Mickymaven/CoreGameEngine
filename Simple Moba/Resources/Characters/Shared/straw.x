@@ -794,7 +794,7 @@ Material {
 0;0;0;;
 0;0;0;;
 TextureFilename {
-"";
+"Carpet_Berber_Pattern_Gray.jpg";
 }
 }
 }

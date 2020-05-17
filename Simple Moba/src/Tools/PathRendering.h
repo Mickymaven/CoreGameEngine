@@ -43,6 +43,8 @@ protected:
 	LMMesh m_pathMesh;
 	LMMesh m_pathMeshOptimised;
 
+	LMMesh m_nodeMesh;
+
 
 public:
 	PathRendering();

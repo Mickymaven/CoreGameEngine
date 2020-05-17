@@ -2,7 +2,14 @@
 
 OpenGL4Object::OpenGL4Object()
 {
+	m_deviceContext = 0;
+	m_renderingContext = 0;
 }
+
+OpenGL4Object::OpenGL4Object(const OpenGL4Object& other)
+{
+}
+
 
 OpenGL4Object::~OpenGL4Object()
 {
@@ -586,6 +593,86 @@ void OpenGL4Object::BuildPerspectiveFovLHMatrix(float* matrix, float fieldOfView
 	return;
 }
 
+float * OpenGL4Object::MatrixRotation(float* out, float* a, float rad, float * axis)
+{
+	long EPSILON = 0.000001;
+
+	float x = axis[0], y = axis[1], z = axis[2],
+	len = sqrt(x * x + y * y + z * z),
+	s, c, t,
+		a00, a01, a02, a03,
+		a10, a11, a12, a13,
+		a20, a21, a22, a23,
+		b00, b01, b02,
+		b10, b11, b12,
+		b20, b21, b22;
+
+	if (abs((long)len) < EPSILON) { return NULL; }
+
+	len = 1 / len;
+	x *= len;
+	y *= len;
+	z *= len;
+
+	s = sin(rad);
+	c = cos(rad);
+	t = 1 - c;
+
+	a00 = a[0]; a01 = a[1]; a02 = a[2]; a03 = a[3];
+	a10 = a[4]; a11 = a[5]; a12 = a[6]; a13 = a[7];
+	a20 = a[8]; a21 = a[9]; a22 = a[10]; a23 = a[11];
+
+	// Construct the elements of the rotation matrix
+	b00 = x * x * t + c; b01 = y * x * t + z * s; b02 = z * x * t - y * s;
+	b10 = x * y * t - z * s; b11 = y * y * t + c; b12 = z * y * t + x * s;
+	b20 = x * z * t + y * s; b21 = y * z * t - x * s; b22 = z * z * t + c;
+
+	// Perform rotation-specific matrix multiplication
+	out[0] = a00 * b00 + a10 * b01 + a20 * b02;
+	out[1] = a01 * b00 + a11 * b01 + a21 * b02;
+	out[2] = a02 * b00 + a12 * b01 + a22 * b02;
+	out[3] = a03 * b00 + a13 * b01 + a23 * b02;
+	out[4] = a00 * b10 + a10 * b11 + a20 * b12;
+	out[5] = a01 * b10 + a11 * b11 + a21 * b12;
+	out[6] = a02 * b10 + a12 * b11 + a22 * b12;
+	out[7] = a03 * b10 + a13 * b11 + a23 * b12;
+	out[8] = a00 * b20 + a10 * b21 + a20 * b22;
+	out[9] = a01 * b20 + a11 * b21 + a21 * b22;
+	out[10] = a02 * b20 + a12 * b21 + a22 * b22;
+	out[11] = a03 * b20 + a13 * b21 + a23 * b22;
+
+	if (a != out) { // If the source and destination differ, copy the unchanged last row
+		out[12] = a[12];
+		out[13] = a[13];
+		out[14] = a[14];
+		out[15] = a[15];
+	}
+
+	return out;
+}
+
+void OpenGL4Object::MatrixRotationX(float* matrix, float angle)
+{
+	matrix[0] = cosf(angle);
+	matrix[1] = 0.0f;
+	matrix[2] = -sinf(angle);
+	matrix[3] = 0.0f;
+
+	matrix[4] = 0.0f;
+	matrix[5] = 1.0f;
+	matrix[6] = 0.0f;
+	matrix[7] = 0.0f;
+
+	matrix[8] = sinf(angle);
+	matrix[9] = 0.0f;
+	matrix[10] = cosf(angle);
+	matrix[11] = 0.0f;
+
+	matrix[12] = 0.0f;
+	matrix[13] = 0.0f;
+	matrix[14] = 0.0f;
+	matrix[15] = 1.0f;
+}
 
 void OpenGL4Object::MatrixRotationY(float* matrix, float angle)
 {

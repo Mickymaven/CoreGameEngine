@@ -1,7 +1,11 @@
 #include "Globals.h"
 
+//G_TARG_OPENGL
+//G_TARG_DIRECTX
 
+//GRAPHICSTARGET graphics_target = G_TARG_OPENGL;
 GRAPHICSTARGET graphics_target = G_TARG_DIRECTX;
+
 
 bool isStartFullscreen = false;
 bool g_isFocus = true;
@@ -15,6 +19,9 @@ int g_windowHeight = 0;
 //desired clientsize
 int g_initWidth = 0;
 int g_initHeight = 0;
+
+int g_myScreenHeight = 0;
+int g_myScreenWidth = 0;
 
 LPRECT g_windowSizeRect = new RECT{ 0, 0, 0, 0 };
 LPRECT g_clientSizeRect = new RECT{ 0, 0, g_initWidth, g_initHeight };

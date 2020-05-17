@@ -14,6 +14,7 @@ enum CharacterClassName
 	characterLoost,
 	characterTypy,
 	characterShork,
+	characterCaalu,
 	characterNameCount
 };
 

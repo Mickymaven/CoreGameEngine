@@ -29,15 +29,19 @@ void CameraInputSet::AttemptAction(int action, float deltaTime)
 {
 	switch (action)
 	{
+		
 	case cameraActionCameraPanModifier: 
-		m_cameraDirector->CameraPanBehavior(
-			sm_gameInputController->GetMousePressDownLast(MIDDLE_BUTTON)
-		);
+		if ( false == sm_gameInputController->GetMousePress(RIGHT_BUTTON,TRUE,TRUE) )
+		{
+			m_cameraDirector->CameraPanBehavior(
+				sm_gameInputController->GetMousePressDownLast(MIDDLE_BUTTON), deltaTime);
+		}
 		break;
 
 	case cameraActionToggleCameraLock:
 		m_cameraDirector->ActionToggleCameraLock(gameState->GetControlledActor());
 		break;
+
 	case cameraActionCentreCamera:
 		
 		if (!m_cameraDirector->GetIsCameraLocked())
@@ -67,10 +71,10 @@ void CameraInputSet::AttemptAction(int action, float deltaTime)
 	case cameraActionCameraFocusPlayer12:gameView->ActionSetControlledPlayerView(11);break;
 		
 	case cameraActionZoomOutLockCamera:
-		m_cameraDirector->Zoom(deltaTime, 'o', 6.0f);
+		m_cameraDirector->Zoom(deltaTime, 0.1f, false, 'o', 0.1f);
 		break;
 	case cameraActionZoomInLockCamera:
-		m_cameraDirector->Zoom(deltaTime, 'i', 6.0f);
+		m_cameraDirector->Zoom(deltaTime, 0.1f, false, 'i', 0.1f);
 		break;
 	case cameraActionMMBZoom:
 
@@ -80,13 +84,13 @@ void CameraInputSet::AttemptAction(int action, float deltaTime)
 		case usingThirdPersonCamera://intentionally use this behavior for 3rd person as well.
 			if (sm_gameInputController->GetZDelta() > 0)
 			{
-				m_cameraDirector->Zoom(deltaTime, 'i', 4.0f);
+				m_cameraDirector->Zoom(deltaTime, 2.0f, true, 'i', 0.01/deltaTime);
 			}
 			else
 			{
 				if (sm_gameInputController->GetZDelta() < 0)
 				{
-					m_cameraDirector->Zoom(deltaTime, 'o', 4.0f);
+					m_cameraDirector->Zoom(deltaTime, 2.0f, true, 'o', 0.01/deltaTime);
 				}
 			}
 			break;
@@ -116,8 +120,8 @@ void CameraInputSet::AttemptAction(int action, float deltaTime)
 			if (m_cameraDirector->GetUsingCamera() == usingThirdPersonCamera)
 			{
 
-				m_cameraDirector->PitchImpulse(g_inputControl.GetYDelta() * 0.0022f);
-				m_cameraDirector->YawImpulse(g_inputControl.GetXDelta() * 0.0022f);
+				m_cameraDirector->PitchImpulse(g_inputControl.GetYDelta() * deltaTime);
+				m_cameraDirector->YawImpulse(g_inputControl.GetXDelta() * deltaTime);
 			}
 			else
 			{

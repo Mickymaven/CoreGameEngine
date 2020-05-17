@@ -29,6 +29,9 @@ extern int g_initHeight;
 extern LPRECT g_windowSizeRect;
 extern LPRECT g_clientSizeRect;
 
+extern int g_myScreenHeight;
+extern int g_myScreenWidth;
+
 extern WNDCLASSEX g_windowClass;
 extern MSG g_msg;
 extern HWND g_hwnd;

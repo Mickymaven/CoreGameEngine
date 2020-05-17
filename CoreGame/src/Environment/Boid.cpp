@@ -42,7 +42,7 @@ Boid::Boid( float xmax, float zmax,
 
 	m_fAngleRads = 0.0f;
 
-	m_cohesionfactor = 0.007f;
+	m_cohesionfactor = 5.0f;
 	m_alignmentFactor = 0.9f;
 
 	m_originfactor = 4.0f;
@@ -72,8 +72,8 @@ void Boid::Update(const float fDeltaTime)
 	m_compositeVector += (m_alignment * m_alignmentFactor);
 
 	//Free Will
-	FreeWill(fDeltaTime);
-	AttractionToOrigin(fDeltaTime);
+	//FreeWill(fDeltaTime);
+	//AttractionToOrigin(fDeltaTime);
 	StayInBounds(fDeltaTime);
 
 	m_compositeVector.y = 0.0f;

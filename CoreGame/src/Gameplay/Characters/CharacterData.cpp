@@ -55,4 +55,9 @@ void CharacterData::InitCharacterData()
 	m_defaultAbilities[characterShork][2] = abilityEternalLight;
 	m_defaultAbilities[characterShork][3] = abilityElixirBurst;
 
+	m_defaultAbilities[characterCaalu][0] = abilityHealTurret;
+	m_defaultAbilities[characterCaalu][1] = abilityHealTurret;
+	m_defaultAbilities[characterCaalu][2] = abilityHealTurret;
+	m_defaultAbilities[characterCaalu][3] = abilityHealTurret;
+
 }

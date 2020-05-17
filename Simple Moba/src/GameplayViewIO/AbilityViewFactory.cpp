@@ -52,6 +52,7 @@ bool AbilityViewFactory::ConstructAbilityView(LPDIRECT3DDEVICE9 device, AbilityV
 	case abilityElixirBurst: m_abilityView = new ElixirBurstView(device, (ElixirBurst*)ability); break;
 	case abilityHiddenPower: m_abilityView = new HiddenPowerView(device, (HiddenPower*)ability); break;
 	case abilityValiantLeap: m_abilityView = new ValiantLeapView(device, (ValiantLeap*)ability); break;
+	case abilityHealTurret: m_abilityView = new HealTurretView(device, (HealTurret*)ability); break;
 	default:return false;
 	}
 
@@ -253,6 +254,19 @@ bool AbilityViewFactory::ConstructAbilityView(LPDIRECT3DDEVICE9 device, AbilityV
 			m_abilityEffects.at(abilityName).push_back(effect1);
 
 			break;
+
+
+		case abilityHealTurret:
+
+			effect1.descFirst = " give nearby team members ";
+			effect1.m_number = " 60 ";
+			effect1.m_type = " health/second";
+			effect1.descSecond = " for the life of the turret.";
+
+			m_abilityEffects.at(abilityName).push_back(effect1);
+
+			break;
+
 
 
 		}

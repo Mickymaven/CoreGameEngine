@@ -104,12 +104,12 @@ void CameraDirector::Update(float deltaTime, Actor *  actorWithFocus)
 		if (m_thirdPerson.GetPosition()->y > 0.9f*(m_thirdPerson.GetZoomLevel() + 2.1f) && pitchVelocityThisUpdate > -0.05f) pitchVelocityThisUpdate -= 0.0025f;
 
 		//pitch / yaw
-		yawVelocity += yawVelocityThisUpdate * 0.2f;
-		pitchVelocity += pitchVelocityThisUpdate *0.2f;
+		yawVelocity += yawVelocityThisUpdate * 9.0f * deltaTime;
+		pitchVelocity += pitchVelocityThisUpdate * 9.0f * deltaTime;
 
 
-		yawVelocity -= 0.05f*yawVelocity;
-		pitchVelocity -= 0.05f*pitchVelocity;
+		yawVelocity -= 6.0f*deltaTime*yawVelocity;
+		pitchVelocity -= 6.0f*deltaTime*pitchVelocity;
 
 		m_thirdPerson.Pitch(pitchVelocity);
 		m_thirdPerson.Yaw(yawVelocity);
@@ -227,8 +227,8 @@ void CameraDirector::ApplyLockedCameraMovement(LMVector2 * panDisplacment)
 
 		m_lockedCamera.Update();
 
-		SetGameView();
-		SetGameProjection();
+		//SetGameView();
+		//SetGameProjection();
 	}
 }
 
@@ -338,14 +338,20 @@ LMCamera * CameraDirector::GetPointerToCurrentCamera()
 	return GetUsingCamera(m_cameraSelectionState);
 }
 
-void CameraDirector::Zoom(float deltaTime, const char dir, float multi)
+void CameraDirector::Zoom(float deltaTime, float factor, bool useFactor, const char dir, float multi)
 {
+	float factorUsed;
+
+	if (useFactor) factorUsed = factor;
+	else factorUsed = 0.01f;
+
+
 	if (m_cameraSelectionState == usingLockCamera)
 	{
 		switch (dir)
 		{
-		case 'i':m_lockedCamera.AdjustZoomLevel(-1 * deltaTime * multi); break;//in
-		case 'o':m_lockedCamera.AdjustZoomLevel(1 * deltaTime * multi); break;//out	
+		case 'i':m_lockedCamera.AdjustZoomLevel(-1 * factorUsed * multi); break;//in
+		case 'o':m_lockedCamera.AdjustZoomLevel(1 * factorUsed * multi); break;//out	
 		default: break;
 		}
 
@@ -356,8 +362,8 @@ void CameraDirector::Zoom(float deltaTime, const char dir, float multi)
 	{
 		switch (dir)
 		{
-		case 'i': m_thirdPerson.AdjustZoomLevel(-1 * deltaTime * multi);break;//in
-		case 'o':m_thirdPerson.AdjustZoomLevel(1 * deltaTime * multi); break;//out
+		case 'i': m_thirdPerson.AdjustZoomLevel(-1 * factorUsed * multi);break;//in
+		case 'o':m_thirdPerson.AdjustZoomLevel(1 * factorUsed * multi); break;//out
 		default:break;
 		}
 
@@ -483,7 +489,7 @@ void CameraDirector::FlyPitchYaw(float deltaTime, float pitch, float yaw)
 
 
 
-void CameraDirector::CameraPanBehavior(bool mouseDownLast)
+void CameraDirector::CameraPanBehavior(bool mouseDownLast, float deltaTime)
 {
 
 	//if down on last update
@@ -524,8 +530,8 @@ void CameraDirector::CameraPanBehavior(bool mouseDownLast)
 			}
 		}
 
-		m_panDisplacment.x = 0.0022f * (m_panCurrent.x - m_panOrigin.x);
-		m_panDisplacment.y = 0.0022f *  (m_panCurrent.y - m_panOrigin.y);
+		m_panDisplacment.x = 0.1f * deltaTime * (m_panCurrent.x - m_panOrigin.x);
+		m_panDisplacment.y = 0.1f *  deltaTime *  (m_panCurrent.y - m_panOrigin.y);
 
 
 		ApplyLockedCameraMovement(&m_panDisplacment);
@@ -612,7 +618,8 @@ void CameraDirector::CentreThirdPersonCam(Actor * actor)
 		m_thirdPersonLookAt.x = playerPos->x;
 		m_thirdPersonLookAt.y = playerPos->y + 2.1f;
 		m_thirdPersonLookAt.z = playerPos->z;
-	} return;
+	}
+
 
 
 	//What happens when you press spacebar in third person
@@ -628,27 +635,56 @@ void CameraDirector::CentreThirdPersonCam(Actor * actor)
 
 	// 2. Get Rot in radians
 		LMVector3 * rot = actor->GetPhysicsObject()->GetRotation();
+
+		float roty = rot->y;
+		float looky = radiansLook*2;
+
+		char bufferX[1000];
+		sprintf_s(bufferX, "\n Player rot y: %f \n", roty);
+		OutputDebugString(bufferX);
+
+		float cosplayerX = cos(playerPos->x);
+		float sinplayerX = sin(playerPos->x);
+
+		float cosplayerZ = cos(playerPos->z);
+		float sinplayerZ = sin(playerPos->z);
+
+
 		float radiansPlayer = atan2(playerPos->x, playerPos->z);
 
+		char hay[63];
+		
+		
+
+		
+
 	//3. get difference
-		float yawTest = radiansPlayer + radiansLook;
+		//float yawTest = radiansPlayer + radiansLook;
+		
+		
+		float yawTest = radiansLook - roty;
+		sprintf_s(bufferX, "\n yaw test: %f \n", yawTest);
+		OutputDebugString(bufferX);
 
 
 	//4. choose which way to want to rotate
 	//5. add yaw in that direction
 
 	//just going to guess direction and see
+		float yawImpulse = 0.001f * abs(0.5f*yawTest);
+		float absYawUpdate = abs(yawVelocity);
 
-		if (yawTest > 0.1f)
+
+		if (yawTest > 0.001f) 
 		{
-			if (yawTest > D3DX_PI) YawImpulse(0.005f);//right (if >pi to anticlockwise)
-			else YawImpulse(-0.005f);//left
+			if (yawTest > D3DX_PI && absYawUpdate < yawImpulse) YawImpulse(0.001f * abs(yawTest));//right (if >pi to anticlockwise)
+			else YawImpulse(-0.001f * abs(yawTest));//left
 
 		}
-		else if (yawTest < -0.1f)
+		else if (yawTest < -0.001f)
 		{
-			if (yawTest < -D3DX_PI) YawImpulse(-0.005f);//left (if >pi to clockwise)
-			else YawImpulse(0.005f);//right
+			if (yawTest < -D3DX_PI && absYawUpdate < yawImpulse) YawImpulse(-0.001f * abs(yawTest));//left (if >pi to clockwise)
+			else YawImpulse(0.001f * abs(yawTest));//right
 		}
 
 	//6. pitch to nearest if <30 || >60 (or something)

@@ -21,32 +21,32 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7DF58374-E792-4876-9C0A-2E079DCBCA40}</ProjectGuid>
     <RootNamespace>EngineGame</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -91,6 +91,7 @@
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalIncludeDirectories>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -99,6 +100,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -110,6 +112,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -124,6 +127,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -137,6 +141,12 @@
     <ClCompile Include="src\Gamestate\GameState.cpp" />
     <ClCompile Include="src\Gamestate\GameStateObject.cpp" />
     <ClCompile Include="src\Gamestate\FrameTimerModel.cpp" />
+    <ClCompile Include="src\Maths\LMMatrix2.cpp" />
+    <ClCompile Include="src\Maths\LMMatrix3.cpp" />
+    <ClCompile Include="src\Maths\LMMatrix4.cpp" />
+    <ClCompile Include="src\Maths\LMNode.cpp" />
+    <ClCompile Include="src\Maths\LMNodeGraph.cpp" />
+    <ClCompile Include="src\Maths\LMNodeMap.cpp" />
     <ClCompile Include="src\Maths\LMVector2.cpp" />
     <ClCompile Include="src\Maths\LMVector3.cpp" />
     <ClCompile Include="src\Maths\LMVector4.cpp" />
@@ -149,9 +159,16 @@
     <ClInclude Include="src\Gamestate\GameState.h" />
     <ClInclude Include="src\Gamestate\GameStateObject.h" />
     <ClInclude Include="src\Gamestate\FrameTimerModel.h" />
+    <ClInclude Include="src\Maths\LMMatrix.h" />
+    <ClInclude Include="src\Maths\LMMatrix2.h" />
+    <ClInclude Include="src\Maths\LMMatrix3.h" />
+    <ClInclude Include="src\Maths\LMNode.h" />
+    <ClInclude Include="src\Maths\LMNodeGraph.h" />
+    <ClInclude Include="src\Maths\LMNodeMap.h" />
     <ClInclude Include="src\Maths\LMVector2.h" />
     <ClInclude Include="src\Maths\LMVector3.h" />
     <ClInclude Include="src\Maths\LMVector4.h" />
+    <ClInclude Include="src\Maths\LMMatrix4.h" />
     <ClInclude Include="src\Utility\LMTimer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

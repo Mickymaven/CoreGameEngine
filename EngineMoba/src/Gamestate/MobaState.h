@@ -27,6 +27,7 @@
 #include "../../../CoreGame/src/Gameplay/TeamName.h"
 #include "../Pathfinding/Pathfinder.h"
 
+
 enum InitPhase
 {
 	initLoading,

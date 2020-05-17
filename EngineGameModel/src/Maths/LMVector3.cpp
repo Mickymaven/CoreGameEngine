@@ -59,16 +59,6 @@ void LMVector3::operator /= (const LMVector3& v)
 	z /= v.z;
 }
 
-LMVector3 LMVector3::operator + (const LMVector3 &v)
-{
-	return LMVector3(x + v.x, y + v.y, z + v.z);
-}
-
-LMVector3 LMVector3::operator * (const float f)
-{
-	return LMVector3(x*f, y*f, z*f);
-}
-
 void LMVector3::operator = (const float& f)
 {
 	x = f;
@@ -80,7 +70,7 @@ void LMVector3::operator += (const float& f)
 {
 	x += f;
 	y += f;
-	z + f;
+	z += f;
 }
 
 void LMVector3::operator -= (const float& f)
@@ -125,14 +115,47 @@ void LMVector3::operator = (const LMVector3 &v)
 	z = v.z;
 }
 
-float & LMVector3::operator [] (int i)
+
+
+LMVector3 LMVector3::operator + (const LMVector3 &v)
 {
+	return LMVector3(x + v.x, y + v.y, z + v.z);
+}
+
+LMVector3 LMVector3::operator * (const float f)
+{
+	return LMVector3(x*f, y*f, z*f);
+}
+
+LMVector3 LMVector3::operator - (const LMVector3 & rhs) const
+{
+	return LMVector3(x - rhs.x, y - rhs.y, z - rhs.z);
+}
+
+float LMVector3::operator[](int i) const
+{
+	/*
 	switch (i)
 	{
 	case 0: return x;
 	case 1: return y;
 	case 2: return z;
 	}
+	*/
+
+	return (&x)[i];
+}
+
+float & LMVector3::operator [] (int i)
+{
+	return (&x)[i];
+}
+
+void LMVector3::set(float vx, float vy, float vz)
+{
+	x = vx;
+	y = vy;
+	z = vz;
 }
 
 float LMVector3::LengthSq()

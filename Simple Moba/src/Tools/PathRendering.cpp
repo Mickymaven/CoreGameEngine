@@ -20,6 +20,21 @@ PathRendering::PathRendering()
 
 	D3DMATERIAL9 * mat = new D3DMATERIAL9();
 	
+
+
+	mat->Ambient.r = 1.0f;
+	mat->Ambient.g = 1.0f;
+	mat->Ambient.b = 1.0f;
+	mat->Specular.r = 0.8f;
+	mat->Specular.g = 0.8f;
+	mat->Specular.b = 0.8f;
+	mat->Power = 0.8f;
+	m_nodeMesh = LMMesh("Resources/Characters/Shared/", "straw.x", g_D3D_Device, mat, false);
+
+
+
+
+	mat = new D3DMATERIAL9();
 	mat->Ambient.r = 0.85f;
 	mat->Ambient.g = 0.4f;
 	mat->Ambient.b = 1.0f;
@@ -28,7 +43,7 @@ PathRendering::PathRendering()
 	mat->Specular.b = 0.5f;
 	mat->Power = 0.5f;
 
-	m_pathMesh = LMMesh("Resources/Characters/Shared/","straw.x", g_D3D_Device, mat, false);
+	m_pathMesh = LMMesh("Resources/misc/", "OneUnitPath.x", g_D3D_Device, mat, false);
 	
 	//Optimsed
 	mat = new D3DMATERIAL9();
@@ -40,7 +55,7 @@ PathRendering::PathRendering()
 	mat->Specular.b = 0.8f;
 	mat->Power = 0.8f;
 	
-	m_pathMeshOptimised = LMMesh("Resources/Characters/Shared/","straw.x", g_D3D_Device, mat, false);
+	m_pathMeshOptimised = LMMesh("Resources/misc/", "OneUnitPath.x", g_D3D_Device, mat, false);
 
 	if (nodeSprite == NULL)
 	{
@@ -55,16 +70,16 @@ PathRendering::PathRendering()
 
 		nodeSpritePosition = nodeSprite->GetPhysicsObject()->GetPosition();
 
-		nodeSpriteView = new SpriteView(g_D3D_Device, nodeSprite, &m_pathMesh);
+		nodeSpriteView = new SpriteView(g_D3D_Device, nodeSprite, &m_nodeMesh);
 
 	}
 
 	if (nodePath == NULL)
 	{
 		nodePath = new Sprite(
-			LMVector3(0.0f, 0.5f, 0.0f),
+			LMVector3(0.0f, 0.05555f, 0.0f),
 			LMVector3(1.571f, 0.0f, 1.571f),
-			LMVector3(4.0f, 1.0f, 4.0f),
+			LMVector3(1.0f, 1.0f, 1.0f),
 			LMVector3(0.0f, 0.0f, 0.0f),
 			LMVector3(0.0f, 0.0f, 0.0f),
 			LMVector3(0.0f, 0.0f, 0.0f),
@@ -81,9 +96,9 @@ PathRendering::PathRendering()
 	if (nodePathOptimised == NULL)
 	{
 		nodePathOptimised = new Sprite(
-			LMVector3(0.0f, 1.7f, 0.0f),
+			LMVector3(0.0f, 0.05555f, 0.0f),
 			LMVector3(1.571f, 0.0f, 1.571f),
-			LMVector3(4.0f, 1.0f, 4.0f),
+			LMVector3(1.0f, 1.0f, 1.0f),
 			LMVector3(0.0f, 0.0f, 0.0f),
 			LMVector3(0.0f, 0.0f, 0.0f),
 			LMVector3(0.0f, 0.0f, 0.0f),

@@ -12,6 +12,7 @@ enum CustomRenderSettings
 	customRenderSettingsMenuUI,
 	customRenderSettingsGameUI,
 	customRenderSettingsGame3d,
+	customRenderSettingsGameFX,
 	customRenderSettingsCount
 };
 

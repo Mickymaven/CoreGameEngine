@@ -43,7 +43,7 @@ inline float LMHypotenuseLength2D(D3DXVECTOR3 * point1, D3DXVECTOR3 * point2)
 	float x = abs(point2->x - point1->x);
 	float z = abs(point2->z - point1->z);
 
-	return sqrt(x*x + z*z);
+	return (float)sqrt(x*x + z*z);
 }
 
 inline bool LMRangeExceedsDisplacement(D3DXVECTOR3 * point1, D3DXVECTOR3 * point2, float range)
@@ -56,7 +56,5 @@ inline bool LMRangeExceedsDisplacement(D3DXVECTOR3 * point1, D3DXVECTOR3 * point
 	return false;
 
 }
-
-
 
 #endif

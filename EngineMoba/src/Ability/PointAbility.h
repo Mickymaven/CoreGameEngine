@@ -1,4 +1,4 @@
-#if !defined(POINTBILITY_H)
+#if !defined(POINTABILITY_H)
 #define POINTABILITY_H
 
 #include "Ability.h"

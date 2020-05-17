@@ -14,6 +14,7 @@ CoreActorStatsFactory::CoreActorStatsFactory()
 	m_settingsPaths[characterLoost] = "Resources/Characters/Grey.stats";
 	m_settingsPaths[characterTypy] = "Resources/Characters/Grey.stats";
 	m_settingsPaths[characterShork] = "Resources/Characters/Shork.stats";
+	m_settingsPaths[characterCaalu] = "Resources/Characters/Caalu.stats";
 }
 
 CoreActorStatsFactory::~CoreActorStatsFactory()

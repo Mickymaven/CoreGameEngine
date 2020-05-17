@@ -36,6 +36,8 @@ bool AbilityFactory::ConstructAbility(
 	case abilityElixirBurst: m_constructedAbility = new ElixirBurst(actor); break;
 	case abilityHiddenPower: m_constructedAbility = new HiddenPower(actor); break;
 	case abilityValiantLeap: m_constructedAbility = new ValiantLeap(actor); break;
+	case abilityHealTurret: m_constructedAbility = new HealTurret(actor); break;
+	default:return false;
 	}
 	
 	m_constructedAbility->SetTeams(teamActors, opponentActors, neutralActors);

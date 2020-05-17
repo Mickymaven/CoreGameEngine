@@ -19,6 +19,6 @@
 
 #include "ValiantLeapView.h"
 
-
+#include "HealTurretView.h"
 
 #endif

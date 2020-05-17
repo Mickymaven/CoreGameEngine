@@ -3,8 +3,12 @@
 
 #pragma comment(lib, "opengl32.lib")
 #include <windows.h>
+
 #include <math.h>
+#include <stdlib.h>
+
 #include<gl/GL.h>
+
 
 //copy paste rastertek
 
@@ -79,6 +83,8 @@ typedef void (APIENTRY * PFNGLDISABLEVERTEXATTRIBARRAYPROC) (GLuint index);
 typedef void (APIENTRY * PFNGLUNIFORM3FVPROC) (GLint location, GLsizei count, const GLfloat *value);
 typedef void (APIENTRY * PFNGLUNIFORM4FVPROC) (GLint location, GLsizei count, const GLfloat *value);
 
+	//my
+typedef void (APIENTRY * PFNGLDRAWELEMENTSPROC) (GLenum mode, GLsizei count, GLenum type, const GLvoid *indices);
 
 //end copy paste
 
@@ -131,10 +137,15 @@ public:
 	PFNGLDISABLEVERTEXATTRIBARRAYPROC glDisableVertexAttribArray;
 	PFNGLUNIFORM3FVPROC glUniform3fv;
 	PFNGLUNIFORM4FVPROC glUniform4fv;
+	
+	//my
+	PFNGLDRAWELEMENTSPROC glDrawElements;
 
 public:
 	OpenGL4Object();
+	OpenGL4Object(const OpenGL4Object&);
 	~OpenGL4Object();
+
 	bool InitialiseOpenGL4Object(HWND hwnd, int screenWidth, int screenHeight, float screenDepth, float screenNear, bool isVsyncEnabled);
 	bool OpenGL4Object::InitializeExtensions(HWND hwnd);
 	void Shutdown(HWND hwnd);
@@ -142,7 +153,7 @@ public:
 	void BeginScene(float, float, float, float);
 	void EndScene();
 
-	bool LoadExtensionList();
+	
 
 	void GetWorldMatrix(float*);
 	void GetProjectionMatrix(float*);
@@ -151,9 +162,14 @@ public:
 
 	void BuildIdentityMatrix(float*);
 	void BuildPerspectiveFovLHMatrix(float*, float, float, float, float);
+	float *  MatrixRotation(float* out, float* a, float rad, float * axis);
+	void MatrixRotationX(float*, float);
 	void MatrixRotationY(float*, float);
 	void MatrixTranslation(float*, float, float, float);
 	void MatrixMultiply(float*, float*, float*);
+
+private:
+	bool LoadExtensionList();
 
 };
 

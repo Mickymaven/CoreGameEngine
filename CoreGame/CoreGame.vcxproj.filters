@@ -54,6 +54,8 @@
     <ClCompile Include="src\GamestateIO\CorePlayerCharacterControllerFactory.cpp" />
     <ClCompile Include="src\GamestateIO\CoreNPCControllerFactory.cpp" />
     <ClCompile Include="src\Gameplay\Abilities\ValiantLeap.cpp" />
+    <ClCompile Include="src\Gameplay\Abilities\HealTurret.cpp" />
+    <ClCompile Include="src\Gameplay\Abilities\HealLaser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Gameplay\Abilities\AbilityName.h" />
@@ -122,5 +124,7 @@
     <ClInclude Include="src\GamestateIO\CoreNPCControllerFactory.h" />
     <ClInclude Include="src\Gameplay\Quests\InvName.h" />
     <ClInclude Include="src\Gameplay\Abilities\ValiantLeap.h" />
+    <ClInclude Include="src\Gameplay\Abilities\HealTurret.h" />
+    <ClInclude Include="src\Gameplay\Abilities\HealLaser.h" />
   </ItemGroup>
 </Project>

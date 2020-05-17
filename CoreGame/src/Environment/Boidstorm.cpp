@@ -17,17 +17,17 @@ bool Boidstorm::Cast(float width, float height, LMVector3 * castPosition)
 {
 	//recieves a parameter cast location
 	
-	boidCount = 40;
+	boidCount = 100;
 
 	m_vecTotal = nullptr;
 
 	m_boids.resize(boidCount);
 
-	acceptableDistance = 12.0f;
+	acceptableDistance = 2.0f;
 
-	sweetbandWidth = 60.0f;
+	sweetbandWidth = 4.0f;
 
-	visionRange = 70.0f;
+	visionRange = 80.0f;
 	
 
 
@@ -62,6 +62,8 @@ bool Boidstorm::Cast(float width, float height, LMVector3 * castPosition)
 
 void Boidstorm::Update(float deltaTime)
 {
+	return;
+
 	for (int i = 0; i < boidCount; i++)
 	{
 		//seperation
@@ -149,6 +151,8 @@ void Boidstorm::GetActionVector(BoidVectorTypes type, Boid * boid, float min, fl
 				m_vec *= mult;
 				break;
 			case boidCohesion:
+				mult = x;
+				m_vec *= mult;
 				break;
 			}
 

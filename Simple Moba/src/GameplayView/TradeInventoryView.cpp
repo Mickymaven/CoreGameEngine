@@ -20,10 +20,10 @@ bool TradeInventoryView::Init(ViewProfile * viewProfile, ThemeResources * theme,
 
 	SetShopViewFromModel();
 
-	m_bounds.values[0] = bounds->x();
-	m_bounds.values[1] = bounds->y();
-	m_bounds.values[2] = bounds->z();
-	m_bounds.values[3] = bounds->w();
+	m_bounds.values[0] = bounds->x;
+	m_bounds.values[1] = bounds->y;
+	m_bounds.values[2] = bounds->z;
+	m_bounds.values[3] = bounds->w;
 
 	// SHOP LABEL /////////////////
 

@@ -4,6 +4,9 @@
 #include <vector>
 using std::vector;
 
+#include <iostream>
+using std::iostream;
+
 #include <d3dx9.h>
 
 #include "../../../Simple Moba/src/Graphics/GraphicsAlgorithms.h"
@@ -18,6 +21,8 @@ protected:
 	Sprite * m_sprite;
 	LMMesh * m_mesh;
 
+	std::string directory;
+
 	D3DXMATRIX m_worldMatrix;
 	D3DXMATRIX m_rotationMatrix;
 	D3DXMATRIX m_translationMatrix;
@@ -31,6 +36,9 @@ public:
 	SpriteView();
 	SpriteView(LPDIRECT3DDEVICE9 device, Sprite * sprite, LMMesh * mesh);
 	~SpriteView();
+
+
+
 
 	void WorldTransform();
 	void virtual Render();

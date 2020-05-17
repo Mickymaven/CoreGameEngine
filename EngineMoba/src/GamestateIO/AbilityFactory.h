@@ -28,6 +28,9 @@
 #include "../../../CoreGame/src/Gameplay/Abilities/HiddenPower.h"
 
 #include "../../../CoreGame/src/Gameplay/Abilities/ValiantLeap.h"
+#include "../../../CoreGame/src/Gameplay/Abilities/HealTurret.h"
+
+
 
 #include "../Item/Item.h"
 

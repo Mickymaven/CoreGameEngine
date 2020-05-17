@@ -33,7 +33,7 @@ float FrameTimerModel::GetFrameTimeAverage()
 	tempAverage = tempAverage /= m_frameTimeSize;
 
 	if (m_thisFrameIndex == 0 || m_thisFrameIndex == 20 || m_thisFrameIndex == 40) m_frameTimeAverage = tempAverage;
-	return m_frameTimeAverage;
+	return m_frameTimeAverage *1000;
 }
 
 float FrameTimerModel::GetFPSAverage()

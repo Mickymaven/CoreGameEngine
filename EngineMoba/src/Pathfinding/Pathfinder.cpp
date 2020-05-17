@@ -3,9 +3,12 @@
 
 
 
+
 Pathfinder::Pathfinder()
 {
 }
+
+
 
 void Pathfinder::InitGraph()
 {
@@ -1426,12 +1429,30 @@ void Pathfinder::InitGraph()
 	m_graph.at(75).push_back(&nodes.at(74));
 
 
+	m_neighbours.resize(m_graph.size());
+
+	for (unsigned int i = 0; i < m_graph.size(); i++)
+	{
+		for (unsigned int j = 1; j < m_graph.at(i).size(); j++)
+		{
+			m_neighbours.at(i).push_back(m_graph.at(i).at(j));
+		}
+
+	}
+
+	for (int i = 0; i < m_neighbours.size(); i++)
+	{
+		/////////////////////////////////////////////////////////////m_nodeMap.GetEdges()->insert(make_pair(&nodes.at(i), m_neighbours.at(i)));
+	}
+
 }
+
 
 Pathfinder::~Pathfinder()
 {
 
 }
+
 
 
 
@@ -1462,37 +1483,371 @@ void Pathfinder::GeneratePath(vector<LMVector3 *> * pathOut, LMVector3 * positio
 			bestStartNode = m_graph.at(i).at(0);
 		}
 	}
+	
+	m_bestNodes.resize(0);
+	m_bestNodeDistances.resize(0);
 
 
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//1. Add starting node to openList ////////////////////////////////////////////////////////////////////////
+	m_bestNodes.resize(3,nullptr);
 
-	//calc target node
-	LMVector3 * bestEndNode = NULL;
-	best = 9999999.0f;
-	dist = 0.0f;
 
+	m_bestNodeDistances.resize(3,99999.9f);
+
+	bool isBestEndFound = false;
+
+
+	//is this overwriting index 0 if the tested distance is lower, only to write inferior (4th 5th best?) distances to index 1 and index 2
 	for (unsigned int i = 0; i < m_graph.size(); i++)
 	{
 		if (m_graph.at(i).size() == 0) continue;
-
-		dist = target->DisplacementMag(*m_graph.at(i).at(0));
-		if (dist < best)
+		
+		for (unsigned int j = 0; j < m_bestNodeDistances.size(); j++)
 		{
-			best = dist;
-			bestEndNode = m_graph.at(i).at(0);
+			dist = target->DisplacementMag(*m_graph.at(i).at(0));
+
+			if (dist < m_bestNodeDistances.at(j))
+			{
+				m_bestNodeDistances.at(j) = dist;
+				m_bestNodes.at(j) = m_graph.at(i).at(0);
+				
+				isBestEndFound = true;
+
+				j = m_bestNodeDistances.size();
+				break; //same effect as an example
+			}
 		}
 	}
 
-	if (bestStartNode != NULL && bestEndNode != NULL)
+
+	if (bestStartNode != NULL && isBestEndFound)
 	{
-		Search(pathOut, bestStartNode, bestEndNode, position, target);
+		Search(pathOut, bestStartNode, position, target);
 		//OutputDebugString("Start and end node found: Call to Search.\n");
 	}
 }
 
-void Pathfinder::Search(vector<LMVector3 *> * pathOut, LMVector3 * startNode, LMVector3 * targetNode, LMVector3 * position, LMVector3 * target)
+
+
+void Pathfinder::Search(vector<LMVector3 *> * pathOut, LMVector3 * startNode, LMVector3 * position, LMVector3 * target)
 {
+	SearchMarch19(pathOut,startNode,position,target);
+	//Search1(pathOut, startNode, position, target);
+	//Search2(pathOut,startNode,position,target);//newest attempt
+}
+
+
+
+
+void Pathfinder::SearchMarch19(vector<LMVector3 *> * pathOut, LMVector3 * startNode, LMVector3 * position, LMVector3 * target)
+{
+	OutputDebugString("Pathfinder::Search Begin Search \n");
+
+
+	vector<LMVector3*> * vec = NULL;
+	vector<LMVector3*> * vecInClosed = NULL;
+	bool found = false;
+
+
+
+	float f = 0.0f;
+	float g = 0.0f;
+	float h = 0.0f;
+
+	float SumOfG = position->DisplacementMag(*startNode);
+
+	//1. Add Starting node to the open list
+	m_openList.push_back(VectorForNode(startNode));
+	//m_closedList.push_back(VectorForNode(startNode));
+
+	vector<LMVector3*> * currentNode = VectorForNode(startNode);
+	bool isComplete = false;
+	while (!isComplete)
+	{
+		//3. Find lowest cost node on open list
+		int indexofLowestCostNode = -1;
+		float lowestCost = 9999.9f;
+
+		for (unsigned int i = 0; i < m_openList.size(); ++i)
+		{
+			//maybe to not focus on this if i change pathfind methods anyway
+			//thinking of making a tool that will give us a grid and we can do manhattan A Star on that.
+
+
+			//we have yet to fully search all possibilities from closed list anyway. just first 'best one' at each depth.
+
+			//prior to late jan that works
+			//g = SumOfG;
+			//if (m_closedList.size() > 0) g += position->DisplacementMag(*currentNode->at(0));
+			//h = m_openList.at(i)->at(0)->DisplacementMag(*targetNode) - 2;
+			//f = g + h;
+
+			//late jan version which is adding stuff over and over to closed list
+			g = SumOfG;
+			if (m_closedList.size() > 0) g += currentNode->at(0)->DisplacementMag(*m_openList.at(i)->at(0));
+			h = m_openList.at(i)->at(0)->DisplacementMag(*m_bestNodes.at(0)) - 0.1f;
+			f = g + h;
+
+
+
+			//most recent
+			//g = SumOfG;
+			//if (m_closedList.size() > 0) g += position->DisplacementMag(*currentNode->at(0));
+			//h = m_openList.at(i)->at(0)->DisplacementMag(*targetNode) - 2;
+			//f = g + h;
+
+			//an attempt
+			//g = SumOfG;
+			//if (m_closedList.size() > 0) g+= m_closedList.back()->at(0)->DisplacementMag(*m_openList.at(i)->at(0));
+			//h = m_openList.at(i)->at(0)->DisplacementMag(*targetNode) -2.0f;
+			//f = g + h;
+
+			if (f < lowestCost)
+			{
+				lowestCost = f;
+				indexofLowestCostNode = i;
+			}
+		}
+
+		if (indexofLowestCostNode != -1)//valid node found
+		{
+			/*
+			sprintf_s(
+				node_buffer,
+				"Node on Closed: (%f %f %f)\n",
+				m_openList.at(indexofLowestCostNode)->at(0)->x,
+				m_openList.at(indexofLowestCostNode)->at(0)->y,
+				m_openList.at(indexofLowestCostNode)->at(0)->z);
+
+			if (DEBUGPATHFINDING) OutputDebugString(node_buffer);
+			*/
+
+			currentNode = m_openList.at(indexofLowestCostNode);
+
+			if (currentNode->at(0) == m_bestNodes.at(0))
+			{
+				isComplete = true;
+				//target added to closed list = target found
+
+				m_closedList.push_back(VectorForNode(m_bestNodes.at(0)));
+				StoreClosedListInPath(pathOut, position, target);
+				if (DEBUGPATHFINDING) OutputDebugString("targ found \n");
+				if (DEBUGPATHFINDING) OutputDebugString("Pathfinder::Search End Search \n");
+				return;
+			}
+
+
+			if (m_closedList.size() > 0) SumOfG += m_closedList.back()->at(0)->DisplacementMag(*m_openList.at(indexofLowestCostNode)->at(0));
+			m_closedList.push_back(m_openList.at(indexofLowestCostNode));
+			m_openList.erase(m_openList.begin() + indexofLowestCostNode);
+
+
+		}
+		else
+		{
+			isComplete = true;
+			//no path
+			pathOut->resize(0);
+			if (DEBUGPATHFINDING) OutputDebugString("Call to Search: NO PATH\n");
+			if (DEBUGPATHFINDING) OutputDebugString("Pathfinder::Search End Search \n");
+			return;
+		}
+
+		//Add edges to open list
+
+		vec = NULL;
+		vecInClosed = NULL;
+
+		//i 0 is node i 1+ is tree
+		for (unsigned int i = 1; i < currentNode->size(); ++i)
+		{
+			vec = VectorForNode(currentNode->at(i));
+			//if (DEBUGPATHFINDING) if (vec == NULL) OutputDebugString("Vec for path is null");
+			found = false;
+
+			for (unsigned int j = 0; j < m_closedList.size(); ++j)
+			{
+				vecInClosed = m_closedList.at(j);
+
+				if (*vec == *vecInClosed)
+				{
+					found = true;
+					//if (DEBUGPATHFINDING) OutputDebugString("found on closed list dont add to open");
+
+					//in some situations there are nodes on the open list that have been added to the closed list
+				}
+			}
+
+			if (!found) m_openList.push_back(vec);
+		}
+	}
+
+	if (DEBUGPATHFINDING) OutputDebugString("Call to Search: Exited LOOP and found end of search function\n");
+	if (DEBUGPATHFINDING) OutputDebugString("Pathfinder::Search End Search \n");
+	pathOut->resize(0);
+
+
+
+	return;
+}
+
+
+void Pathfinder::Search1(vector<LMVector3 *> * pathOut, LMVector3 * startNode, LMVector3 * position, LMVector3 * target)
+{/*
+	
+	float f = 0.0f;
+	float g = 0.0f;
+	float h = 0.0f;
+
+	float SumOfG = position->DisplacementMag(*startNode);
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//1. Add starting node to openList ////////////////////////////////////////////////////////////////////////
+	m_open1.emplace(*startNode, 0);
+
+	LMVector3 * currentNode = startNode;
+
+	LMVector3 * testingNode = nullptr;
+	LMVector3 * lowestCostNode = nullptr;
+
+
+	came_from[*startNode] = *startNode;
+	cost_so_far[*startNode] = 0;
+
+	//f = g + h;
+
+
+
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//2 Execute a series of steps until the target is found or break out if seach is exhuasted ////////////////
+
+
+	while (!m_open1.empty())
+	{
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//2a Find lowest cost node on open list ///////////////////////////////////////////////////////////////////
+
+		LMVector3 & selected = m_open1.top().second;//must have a came_from before we select
+		m_open1.pop();
+
+
+		m_closed1.push( make_pair(cost_so_far[selected], selected) );
+		
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// 2d. Now we have our lowest cost node, set its G as OUR sum + latest distance
+
+		cost_so_far[selected] = cost_so_far[came_from[selected]] + selected.DisplacementMag(came_from[selected]);
+		 
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// 2E. STOP WHEN target added to the closed list.
+
+
+		for (unsigned int j = 0; j < m_bestNodes.size(); j++)
+		{
+			if ( selected.x == m_bestNodes.at(j)->x && selected.y == m_bestNodes.at(j)->y) return;
+
+
+			//if (selected == m_bestNodes.at(j)) return;
+		}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// 2F. ADD CHILDREN TO OPENLIST
+	//must have a came_from before we select (later, at top of while)
+
+		vector<LMVector3*> * treeChildren = nullptr;
+		for (unsigned int i = 0; i < m_graph.size(); i++)
+		{
+
+			if (selected.x == m_graph.at(i).at(0)->x && selected.y == m_graph.at(i).at(0)->y)
+			{
+				treeChildren = &m_graph.at(i);
+
+				for (unsigned int j = 0; j < m_open1.size(); j++)
+				{
+					//are the children already on the open list; then:
+					
+					//selected g + (cost selected to CHILD COST).
+					g = selected.DisplacementMag(*m_graph.at(i).at(j));
+
+					m_open1.push( make_pair(g, *m_graph.at(i).at(j)) );
+					came_from[*m_graph.at(i).at(j)] = selected;
+
+				}
+
+				break;
+			}
+
+		}
+
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// 2G. If the edge is in the closed list, dont add it to the open list;
+		//we could iterated the closed list and search for the neighbours here;
+		//or since we have a boolean in the object
+
+		// includes
+
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//
+		// 2H.  If it is on the open list already, check to see if this path to that square is better,
+		//
+		//
+
+		for (LMVector3 * next : m_nodeMap.neighbours(&selected)) {
+		
+			g = cost_so_far[selected] + selected.DisplacementMag(*next); //m_nodeMap.cost(selected, next);
+			
+			if (cost_so_far.find(*next) == cost_so_far.end() || g < cost_so_far[*next])
+			{
+				cost_so_far[*next] = g;
+			
+			
+				////
+
+				LMVector3 * bestEndNode = nullptr;
+				float fitness = 999999.9f;
+
+				for (unsigned int j = 0; j < m_bestNodes.size(); j++)
+				{
+					g = cost_so_far[selected] + selected.DisplacementMag(*m_bestNodes.at(j));
+
+
+
+					h = next->DisplacementMag(*m_bestNodes.at(j)) - 2.0f;
+					f = g + h;
+
+					if (f < fitness)
+					{
+						fitness = f;
+						bestEndNode = m_bestNodes.at(j);
+					}
+					
+					//g = 0.0f;
+					//h = target->DisplacementMag(*m_bestNodes.at(i));
+					//f = g + h;
+
+
+				}
+
+
+				//
+
+
+				f = g + next->DisplacementMag(*bestEndNode);
+			
+				m_open1.push(make_pair(f, selected));
+			
+				came_from[*next] = selected;
+			}
+		}
+	}
+
+	*/
+}
+
+void Pathfinder::Search2(vector<LMVector3 *> * pathOut, LMVector3 * startNode, LMVector3 * position, LMVector3 * target)
+{
+	/*
 	OutputDebugString("Pathfinder::Search Begin Search \n");
 
 
@@ -1535,11 +1890,29 @@ void Pathfinder::Search(vector<LMVector3 *> * pathOut, LMVector3 * startNode, LM
 			//f = g + h;
 
 			//late jan version which is adding stuff over and over to closed list
-			g = SumOfG;
-			if (m_closedList.size() > 0) g += currentNode->at(0)->DisplacementMag(*m_openList.at(i)->at(0));
-			h = m_openList.at(i)->at(0)->DisplacementMag(*targetNode) -2.0f;
-			f = g + h;
 
+
+			LMVector3 * bestEndNode = nullptr;
+			float fitness = 99999.9f;
+
+			for (unsigned int j = 0; j < m_bestNodes.size(); j++)
+			{
+			
+				g = SumOfG;
+				if (m_closedList.size() > 0) g += currentNode->at(0)->DisplacementMag(*m_openList.at(i)->at(0));
+				h = m_openList.at(i)->at(0)->DisplacementMag(*m_bestNodes.at(j)) - 2.0f;
+				f = g + h;
+
+				if (f < fitness)
+				{
+					fitness = f;
+					bestEndNode = m_bestNodes.at(j);
+				}
+				
+				///g = 0.0f;
+				///h = target->DisplacementMag(*m_bestNodes.at(i));
+				///f = g + h;
+			}
 
 
 			//most recent
@@ -1563,29 +1936,37 @@ void Pathfinder::Search(vector<LMVector3 *> * pathOut, LMVector3 * startNode, LM
 
 		if (indexofLowestCostNode != -1)//valid node found
 		{
-			/*
-			sprintf_s(
-				node_buffer,
-				"Node on Closed: (%f %f %f)\n",
-				m_openList.at(indexofLowestCostNode)->at(0)->x,
-				m_openList.at(indexofLowestCostNode)->at(0)->y,
-				m_openList.at(indexofLowestCostNode)->at(0)->z);
 			
-			if (DEBUGPATHFINDING) OutputDebugString(node_buffer);
-			*/
+		//	sprintf_s(
+		//		node_buffer,
+		//		"Node on Closed: (%f %f %f)\n",
+		//		m_openList.at(indexofLowestCostNode)->at(0)->x,
+		//		m_openList.at(indexofLowestCostNode)->at(0)->y,
+		//		m_openList.at(indexofLowestCostNode)->at(0)->z);
+			
+		//	if (DEBUGPATHFINDING) OutputDebugString(node_buffer);
+			
 
 			currentNode = m_openList.at(indexofLowestCostNode);
 			
-			if (currentNode->at(0) == targetNode)
-			{
-				isComplete = true;
-				//target added to closed list = target found
 
-				m_closedList.push_back(VectorForNode(targetNode));
-				StoreClosedListInPath(pathOut, position, target);
-				if (DEBUGPATHFINDING) OutputDebugString("targ found \n");
-				if (DEBUGPATHFINDING) OutputDebugString("Pathfinder::Search End Search \n");
-				return;
+
+			for (unsigned int j = 0; j < m_bestNodes.size(); j++)
+			{
+
+
+				if (currentNode->at(0) == m_bestNodes.at(j))
+				{
+					isComplete = true;
+					//target added to closed list = target found
+
+					m_closedList.push_back(VectorForNode(m_bestNodes.at(j)));
+					StoreClosedListInPath(pathOut, position, target);
+					if (DEBUGPATHFINDING) OutputDebugString("targ found \n");
+					if (DEBUGPATHFINDING) OutputDebugString("Pathfinder::Search End Search \n");
+					return;
+				}
+
 			}
 			
 			
@@ -1640,8 +2021,19 @@ void Pathfinder::Search(vector<LMVector3 *> * pathOut, LMVector3 * startNode, LM
 
 
 
+	*/
+
 	return;
 }
+
+
+void Pathfinder::SearchMaze19(vector<LMVector3*>* pathOut, LMVector3 * startNode, LMVector3 * position, LMVector3 * target)
+{
+
+	int timeoutInitial = 15000;
+	int timeout = timeoutInitial;
+}
+
 
 vector<LMVector3*> * Pathfinder::VectorForNode(LMVector3 * node)
 {
@@ -1654,6 +2046,7 @@ vector<LMVector3*> * Pathfinder::VectorForNode(LMVector3 * node)
 	}
 	return NULL;
 }
+
 
 void Pathfinder::StoreClosedListInPath(vector<LMVector3 *> * pathOut, LMVector3 * position, LMVector3 * target)
 {
@@ -1686,10 +2079,12 @@ void Pathfinder::StoreClosedListInPath(vector<LMVector3 *> * pathOut, LMVector3 
 	}
 }
 
-template <typename MyGraph>
+
+/*
+template<typename typename T, typename priority_t>
 void Pathfinder::Search2(MyGraph graph, typename MyGraph::Location start)
 {
-	/*
+	
 	typedef typename MyGraph::Location Location;
 
 	queue<Location> openList;
@@ -1720,17 +2115,21 @@ void Pathfinder::Search2(MyGraph graph, typename MyGraph::Location start)
 	OutputDebugString("end nav\n");
 
 
-*/
+
 	//float g = 
 	//float h = 
 	//float f = g + h;
 
 
 
-}
+}*/
+
 
 deque<vector<LMVector3*>*> * Pathfinder::GetClosedList()
 { return &m_closedList; }
+
+
+
 
 void Pathfinder::SetOptimiseFunction(std::function<void(vector<LMVector3*>*pathOut, LMVector3*position, LMVector3*target)> f)
 { m_optimiseFunction = f; }

@@ -502,7 +502,7 @@ bool MobaViewState::InitSelectedPhase(int initPhase)
 
 		
 
-		vector <HealthBar *> * currentVector;
+		vector <HealthBar *> * currentVector = nullptr;
 
 		for (unsigned int vectorCount = 0; vectorCount < 3; vectorCount++)
 		{
@@ -884,7 +884,7 @@ void MobaViewState::ActionSetControlledPlayerView(int i)
 	// this should be base on some debug varibale being true
 	if (true)
 	{
-		if (i <= m_playerCharacterViews.size())
+		if (i < m_playerCharacterViews.size())
 		{
 			gameState->SetControlledCharacter(gameState->GetPCCs()->at(i));
 			m_mobaHud;

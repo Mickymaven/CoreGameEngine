@@ -44,10 +44,11 @@ bool ActorViewFactory::GetActorMesh(CharacterClassName name, LMMesh ** actorMesh
 
 		switch (name)
 		{
-		case characterNenian: dir = "Resources/misc/"; file = "Grey.x"; break;
-		case characterSurku: dir = "Resources/misc/"; file = "Grey.x"; break;
+		case characterNenian: dir = "Resources/misc/"; file = "lowpolyfigure.x"; break;
+		case characterSurku: dir = "Resources/misc/"; file = "lowpolyfigure.x"; break;
+		case characterCaalu: dir = "Resources/misc/"; file = "lowpolyfigure.x"; break;
 		default:
-		case characterGrey: dir = "Resources/misc/"; file = "Grey.x"; break;
+		case characterGrey: dir = "Resources/misc/"; file = "lowpolyfigure.x"; break;
 		//case characterLoost: dir = "Resources/misc/"; file = "Grey.x"; break;
 		//case characterTypy: dir = "Resources/misc/"; file = "Grey.x"; break;
 		//case characterShork: dir = "Resources/misc/"; file = "Grey.x"; break;

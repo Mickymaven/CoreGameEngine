@@ -34,10 +34,10 @@
 #include "MenuController.h"
 MenuController g_menuController;
 
-class OpenGL4Object;
-
 #include "../../../EngineGameModuleOpenGL46/src/Device/OpenGL4Object.h"
 
+#include <shellapi.h>
+#include <cstring>
 
 Main::Main()
 {
@@ -49,6 +49,54 @@ Main::~Main()
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
+
+	LPWSTR* szArglist;
+	int nArgs;
+	int i;
+
+	szArglist = CommandLineToArgvW(GetCommandLineW(), &nArgs);
+
+	char bufferX[1000];
+	
+
+	for (i = 0; i < nArgs; i++)
+	{
+		
+	}
+
+	if (NULL == szArglist)
+	{
+		//wprintf(L"CommandLineToArgvW failed\n");
+		return 0;
+	}
+	else for (i = 1; i <= nArgs; i++)
+	{
+
+		sprintf_s(bufferX, "%ws", szArglist[i]);
+		OutputDebugString(bufferX);
+
+
+		int x = strcmp(bufferX, "DX9");
+
+		if (x==0)
+		{
+			graphics_target = G_TARG_DIRECTX;
+			break;
+		}
+
+		x = strcmp(bufferX, "OGL");
+
+		if (x==0)
+		{
+			graphics_target = G_TARG_OPENGL;
+			break;
+		}
+		else
+		{
+			string s = "no";
+		}
+	}
+
 	isStartFullscreen = false;
 	g_initWidth = 1600;
 	g_initHeight = 900;
@@ -64,6 +112,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	Main app;
 	g_app = &app;
 	g_hInstance = hInstance;
+
+
 
 	if (FAILED(app.Create(hInstance))) return 0;
 
@@ -177,6 +227,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 		case WM_GETMINMAXINFO:OutputDebugString("WM_GETMINMAXINFO \n"); break;
 		*/
 	default:
+		if (graphics_target == G_TARG_OPENGL) ApplicationHandle->MessageHandler(hwnd, message, wParam, lParam);
+
 		break;
 	}
 
@@ -187,20 +239,62 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 HRESULT Main::Create(HINSTANCE hInstance)
 {
 	
+	if (graphics_target == G_TARG_OPENGL)
+	{
+		OGLINIT();
+		//InitWindowClass();
+		//InitOpenGLExtensions();
+		//InitWindow();
+		/*
+		if (!InitWindowClass()) return false;
+		if (!InitOpenGLExtensions()) return false;
+		if (!InitWindow()) return false;
+		if (!InitOpenGL()) return false;
+		if (!ShowMyWindow()) return false;
+		
+		*/
+
+	}
+
+	if (graphics_target == G_TARG_DIRECTX)
+	{
+		/*
+		InitWindowClass();
+		InitWindow();
+		InitDirectX();
+		//ShowMyWindow();
+		InitDeviceController();
+		InitInputController();
+		InitMenuController();
+
+		*/
+
+		if (!InitWindowClass())		return false;
+		if (!InitWindow())			return false;
+		if (!InitDirectX()) return false;
+		ShowMyWindow();
+		if (!InitDeviceController()) return false;
+		if (!InitInputController())	return false;
+		if (!InitMenuController())	return false;
+
+	}
+
 
 	//HRESULT x;
-
+	/*
 	if (!InitWindowClass())		return false;
-
-
 	if (graphics_target == G_TARG_OPENGL) { if (!InitOpenGLExtensions()) return false; }
-
 	if (!InitWindow())			return false;
+
 	if (graphics_target == G_TARG_DIRECTX) { if (!InitDirectX()) return false; }
-	else if (graphics_target == G_TARG_OPENGL) { if (!InitOpenGL()) return false; else return S_OK; }
+	else if (graphics_target == G_TARG_OPENGL) { if (!InitOpenGL()) return false; }
+
+	if (!ShowMyWindow()) return false;
+	if (graphics_target == G_TARG_OPENGL) return S_OK;
+	
 	if (!InitDeviceController()) return false;
 	if (!InitInputController())	return false;
-	if (!InitMenuController())	return false;
+	if (!InitMenuController())	return false;*/
 
 	return S_OK;
 }
@@ -225,44 +319,53 @@ INT Main::Run()
 	//SetWindowPos(g_hwnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
 
 
+
 	if (graphics_target == G_TARG_OPENGL)
-
 	{
-		OpenGL46TestController control = OpenGL46TestController();
+		OGLRUN();
 
+		/*
 		while (!done)
 		{
-			if (!control.Run())//todo int used as bool here(enum for codes maybe)
+		
+
+			
+			if (!m_Graphics->Run())//todo int used as bool here(enum for codes maybe)
 			{
 				done = true;
 				OutputDebugString("game controller returned false\n");
 			}
+			
+		}*/
 
-		}
-	return (INT)g_msg.wParam;
+		return (INT)g_msg.wParam;
 	}
 
-	while (!done)
-	{
-		if (g_menuController.Run() == menuTargetGame)
+	else {
+		while (!done)
 		{
-			GameController gameController; //default constructor on stack, destruct within this scope.
-			GameConfiguration * pGameConfig = g_menuController.GetGameConfig();
-
-			if (pGameConfig != NULL)
+			if (g_menuController.Run() == menuTargetGame)
 			{
-				if (!gameController.Run(pGameConfig))//todo int used as bool here(enum for codes maybe)
-				{
-					done = true;
-					OutputDebugString("game controller returned false\n");
-				}
-				gameController.Shutdown();
-			}
+				GameController gameController; //default constructor on stack, destruct within this scope.
+				GameConfiguration * pGameConfig = g_menuController.GetGameConfig();
 
-			g_menuController.Reset();
+				if (pGameConfig != NULL)
+				{
+					if (!gameController.Run(pGameConfig))//todo int used as bool here(enum for codes maybe)
+					{
+						done = true;
+						OutputDebugString("game controller returned false\n");
+					}
+					gameController.Shutdown();
+				}
+
+				g_menuController.Reset();
+			}
+			else { done = true; break; }//maybe menus (however many we implement in this app) targets end up in credit screen etc or others.
 		}
-		else { done = true; break; }//maybe menus (however many we implement in this app) targets end up in credit screen etc or others.
+
 	}
+
 
 	return (INT)g_msg.wParam;
 }
@@ -278,13 +381,16 @@ bool Main::InitWindowClass()
 	g_windowClass.hIcon = LoadIcon(NULL, IDI_APPLICATION);// Window Icon.
 	g_windowClass.hCursor = LoadCursor(NULL, IDC_ARROW); // Load mouse cursor.
 	if (!isStartFullscreen) g_windowClass.hbrBackground = NULL;                  // Background color.
+	else {
+		g_windowClass.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
+	}
 	g_windowClass.lpszMenuName = NULL;                   // Menu.
 	g_windowClass.lpszClassName = "MyClass";            // Name of the window class.
 	g_windowClass.hIconSm = LoadIcon(NULL, IDI_APPLICATION);// Minimized window icon.
 
 	if (!RegisterClassEx(&g_windowClass)) return false;
 
-	AdjustWindowRect(g_clientSizeRect, WS_OVERLAPPEDWINDOW, FALSE);
+	if (graphics_target == G_TARG_DIRECTX) AdjustWindowRect(g_clientSizeRect, WS_OVERLAPPEDWINDOW, FALSE);
 
 	return true;
 }
@@ -293,9 +399,52 @@ bool Main::InitWindowClass()
 
 bool Main::InitOpenGLExtensions()
 {
+
+	/*
+	InitWindowClass()       DONE
+	InitOpenGLExtensions()	
+	InitWindow()
+	InitOpenGL()
+	InitDeviceController()
+	InitInputController()
+	*/
+
+
+	/*
+	A  WINCLASS
+	B  FAKEWINDOW
+	C  HIDE IT
+	D  INIT EXTENSION
+	E  DESTROY FAKE WIN
+	F  DEVMODE
+	G  CHANGEDISPLAYSETTINGS
+	H  WINDOW POS CALC
+	I  hwnd CREATEWINDOWEX
+	J  INITOPENGL
+	K  SHOW WINDOW
+	*/
+
+	/*
+	====	INIT OPEN GL	===
+	DEV CONTEXT
+	PIXEL FORMAT
+	ATTRS
+	CONTEXT
+	GLSTUFFS
+	WGLSWAPINTERVALEXT
+	
+	*/
+
+	g_myScreenHeight =0;
+	g_myScreenWidth =0;
+
+	//B FAKE WINDOW
+
 	bool result;
 	HWND h;
-	h = CreateWindowEx(NULL,                       // The extended style.
+	h = 
+
+		CreateWindowEx(NULL,                       // The extended style.
 		"MyClass",										// Window class.
 		"Simple Moba on twitch.tv/mickymaven",			// Window name.
 		WS_OVERLAPPED | WS_MINIMIZEBOX | WS_VISIBLE |   // Window style.
@@ -309,14 +458,13 @@ bool Main::InitOpenGLExtensions()
 		g_hInstance,									// Handle to app instance.
 		NULL);
 
-	if (h == NULL)
-	{
-		return false;
-	}
+	if (h == NULL) return false;
 
-	// Don't show the window.
+	//C HIDE IT Don't show the window.
 	ShowWindow(h, SW_HIDE);
 
+
+	// D INIT EXTENTIONS
 	// Initialize a temporary OpenGL window and load the OpenGL extensions.
 	result = g_OpenGL4Object.InitializeExtensions(h);
 	if (!result)
@@ -329,6 +477,7 @@ bool Main::InitOpenGLExtensions()
 	DestroyWindow(h);
 	h = NULL;
 
+	//FIX THE QUEUED MESSAGES EXIT THE WINDOW BUG
 	bool messages=true;
 	while (messages)
 	{
@@ -342,6 +491,54 @@ bool Main::InitOpenGLExtensions()
 		else messages = false;
 	}
 
+
+	DEVMODE dmScreenSettings;
+	int posX, posY;
+
+	// Determine the resolution of the clients desktop screen.
+
+
+	g_myScreenHeight = GetSystemMetrics(SM_CYSCREEN);
+	g_myScreenWidth = GetSystemMetrics(SM_CXSCREEN);
+
+	g_initWidth = GetSystemMetrics(SM_CXSCREEN);
+	g_initHeight = GetSystemMetrics(SM_CYSCREEN);
+
+	// Setup the screen settings depending on whether it is running in full screen or in windowed mode.
+	if (isStartFullscreen)
+	{
+		// If full screen set the screen to maximum size of the users desktop and 32bit.
+		memset(&dmScreenSettings, 0, sizeof(dmScreenSettings));
+		dmScreenSettings.dmSize = sizeof(dmScreenSettings);
+		dmScreenSettings.dmPelsWidth = (unsigned long)g_myScreenWidth;
+		dmScreenSettings.dmPelsHeight = (unsigned long)g_myScreenHeight;
+		dmScreenSettings.dmBitsPerPel = 32;
+		dmScreenSettings.dmFields = DM_BITSPERPEL | DM_PELSWIDTH | DM_PELSHEIGHT;
+
+		// Change the display settings to full screen.
+		ChangeDisplaySettings(&dmScreenSettings, CDS_FULLSCREEN);
+
+		// Set the position of the window to the top left corner.
+		posX = posY = 0;
+	}
+	else
+	{
+		// If windowed then set it to 800x600 resolution.
+
+		g_myScreenWidth = 800;
+		g_myScreenHeight = 600;
+
+		g_initWidth = g_myScreenWidth;
+		g_initHeight = g_myScreenHeight;
+
+
+		// Place the window in the middle of the screen.
+		g_windowPositionX = (GetSystemMetrics(SM_CXSCREEN) - g_myScreenWidth) / 2;
+		g_windowPositionY = (GetSystemMetrics(SM_CYSCREEN) - g_myScreenHeight) / 2;
+	}
+
+
+
 	return true;
 
 }
@@ -351,7 +548,7 @@ bool Main::InitWindow()
 	// Create the window.
 	
 
-	if (isStartFullscreen)
+	if (isStartFullscreen && graphics_target == G_TARG_DIRECTX)
 	{
 		g_hwnd = CreateWindowEx(NULL,                       // The extended style.
 			"MyClass",										// Window class.
@@ -366,7 +563,7 @@ bool Main::InitWindow()
 			NULL);											// Pointer to window.
 	}
 
-	else
+	else if (graphics_target==G_TARG_DIRECTX)
 	{
 		g_hwnd = CreateWindowEx(NULL,                       // The extended style.
 			"MyClass",										// Window class.
@@ -381,33 +578,43 @@ bool Main::InitWindow()
 			NULL,											// Menu.
 			g_hInstance,									// Handle to app instance.
 			NULL);											// Pointer to window.
+
+
+
+		if (!g_hwnd) return false;
+
+		ShowWindow(g_hwnd, SW_SHOW);    // Show the window.
+		SetForegroundWindow(g_hwnd);
+		UpdateWindow(g_hwnd);           // Update its display.
+
+										//GetWindowRect(g_hwnd, &)
+										//GetClientRect(g_hwnd, &)
+		SetFocus(g_hwnd);
+
+	}
+	else
+	{
+		g_hwnd = CreateWindowEx(WS_EX_APPWINDOW,                       // The extended style.
+			"MyClass",										// Window class.
+			"Simple Moba on twitch.tv/mickymaven",			// Window name.
+			WS_POPUP,
+			g_windowPositionX,
+			g_windowPositionY,
+			g_myScreenWidth,   // Window size X.
+			g_myScreenHeight,   // Window size Y.
+			NULL,											// Handle to parent window.
+			NULL,											// Menu.
+			g_hInstance,									// Handle to app instance.
+			NULL);
 	}
 
-
-
-
-
 	// If there was an error with creating the window, then close the program.
-	if (!g_hwnd) return false;
-
-	ShowWindow(g_hwnd, SW_SHOW);    // Show the window.
-	SetForegroundWindow(g_hwnd);
-	UpdateWindow(g_hwnd);           // Update its display.
-
-									//GetWindowRect(g_hwnd, &)
-									//GetClientRect(g_hwnd, &)
-	SetFocus(g_hwnd);
+	if (g_hwnd==NULL) return false;
 
 
-	char m_buffer[500];
+	
 
-	sprintf_s(m_buffer, "---------------\n ClientSizeRect AFTER AdjustWIndowRect: w%i h%i, \n--------------\n", g_clientSizeRect->right, g_clientSizeRect->bottom);
-	OutputDebugString(m_buffer);
 
-	GetClientRect(g_hwnd, g_clientSizeRect);
-
-	sprintf_s(m_buffer, "---------------\n GetClientRect : w%i , h%i (back onto clientSizeRect) \n--------\n", g_clientSizeRect->right, g_clientSizeRect->bottom);
-	OutputDebugString(m_buffer);
 
 	return true;
 }
@@ -481,6 +688,22 @@ bool Main::InitDirectX()
 		return false;
 	}
 
+	g_Present_Parameters.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
+
+	g_Present_Parameters.AutoDepthStencilFormat;
+	g_Present_Parameters.BackBufferCount;
+	g_Present_Parameters.BackBufferFormat;
+	g_Present_Parameters.BackBufferHeight;
+	g_Present_Parameters.BackBufferWidth;
+	g_Present_Parameters.EnableAutoDepthStencil;
+	g_Present_Parameters.Flags;
+	g_Present_Parameters.FullScreen_RefreshRateInHz;
+	g_Present_Parameters.hDeviceWindow;
+	g_Present_Parameters.MultiSampleQuality;
+	g_Present_Parameters.MultiSampleType;
+	g_Present_Parameters.PresentationInterval;
+	g_Present_Parameters.SwapEffect;
+	g_Present_Parameters.Windowed;
 
 	//g_D3DCaps.RasterCaps
 
@@ -533,7 +756,6 @@ bool Main::InitDirectX()
 
 bool Main::InitOpenGL()
 {
-
 	bool result = g_OpenGL4Object.InitialiseOpenGL4Object(
 		g_hwnd,
 		g_clientSizeRect->right - g_clientSizeRect->left, //width
@@ -549,6 +771,22 @@ bool Main::InitOpenGL()
 		MessageBox(g_hwnd, "Could not initialize OpenGL, check if video card supports OpenGL 4.0.", "Error", MB_OK);
 		return false;
 	}
+
+	return true;
+}
+
+bool Main::ShowMyWindow()
+{
+	if (g_hwnd == NULL) return false;
+	
+	ShowWindow(g_hwnd, SW_SHOW);
+	SetForegroundWindow(g_hwnd);
+	SetFocus(g_hwnd);
+
+	// Hide the mouse cursor.
+	if (graphics_target == G_TARG_DIRECTX) ShowCursor(true);
+	else if (graphics_target == G_TARG_OPENGL) ShowCursor(false);
+	ShowCursor(false);
 
 	return true;
 }
@@ -574,4 +812,342 @@ bool Main::InitMenuController()
 	g_menuController.SetMenu(menuIntro);
 
 	return true;
+}
+
+bool Main::OGLINIT()
+{
+	int screenWidth, screenHeight;
+	bool result;
+
+
+	// Initialize the width and height of the screen to zero.
+	screenWidth = 0;
+	screenHeight = 0;
+
+	// Create the OpenGL object.
+	g_OpenGL4Object = OpenGL4Object();
+
+	m_OpenGL = &g_OpenGL4Object;
+	if (!m_OpenGL)
+	{
+		return false;
+	}
+
+	// Create the window the application will be using and also initialize OpenGL.
+	result = OGLINITWINDOWS(m_OpenGL, screenWidth, screenHeight);
+	if (!result)
+	{
+		MessageBoxW(m_hwnd, L"Could not initialize the window.", L"Error", MB_OK);
+		return false;
+	}
+
+	// Create the input object.  This object will be used to handle reading the input from the user.
+	m_Input = new OpenGL4Input;
+	if (!m_Input)
+	{
+		return false;
+	}
+
+	// Initialize the input object.
+	m_Input->Initialize();
+
+	// Create the graphics object.  This object will handle rendering all the graphics for this application.
+	m_Graphics = new OpenGL46TestController;
+	if (!m_Graphics)
+	{
+		return false;
+	}
+
+	// Initialize the graphics object.
+	result = m_Graphics->Initialize(m_OpenGL, m_hwnd);
+	if (!result)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+void Main::OGLRUN()
+{
+	MSG msg;
+	bool done, result;
+
+
+	// Initialize the message structure.
+	ZeroMemory(&msg, sizeof(MSG));
+
+	// Loop until there is a quit message from the window or the user.
+	done = false;
+	while (!done)
+	{
+		// Handle the windows messages.
+		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+		{
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+
+		// If windows signals to end the application then exit out.
+		if (msg.message == WM_QUIT)
+		{
+			done = true;
+		}
+		else
+		{
+			// Otherwise do the frame processing.
+			result = OGLFRAME();
+			if (!result)
+			{
+				done = true;
+			}
+		}
+
+	}
+
+	return;
+}
+
+void Main::OGLSHUT()
+{
+	// Release the graphics object.
+	if (m_Graphics)
+	{
+		m_Graphics->Shutdown();
+		delete m_Graphics;
+		m_Graphics = 0;
+	}
+
+	// Release the input object.
+	if (m_Input)
+	{
+		delete m_Input;
+		m_Input = 0;
+	}
+
+	// Release the OpenGL object.
+	if (m_OpenGL)
+	{
+		m_OpenGL->Shutdown(m_hwnd);
+		delete m_OpenGL;
+		m_OpenGL = 0;
+	}
+
+	// Shutdown the window.
+	OGLSHUTDOWNWINDOWS();
+
+	return;
+}
+
+bool Main::OGLFRAME()
+{
+	bool result;
+
+
+	// Check if the user pressed escape and wants to exit the application.
+	if (m_Input->IsKeyDown(VK_ESCAPE))
+	{
+		return false;
+	}
+
+	// Do the frame processing for the graphics object.
+
+	result = m_Graphics->Frame();
+	if (!result)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+bool Main::OGLINITWINDOWS(OpenGL4Object *OpenGL, int & screenWidth, int & screenHeight)
+{
+	WNDCLASSEX wc;
+	DEVMODE dmScreenSettings;
+	int posX, posY;
+	bool result;
+
+
+	// Get an external pointer to this object.	
+	ApplicationHandle = this;
+
+	// Get the instance of this application.
+	m_hinstance = GetModuleHandle(NULL);
+
+	// Give the application a name.
+	m_applicationName = "Engine";
+
+	// Setup the windows class with default settings.
+	wc.style = CS_HREDRAW | CS_VREDRAW;
+	wc.lpfnWndProc = WndProc;
+	wc.cbClsExtra = 0;
+	wc.cbWndExtra = 0;
+	wc.hInstance = m_hinstance;
+	wc.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+	wc.hIconSm = wc.hIcon;
+	wc.hCursor = LoadCursor(NULL, IDC_ARROW);
+	wc.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
+	wc.lpszMenuName = NULL;
+	wc.lpszClassName = m_applicationName;
+	wc.cbSize = sizeof(WNDCLASSEX);
+
+	// Register the window class.
+	RegisterClassEx(&wc);
+
+	// Create a temporary window for the OpenGL extension setup.
+	m_hwnd = CreateWindowEx(WS_EX_APPWINDOW, m_applicationName, m_applicationName, WS_POPUP,
+		0, 0, 640, 480, NULL, NULL, m_hinstance, NULL);
+	if (m_hwnd == NULL)
+	{
+		return false;
+	}
+
+	// Don't show the window.
+	ShowWindow(m_hwnd, SW_HIDE);
+
+	// Initialize a temporary OpenGL window and load the OpenGL extensions.
+	result = OpenGL->InitializeExtensions(m_hwnd);
+	if (!result)
+	{
+		MessageBoxW(m_hwnd, L"Could not initialize the OpenGL extensions.", L"Error", MB_OK);
+		return false;
+	}
+
+	// Release the temporary window now that the extensions have been initialized.
+	DestroyWindow(m_hwnd);
+	m_hwnd = NULL;
+
+
+	//FIX THE QUEUED MESSAGES EXIT THE WINDOW BUG
+	bool messages = true;
+	while (messages)
+	{
+		if (PeekMessage(&g_msg, NULL, NULL, NULL, PM_REMOVE))
+		{
+			TranslateMessage(&g_msg);
+			DispatchMessage(&g_msg);
+
+			messages = true;
+		}
+		else messages = false;
+	}
+
+
+	// Determine the resolution of the clients desktop screen.
+	screenWidth = GetSystemMetrics(SM_CXSCREEN);
+	screenHeight = GetSystemMetrics(SM_CYSCREEN);
+
+	// Setup the screen settings depending on whether it is running in full screen or in windowed mode.
+	if (FULL_SCREEN)
+	{
+		// If full screen set the screen to maximum size of the users desktop and 32bit.
+		memset(&dmScreenSettings, 0, sizeof(dmScreenSettings));
+		dmScreenSettings.dmSize = sizeof(dmScreenSettings);
+		dmScreenSettings.dmPelsWidth = (unsigned long)screenWidth;
+		dmScreenSettings.dmPelsHeight = (unsigned long)screenHeight;
+		dmScreenSettings.dmBitsPerPel = 32;
+		dmScreenSettings.dmFields = DM_BITSPERPEL | DM_PELSWIDTH | DM_PELSHEIGHT;
+
+		// Change the display settings to full screen.
+		ChangeDisplaySettings(&dmScreenSettings, CDS_FULLSCREEN);
+
+		// Set the position of the window to the top left corner.
+		posX = posY = 0;
+	}
+	else
+	{
+		// If windowed then set it to 800x600 resolution.
+		screenWidth = 800;
+		screenHeight = 600;
+
+		// Place the window in the middle of the screen.
+		posX = (GetSystemMetrics(SM_CXSCREEN) - screenWidth) / 2;
+		posY = (GetSystemMetrics(SM_CYSCREEN) - screenHeight) / 2;
+	}
+
+	// Create the window with the screen settings and get the handle to it.
+	m_hwnd = CreateWindowEx(WS_EX_APPWINDOW, m_applicationName, m_applicationName, WS_POPUP,
+		posX, posY, screenWidth, screenHeight, NULL, NULL, m_hinstance, NULL);
+	if (m_hwnd == NULL)
+	{
+		return false;
+	}
+
+	// Initialize OpenGL now that the window has been created.
+	result = m_OpenGL->InitialiseOpenGL4Object(m_hwnd, screenWidth, screenHeight, SCREEN_DEPTH, SCREEN_NEAR, VSYNC_ENABLED);
+	if (!result)
+	{
+		MessageBoxW(m_hwnd, L"Could not initialize OpenGL, check if video card supports OpenGL 4.0.", L"Error", MB_OK);
+		return false;
+	}
+
+	// Bring the window up on the screen and set it as main focus.
+	ShowWindow(m_hwnd, SW_SHOW);
+	SetForegroundWindow(m_hwnd);
+	SetFocus(m_hwnd);
+
+	// Hide the mouse cursor.
+	ShowCursor(false);
+
+	return true;
+}
+
+void Main::OGLSHUTDOWNWINDOWS()
+{
+	// Show the mouse cursor.
+	ShowCursor(true);
+
+	// Fix the display settings if leaving full screen mode.
+	if (FULL_SCREEN)
+	{
+		ChangeDisplaySettings(NULL, 0);
+	}
+
+	// Remove the window.
+	DestroyWindow(m_hwnd);
+	m_hwnd = NULL;
+
+	// Remove the application instance.
+	UnregisterClass(m_applicationName, m_hinstance);
+	m_hinstance = NULL;
+
+	// Release the pointer to this class.
+	ApplicationHandle = NULL;
+
+	return;
+}
+
+
+LRESULT CALLBACK Main::MessageHandler(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam)
+{
+	switch (umsg)
+	{
+	case WM_CLOSE:
+	{
+		PostQuitMessage(0);
+		return 0;
+	}
+		// Check if a key has been pressed on the keyboard.
+	case WM_KEYDOWN:
+	{
+		// If a key is pressed send it to the input object so it can record that state.
+		m_Input->KeyDown((unsigned int)wparam);
+		return 0;
+	}
+
+	// Check if a key has been released on the keyboard.
+	case WM_KEYUP:
+	{
+		// If a key is released then send it to the input object so it can unset the state for that key.
+		m_Input->KeyUp((unsigned int)wparam);
+		return 0;
+	}
+
+	// Any other messages send to the default message handler as our application won't make use of them.
+	default:
+	{
+		return DefWindowProc(hwnd, umsg, wparam, lparam);
+	}
+	}
 }

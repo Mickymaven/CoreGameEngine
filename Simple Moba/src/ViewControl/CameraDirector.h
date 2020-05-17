@@ -129,7 +129,7 @@ public:
 	void SetGameView();
 	void SetGameProjection();
 
-	void Zoom(float deltaTime, const char dir, float multi);
+	void Zoom(float deltaTime, float factor, bool useFactor, const char dir, float multi);
 
 	void StoreLookAt(Actor *  actorWithFocus);
 
@@ -150,7 +150,7 @@ public:
 	void AddZDelta(float deltaTime, float zDelta);
 	void FlyPitchYaw(float deltaTime, float pitch, float yaw);
 
-	void CameraPanBehavior(bool mouseDownLast);
+	void CameraPanBehavior(bool mouseDownLast, float deltaTime);
 
 	void ActionCameraFocusPlayer(unsigned int i);
 

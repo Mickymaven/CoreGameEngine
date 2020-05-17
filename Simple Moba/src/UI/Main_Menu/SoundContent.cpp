@@ -21,10 +21,10 @@ bool SoundContent::Init(ViewProfile * viewProfile, ThemeResources * theme, LMVec
 
 	m_name = "Sound Options";
 
-	m_bounds.values[0] = bounds->x();
-	m_bounds.values[1] = bounds->y();
-	m_bounds.values[2] = bounds->z();
-	m_bounds.values[3] = bounds->w();
+	m_bounds.values[0] = bounds->x;
+	m_bounds.values[1] = bounds->y;
+	m_bounds.values[2] = bounds->z;
+	m_bounds.values[3] = bounds->w;
 
 	m_categories.resize(1);
 	ContentCat * cat = &m_categories.at(0);

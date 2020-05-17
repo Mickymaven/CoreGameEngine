@@ -19,10 +19,10 @@ bool KeybindContent::Init(ViewProfile * viewProfile, ThemeResources * theme, LMV
 {
 	m_name = "Keybinds";
 
-	m_bounds.values[0] = bounds->x();
-	m_bounds.values[1] = bounds->y();
-	m_bounds.values[2] = bounds->z();
-	m_bounds.values[3] = bounds->w();
+	m_bounds.values[0] = bounds->x;
+	m_bounds.values[1] = bounds->y;
+	m_bounds.values[2] = bounds->z;
+	m_bounds.values[3] = bounds->w;
 
 	/*
 	m_img = UIElement(50.0f, 50.0f, "Resources/UI/Squares/Grey.png");
